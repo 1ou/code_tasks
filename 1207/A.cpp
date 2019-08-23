@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
-#include <algorithm>
+
+//https://codeforces.com/contest/1207/problem/A
 
 using namespace std;
+
 
 int main() {
 //#ifdef _DEBUG
