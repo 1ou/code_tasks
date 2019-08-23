@@ -3,12 +3,6 @@
 
 using namespace std;
 
-long create(int bulochka, int meat) {
-	if (bulochka > meat) {
-		return meat;
-	} else return 0;
-}
-
 int main() {
 //#ifdef _DEBUG
 //	freopen("/home/toxa/Work/codeforces/1207/input.txt", "r", stdin);
