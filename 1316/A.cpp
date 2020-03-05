@@ -6,7 +6,7 @@ using namespace std;
 #define ll long long int
 
 int main() {
-    freopen("/home/toxa/Work/codeforces/1316/input.txt", "r", stdin);
+//    freopen("/home/toxa/Work/codeforces/1316/input.txt", "r", stdin);
 
     ll test;
     cin >> test;
