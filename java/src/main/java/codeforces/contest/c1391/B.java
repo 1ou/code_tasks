@@ -1,35 +1,51 @@
-package codeforces.contest.c1366;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
-public class A {
+/*
+1
+3 3
+RRD
+DDR
+RRC
+ */
+
+import java.lang.*;
+
+
+public class B {
     public static void main(String[] args) {
-        FastScanner fs = new FastScanner();
-        PrintWriter pt=new PrintWriter(System.out);
-        int T = fs.nextInt();
-        for (int tt = 0; tt < T; tt++) {
-            int palka = fs.nextInt();
-            int almaz = fs.nextInt();
-            int r = (palka + almaz) / 3;
-            if (palka < almaz) {
-                if (palka < r) {
-                   pt.println(palka);
-                } else {
-                    pt.println(r);
+        try {
+            FastScanner fs = new FastScanner();
+            PrintWriter pt = new PrintWriter(System.out);
+
+            int T = fs.nextInt();
+
+            for (int tt = 0; tt < T; tt++) {
+                int n = fs.nextInt();
+                int m = fs.nextInt();
+                char[][] arr = new char[n][m];
+                int c = 0;
+                for (int i = 0; i < n; ++i) {
+                    arr[i] = fs.next().toCharArray();
                 }
-            } else {
-                if (almaz < r) {
-                    pt.println(almaz);
-                } else {
-                    pt.println(r);
+                for (int i = 0; i < m - 1; ++i) {
+                    if (arr[n-1][i] != 'R') c++;
                 }
+
+                for (int i = 0; i < n - 1; ++i) {
+                    if (arr[i][m-1] != 'D' ) c++;
+                }
+                pt.println(c);
             }
+            pt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        pt.close();
     }
 
     static class FastScanner {
@@ -48,6 +64,10 @@ public class A {
 
         int nextInt() {
             return Integer.parseInt(next());
+        }
+
+        char nextChar() {
+            return next().charAt(0);
         }
 
         int[] readArray(int n) {

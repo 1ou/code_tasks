@@ -1,5 +1,3 @@
-package codeforces.contest.c1366;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,25 +7,15 @@ import java.util.StringTokenizer;
 public class A {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
-        PrintWriter pt=new PrintWriter(System.out);
+        PrintWriter pt = new PrintWriter(System.out);
         int T = fs.nextInt();
         for (int tt = 0; tt < T; tt++) {
-            int palka = fs.nextInt();
-            int almaz = fs.nextInt();
-            int r = (palka + almaz) / 3;
-            if (palka < almaz) {
-                if (palka < r) {
-                   pt.println(palka);
-                } else {
-                    pt.println(r);
-                }
-            } else {
-                if (almaz < r) {
-                    pt.println(almaz);
-                } else {
-                    pt.println(r);
-                }
+            int n = fs.nextInt();
+            for (int i = 1; i <= n; i++) {
+                pt.print(i);
+                pt.print(" ");
             }
+            pt.println();
         }
         pt.close();
     }
