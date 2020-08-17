@@ -4,38 +4,29 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /*
-6
+3
 4
-2 1 3 1
-2
-420 420
+5 3 2 5
 5
-1 2 3 4 5
-1
-1
-2
-1 1
-5
-44 44 44 44 44
+1 2 3 5 3
+3
+1 1 1
  */
-public class A {
+public class С {
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
         int T = fs.nextInt();
         for (int tt = 0; tt < T; tt++) {
             int n = fs.nextInt();
-            int[] arr = fs.readArray(n);
-            int res = n;
-            for (int i = 1; i < n; i++) {
-                if (arr[i] != arr[i - 1]) {
-                    res = 1;
-                }
+            long[] arr = fs.readArrayLong(n);
+            long o = 0;
+            for (int i = 0; i < n - 1; i++) {
+                o += Math.max(0, arr[i] - arr[i + 1]);
             }
-            fs.pt.println(res);
+            fs.pt.println(o);
         }
         fs.close();
     }
@@ -65,6 +56,12 @@ public class A {
             return a;
         }
 
+        long[] readArrayLong(int n) {
+            long[] a = new long[n];
+            for (int i = 0; i < n; i++) a[i] = nextLong();
+            return a;
+        }
+
         int[][] read2Array(int m, int n) {
             int[][] a = new int[m][n];
             for (int i = 0; i < m; i++) {
@@ -77,6 +74,14 @@ public class A {
 
         void printArr(int[] arr) {
             for (int value : arr) {
+                pt.print(value);
+                pt.print(" ");
+            }
+            pt.println();
+        }
+
+        void printArr(long[] arr) {
+            for (long value : arr) {
                 pt.print(value);
                 pt.print(" ");
             }

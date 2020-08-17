@@ -1,4 +1,4 @@
-//package codeforces.contest.c1392;
+package codeforces.contest.c1392;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +23,8 @@ public class B {
         int T = fs.nextInt();
         for (int tt = 0; tt < T; tt++) {
             int n = fs.nextInt();
-            long k = fs.nextInt();
+            long k = fs.nextLong() % 2;
+            if (k == 0) k = 2;
             long[] arr = fs.readArrayLong(n);
             for (int j = 0; j < k; j++) {
                 long max = Long.MIN_VALUE;
