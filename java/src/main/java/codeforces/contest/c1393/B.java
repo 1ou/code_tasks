@@ -1,4 +1,4 @@
-//package codeforces.contest.c1393;
+package codeforces.contest.c1393;
 
 import java.io.BufferedReader;
 import java.io.IOException;
