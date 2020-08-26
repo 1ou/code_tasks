@@ -1,87 +1,44 @@
-package codeforces.contest.c1400;
+//package codeforces.problem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-3
-101110
+4
 2
-01
-1
-110
-1
-
-2
-01
-1
-110
-1
-
-1
-110
-1
+)(
+4
+()()
+8
+())()()(
+10
+)))((((())
  */
-public class C {
+public class C3174 {
+
 
     static void solve() {
-        int x;
+        int n = FS.nextInt();
         String s = FS.next();
-        x = FS.nextInt();
-        char[] arr = new char[s.length()];
-        for (int i = 0; i < s.length(); ++i) {
-            boolean f = true;
-            if (i + 1 > x && s.charAt(i) == '1') {
-                arr[i - x] = '1';
-            } else {
-                if (i + 1 > x) {
-                    if (s.charAt(i) == '0' && arr[i - x] == '1') {
-                        FS.pt.println(-1);
-                        return;
-                    }
-                }
-                f = false;
+        char[] arr = s.toCharArray();
+        int r = 0;
+        int k = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == '(') {
+                r++;
             }
-            if (i + 1 + x <= s.length() && s.charAt(i) == '1') {
-                arr[i + x] = '1';
-            } else {
-                if (!f) {
-                    if (i + 1 + x <= s.length()) {
-                        if (s.charAt(i) == '0' && arr[i + x] == '1') {
-                            FS.pt.println(-1);
-                            return;
-                        }
-                    }
-                    if (i + 1 + x <= s.length()) {
-                        arr[i + x] = '0';
-                    }
-                    if (i + 1 > x) {
-                        arr[i - x] = '0';
-                    }
+            if (arr[i] == ')') {
+                if (r == 0) {
+                    k++;
                 } else {
-//                    FS.pt.println(-1);
-//                    return;
+                    r--;
                 }
             }
         }
-//        int one = 0;
-//        for (int i = 0; i < arr.length; i++) {
-//            if (arr[i] != '1') {
-//                arr[i] = '0';
-//            } else {
-//                one++;
-//            }
-//        }
-
-//        if (one == arr.length) {
-//            FS.pt.println(-1);
-//        } else {
-        FS.pt.println(arr);
-//        }
+        FS.pt.println((k + r) / 2);
     }
 
     public static void main(String[] args) {
