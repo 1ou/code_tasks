@@ -4,35 +4,33 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.EmptyStackException;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1370/B
-1
+https://codeforces.com/problemset/problem/1385/C
 5
-1 3 3 4 5 90 100 101 2 3
+4
+1 2 3 4
+1
+7
+4 3 3 8 4 5 2
+3
+1 1 1
+7
+1 3 1 4 5 3 2
+5
+5 4 3 2 3
  */
-public class B1370 {
-
+public class C1385 {
     static void solve() {
-        int n = FS.nextInt() * 2;
-        int[] arr = FS.readArray(n);
-        int s = 0;
-        for (int i = 0; i < n && s != n - 2; i++) {
-            if (arr[i] == 0) continue;
-            int k = i + 1;
-            while (k < n) {
-                if (arr[k] != 0 && (arr[i] + arr[k]) % 2 == 0) {
-                    arr[i] = 0;
-                    arr[k] = 0;
-                    s+=2;
-                    FS.pt.println((i + 1) + " " + (k + 1));
-                    break;
-                }
-                k++;
-            }
-        }
+        int n = FS.nextInt();
+        int[] a = FS.readArray(n);
+        int pos = n - 1;
+        while (pos > 0 && a[pos - 1] >= a[pos]) --pos;
+        while (pos > 0 && a[pos - 1] <= a[pos]) --pos;
+        FS.pt.println(pos);
     }
 
     public static void main(String[] args) {
