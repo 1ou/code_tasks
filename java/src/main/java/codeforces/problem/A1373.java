@@ -1,44 +1,39 @@
-package codeforces.problem;
+//package codeforces.problem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.StringTokenizer;
 
 /*
+https://codeforces.com/problemset/problem/1373/A
 4
-2
-)(
-4
-()()
-8
-())()()(
-10
-)))((((())
+5 10 4
+4 5 20
+2 2 3
+1000000000 1000000000 1000000000
  */
-public class C3174 {
-
+public class A1373 {
 
     static void solve() {
-        int n = FS.nextInt();
-        String s = FS.next();
-        char[] arr = s.toCharArray();
-        int r = 0;
-        int k = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == '(') {
-                r++;
-            }
-            if (arr[i] == ')') {
-                if (r == 0) {
-                    k++;
-                } else {
-                    r--;
-                }
-            }
+        long a = FS.nextLong();
+        long b = FS.nextLong();
+        long c = FS.nextLong();
+
+
+        if (a < c) {
+            FS.pt.print("1 ");
+        } else {
+            FS.pt.print("-1 ");
         }
-        FS.pt.println((k + r) / 2);
+
+        if (c < a * b) {
+            FS.pt.print(b);
+        } else {
+            FS.pt.print("-1");
+        }
+        FS.pt.println();
     }
 
     public static void main(String[] args) {

@@ -4,41 +4,30 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.math.BigInteger;
+import java.util.StringTokenizer;
 
 /*
-4
+https://codeforces.com/problemset/problem/1388/B
 2
-)(
-4
-()()
-8
-())()()(
-10
-)))((((())
- */
-public class C3174 {
+1
+3
 
+1
+3
+ */
+public class B1388 {
 
     static void solve() {
         int n = FS.nextInt();
-        String s = FS.next();
-        char[] arr = s.toCharArray();
-        int r = 0;
-        int k = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == '(') {
-                r++;
-            }
-            if (arr[i] == ')') {
-                if (r == 0) {
-                    k++;
-                } else {
-                    r--;
-                }
-            }
+        int x = (n + 3) / 4;
+        for (int i = 0; i < n - x; ++i) {
+            FS.pt.print(9);
         }
-        FS.pt.println((k + r) / 2);
+        for (int i = 0; i < x; ++i) {
+            FS.pt.print(8);
+        }
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
