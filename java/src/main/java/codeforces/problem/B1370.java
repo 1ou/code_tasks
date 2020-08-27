@@ -1,39 +1,38 @@
-package codeforces.problem;
+//package codeforces.problem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1373/A
-4
-5 10 4
-4 5 20
-2 2 3
-1000000000 1000000000 1000000000
+https://codeforces.com/problemset/problem/1370/B
+1
+5
+1 3 3 4 5 90 100 101 2 3
  */
-public class A1373 {
+public class B1370 {
 
     static void solve() {
-        long a = FS.nextLong();
-        long b = FS.nextLong();
-        long c = FS.nextLong();
-
-
-        if (a < c) {
-            FS.pt.print("1 ");
-        } else {
-            FS.pt.print("-1 ");
+        int n = FS.nextInt() * 2;
+        int[] arr = FS.readArray(n);
+        int s = 0;
+        for (int i = 0; i < n && s != n - 2; i++) {
+            if (arr[i] == 0) continue;
+            int k = i + 1;
+            while (k < n) {
+                if (arr[k] != 0 && (arr[i] + arr[k]) % 2 == 0) {
+                    arr[i] = 0;
+                    arr[k] = 0;
+                    s+=2;
+                    FS.pt.println((i + 1) + " " + (k + 1));
+                    break;
+                }
+                k++;
+            }
         }
-
-        if (c < a * b) {
-            FS.pt.print(b);
-        } else {
-            FS.pt.print("-1");
-        }
-        FS.pt.println();
     }
 
     public static void main(String[] args) {
