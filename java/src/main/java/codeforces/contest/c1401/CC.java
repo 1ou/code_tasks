@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
 4
@@ -16,12 +16,16 @@ import java.util.StringTokenizer;
 4 5 6 7
 5
 7 5 2 2 4
+
+1
+6
+4 3 6 6 2 9
  */
 public class CC {
 
-    public static int gcd(int a,int b) {
-        while (b !=0) {
-            int tmp = a%b;
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int tmp = a % b;
             a = b;
             b = tmp;
         }
@@ -33,37 +37,32 @@ public class CC {
         n = FS.nextInt();
         int arr[] = FS.readArray(n);
         int min = Integer.MAX_VALUE;
-        int y = 0;
-        boolean check = false;
         for (int i = 0; i < n; i++) {
-            if (i != n -1 && arr[i] >= arr[i+1]) {
-                check = true;
-            }
+            min = Math.min(min, arr[i]);
+        }
 
-            if (arr[i] < min) {
-                min = arr[i];
-                y = i;
-            }
-        }
-        if (!check) {
-            FS.pt.println("YES");
-            return;
-        }
-        boolean f = true;
+        List<Integer> indexes = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (arr[i] > arr[j]) {
-                    if (gcd(arr[i], arr[j]) == min) {
-                        f = false;
-                    }
-                }
+            if (arr[i] % min == 0) indexes.add(arr[i]);
+        }
+
+        indexes.sort(Comparator.comparingInt(it -> it));
+
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] % min == 0) {
+                arr[i] = indexes.get(s++);
             }
         }
-        if (!f) {
-            FS.pt.println("NO");
-        } else {
-            FS.pt.println("YES");
+
+        for (int i = 0; i < n - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                FS.pt.println("NO");
+                return;
+            }
         }
+
+        FS.pt.println("YES");
     }
 
 
