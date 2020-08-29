@@ -8,7 +8,6 @@ and reach 1800 at the 1 April of 2021.<br>
 according to plan i will have 1-3 months of free time, so it is time to reach 2000.<br>
 
 how can i achieve it? it is an interesting question))<br>
-i'm going to code on java.<br>
 
 Plans for Aug:<br><br>
 
