@@ -1,44 +1,48 @@
-package codeforces.problem;
+//package codeforces.problem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1384/A
-4
-4
-1 2 4 2
-2
-5 3
+https://codeforces.com/problemset/problem/1399/C
+5
+5
+1 2 3 4 5
+8
+6 6 6 6 6 6 8 8
+8
+1 2 2 1 2 1 1 2
 3
-1 3 1
-3
-0 0 0
+1 3 3
+6
+1 1 3 4 2 2
  */
-public class A1384 {
+public class C1399 {
 
     static void solve() {
         int n = FS.nextInt();
         int[] arr = FS.readArray(n);
-        for (int i = 0; i < n; ++i) {
-            int c = 'a';
-            StringBuilder stringBuilder = new StringBuilder();
-            StringBuilder stringBuilder2 = new StringBuilder();
-            for (int j = 0; j < arr[i] + 1; j++) {
-                if (j < arr[i] || j == 0) {
-                    stringBuilder.append((char)c);
-                    stringBuilder2.append((char)c);
-                } else {
-                    stringBuilder.append((char)++c);
-                    stringBuilder2.append((char)c);
+        int max = Integer.MIN_VALUE;
+        int[] ctn = new int[n * 2 + 2];
+        for (int s = 2; s <= n * 2; s++) {
+            int[] tmp = new int[n];
+            System.arraycopy(arr, 0, tmp, 0, arr.length);
+            for (int i = 0; i < n; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (tmp[i] != -1 && tmp[j] != -1 && i != j && (tmp[i] + tmp[j] == s)) {
+                        ctn[s]++;
+                        tmp[i] = -1;
+                        tmp[j] = -1;
+                        break;
+                    }
                 }
             }
-            FS.pt.println(stringBuilder.toString());
-            FS.pt.println(stringBuilder2.toString());
+            max = Math.max(ctn[s], max);
         }
+        FS.pt.println(max);
     }
 
     public static void main(String[] args) {
@@ -47,6 +51,16 @@ public class A1384 {
             solve();
         }
         FS.pt.close();
+    }
+
+    static class Pair<T, N> {
+        T i;
+        N j;
+
+        public Pair(T i, N j) {
+            this.i = i;
+            this.j = j;
+        }
     }
 
     static class FS {
@@ -84,6 +98,16 @@ public class A1384 {
             return a;
         }
 
+        static long[][] read2ArrayL(int m, int n) {
+            long[][] a = new long[m][n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    a[i][j] = nextInt();
+                }
+            }
+            return a;
+        }
+
         static void printArr(int[] arr) {
             for (int value : arr) {
                 pt.print(value);
@@ -100,7 +124,16 @@ public class A1384 {
                 }
                 pt.println();
             }
-            pt.println();
+        }
+
+        static void print2ArrL(long[][] arr, int m, int n) {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    pt.print(arr[i][j]);
+                    pt.print(" ");
+                }
+                pt.println();
+            }
         }
 
         static void close() {
