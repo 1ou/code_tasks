@@ -9,14 +9,10 @@ according to plan i will have 1-3 months of free time, so it is time to reach 20
 
 how can i achieve it? it is an interesting question))<br>
 
-Plans for Aug:<br><br>
+Plans:<br><br>
 
-FIRTS. Do one task at leet code per day.<br>
+FIRTS. Do one task at leet code per day + one task at codeforces with >= 1200 rating.<br>
 SECOND. Apply for one competition per week on codeforces.<br>
-End of Aug. My rating at codeforces is 1241 now. the goal to have 1300 at 31 AUG.<br> 
-
-
-On the 1 of September my rating is 1000. I think 100 - point per month is good strategy.
 
 Month | Expectation | Reality 
 --- | --- | ---
