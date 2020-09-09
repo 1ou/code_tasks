@@ -12,7 +12,7 @@ how can i achieve it? it is an interesting question))<br>
 Plans:<br><br>
 
 FIRTS. Do one task at leet code per day + one task at codeforces with >= 1200 rating.<br>
-SECOND. Apply for one competition per week on codeforces.<br>
+SECOND. Apply for one competition per week at codeforces.<br>
 
 Month | Expectation | Reality 
 --- | --- | ---
