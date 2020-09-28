@@ -1,39 +1,43 @@
-package codeforces.contest.c1420;
+package codeforces.contest.c1417;//package codeforces.contest.c1417;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1420/A
-4
+https://codeforces.com/problemset/problem/14217/B
 5
-5 3 2 1 4
-6
-2 2 2 2 2 2
-2
-2 1
-6
-6 5 4 3 1 2
+1
+5
+42
+1337
+1000000000
 
 1
-6
-6 5 4 3 2 1
+1337
  */
-public class A {
+public class С {
 
     static void solve() {
         int n = FS.nextInt();
-        long[] arr = FS.readArrayL(n);
-        for (int i = 0; i < n - 1; i++) {
-            if (arr[i] <= arr[i +1]) {
-                FS.pt.println("YES");
-                return;
-            }
+        if (n == 1) {
+            FS.pt.println(0);
+            return;
         }
-        FS.pt.println("NO");
+        int x = 1;
+        while (x * x + x <= n) {
+            x++;
+        }
+        if ((x - 1) * (x - 1) + x - 1 == n) {
+            x--;
+            FS.pt.println((n / (x + 1)) + (x - 1));
+        } else {
+            FS.pt.println(n / x + x);
+        }
     }
 
     public static void main(String[] args) {
@@ -86,6 +90,7 @@ public class A {
             }
             pt.println();
         }
+
         static long[] readArrayL(int n) {
             long[] a = new long[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
@@ -94,6 +99,14 @@ public class A {
 
         static void printArr(int[] arr) {
             for (int value : arr) {
+                pt.print(value);
+                pt.print(" ");
+            }
+            pt.println();
+        }
+
+        static void printArrL(long[] arr) {
+            for (long value : arr) {
                 pt.print(value);
                 pt.print(" ");
             }

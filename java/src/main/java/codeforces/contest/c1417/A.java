@@ -1,4 +1,4 @@
-package codeforces.contest.c1420;
+package codeforces.contest.c1417;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,33 +7,36 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1420/A
-4
-5
-5 3 2 1 4
-6
-2 2 2 2 2 2
-2
-2 1
-6
-6 5 4 3 1 2
+https://codeforces.com/problemset/problem/14217/A
+3
+2 2
+1 1
+3 5
+1 2 3
+3 7
+3 2 2
 
-1
-6
-6 5 4 3 2 1
  */
 public class A {
 
     static void solve() {
         int n = FS.nextInt();
-        long[] arr = FS.readArrayL(n);
-        for (int i = 0; i < n - 1; i++) {
-            if (arr[i] <= arr[i +1]) {
-                FS.pt.println("YES");
-                return;
+        int k = FS.nextInt();
+        int[] arr = FS.readArray(n);
+        int min = arr[0];
+        int minI = 0;
+        for (int i = 1; i < n; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+                minI = i;
             }
         }
-        FS.pt.println("NO");
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == minI) continue;
+            sum += (k - arr[i]) / min;
+        }
+        FS.pt.println(sum);
     }
 
     public static void main(String[] args) {
