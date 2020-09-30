@@ -4,67 +4,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1426/B
-6
-3 4
-1 2
-5 6
-5 7
-7 4
-8 9
-9 8
-2 5
-1 1
-1 1
-2 2
-2 2
-1 100
-10 10
-10 10
-1 2
-4 5
-8 4
-2 2
-1 1
-1 1
-1 2
-3 4
-1 2
-1 1
-1 1
+https://codeforces.com/problemset/problem/1426/C
+5
+1
+5
+42
+1337
+1000000000
 
  */
-public class B {
-
+public class С {
     static void solve() {
         int n = FS.nextInt();
-        int m = FS.nextInt();
-        int sim = 0;
-        for (int k = 0; k < n; k++) {
-            int x = FS.nextInt();
-            int y = FS.nextInt();
-            int x2 = FS.nextInt();
-            int y2 = FS.nextInt();
-
-            if (x2 == y) {
-                sim++;
-            }
-        }
-        if (m % 2 == 1) {
-            FS.pt.println("NO");
+        if (n == 1) {
+            FS.pt.println(0);
             return;
         }
-
-        if (sim > 0) {
-            FS.pt.println("YES");
-        } else {
-            FS.pt.println("NO");
+        int x = 1;
+        while (x * x + x <= n) {
+            x++;
         }
+        long ans = Long.MAX_VALUE;
+        ans = Math.min(ans, x - 1 + ((n - x) + x - 1) / x);
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

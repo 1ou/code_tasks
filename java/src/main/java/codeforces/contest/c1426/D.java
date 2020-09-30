@@ -4,74 +4,47 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1426/B
-6
-3 4
-1 2
-5 6
-5 7
-7 4
-8 9
-9 8
-2 5
-1 1
-1 1
-2 2
-2 2
-1 100
-10 10
-10 10
-1 2
-4 5
-8 4
-2 2
-1 1
-1 1
-1 2
-3 4
-1 2
-1 1
-1 1
+https://codeforces.com/problemset/problem/1426/D
+4
+1 -5 3 2
 
+5
+4 -2 3 -9 2
+
+9
+-1 1 -1 1 -1 1 1 -1 -1
  */
-public class B {
-
+public class D {
     static void solve() {
         int n = FS.nextInt();
-        int m = FS.nextInt();
-        int sim = 0;
-        for (int k = 0; k < n; k++) {
-            int x = FS.nextInt();
-            int y = FS.nextInt();
-            int x2 = FS.nextInt();
-            int y2 = FS.nextInt();
-
-            if (x2 == y) {
-                sim++;
+        long[] arr = FS.readArrayL(n);
+        long ans = 0;
+        long cur = 0;
+        Set<Long> set = new HashSet<>();
+        set.add(0L);
+        for (int i = 0; i < n; i++) {
+            cur += arr[i];
+            if (set.contains(cur)) {
+                ans += 1;
+                set = new HashSet<>();
+                set.add(0L);
+                cur = arr[i];
             }
+            set.add(cur);
         }
-        if (m % 2 == 1) {
-            FS.pt.println("NO");
-            return;
-        }
-
-        if (sim > 0) {
-            FS.pt.println("YES");
-        } else {
-            FS.pt.println("NO");
-        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
             solve();
-        }
+//        }
         FS.pt.close();
     }
 
