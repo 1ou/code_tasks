@@ -1,3 +1,5 @@
+package codeforces.contest.c1391;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
