@@ -1,4 +1,4 @@
-//package codeforces.contest.c1379;
+package codeforces.problem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,98 +7,26 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1379/A
-6
-7
-abacaba
-7
-???????
-11
-aba?abacaba
-11
-abacaba?aba
-15
-asdf???f???qwer
-11
-abacabacaba
 
  */
-public class A {
+public class A1204 {
 
     static void solve() {
-        int n = FS.nextInt();
-        char[] str = FS.next().toCharArray();
-        char[] sub = "abacaba".toCharArray();
-        int c = 0, k = 0;
-        int cId = 0;
-        for (int i = 0; i < n - sub.length + 1; i++) {
-            int u = 0;
-            int r = 0;
-
-            for (int j = 0; j < sub.length; j++) {
-                boolean b = str[i + j] == sub[j];
-
-                if (b || (str[i + j] == '?')) {
-                    u++;
-                }
-
-                if (b) {
-                    r++;
-                }
+        String n = FS.next();
+        for (int i = 1; i < n.length(); i++) {
+            if (n.charAt(i) != '0') {
+                FS.pt.println(n.length() / 2 + 1);
+                return;
             }
-            if (u == sub.length) {
-                c++;
-                cId = i;
-            }
-            if (r == sub.length) k++;
         }
-
-        if (k > 1) {
-            FS.pt.println("NO");
-            return;
-        }
-        if (c + k > 0) {
-            FS.pt.println("YES");
-            if (k == 0) {
-                for (int i = 0; i < sub.length; i++) {
-                    str[i + cId] = sub[i];
-                }
-
-                int cc = 0;
-                for (int i = 0; i < sub.length * 2 && i + cId < n; i++) {
-                    boolean b = false;
-                    for (int j = 0; j < sub.length; j++) {
-                        if (str[i] != sub[j]) {
-                            b = true;
-                            break;
-                        }
-                    }
-                    if (!b) {
-                        cc++;
-                    }
-                }
-                if (cc > 1) {
-                    FS.pt.println("");
-                }
-            }
-
-            for (int i = 0; i < str.length; i++) {
-                if (str[i] == '?') {
-                    str[i] = 'f';
-                }
-            }
-            FS.pt.println(str);
-        } else {
-            FS.pt.println("NO");
-        }
-
+        FS.pt.println(n.length() / 2);
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
             solve();
-        }
+//        }
         FS.pt.close();
     }
 
