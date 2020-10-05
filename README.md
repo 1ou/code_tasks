@@ -14,7 +14,7 @@ SECOND. Apply for one competition per week at codeforces.<br>
 Month | Expectation | Reality 
 --- | --- | ---
 September|1100|1032
-October|1200|x
+October|1200|973
 November|1300|x
 December|1400|x
 January|1500|x
