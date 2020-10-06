@@ -15,12 +15,8 @@ https://codeforces.com/problemset/problem/1364/A
 1 2 3
 2 2
 0 6
-3 3
-3 6 9
-
-1
-3 4
-1 2 3
+4 4
+1 2 3 4
  */
 public class A1364 {
 
@@ -28,39 +24,24 @@ public class A1364 {
         int n = FS.nextInt();
         int x = FS.nextInt();
         int[] arr = FS.readArray(n);
-        int[] sum = new int[n];
-        sum[0] = arr[0];
-        boolean each = true;
-        for (int i = 1; i < n; i++) {
-            sum[i] = sum[i - 1] + arr[i];
-            if (each && arr[i] % x != 0) {
-                each = false;
-            }
-        }
-        if (each) {
-            FS.pt.println(-1);
-            return;
-        }
-        if (sum[n - 1] % x != 0) {
-            FS.pt.println(n);
-            return;
-        }
-        int max = -1;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == j) {
-                    if (sum[i] % x != 0) {
-                        max = Math.max(max, i + 1);
-                    }
-                } else {
-                    if ((sum[j] - sum[i]) % x != 0) {
-                        max = Math.max(max, j - i);
-                    }
-                }
-            }
-        }
+        int sum = 0;
 
-        FS.pt.println(max);
+        int l = -1, r = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] % x != 0) {
+                if (l == -1) {
+                    l = i;
+                }
+                r = i;
+            }
+            sum += arr[i];
+        }
+        if (sum % x != 0)
+            FS.pt.println(n);
+        else if (l==-1)
+            FS.pt.println("-1");
+        else
+            FS.pt.println(n-Math.min(l+1,n-r));
     }
 
     public static void main(String[] args) {
