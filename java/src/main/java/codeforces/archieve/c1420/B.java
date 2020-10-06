@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.archieve.c1420;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,12 +7,35 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 /*
+https://codeforces.com/problemset/problem/1420/B
+5
+5
+1 4 3 7 10
+3
+1 1 1
+4
+6 2 5 3
+2
+2 4
+1
+1
  */
-public class aTemplate {
+public class B {
 
     static void solve() {
         int n = FS.nextInt();
-
+        long[] arr = FS.readArrayL(n);
+        long cnt = 0, ans = 0;
+        for (int j = 29; j >= 0; j--) {
+            cnt = 0;
+            for (int i = 0; i < n; i++) {
+                if (arr[i] >= (1 << j) && arr[i] < (1 << (j + 1))) {
+                    cnt++;
+                }
+            }
+            ans+=cnt*(cnt-1)/2;
+        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
