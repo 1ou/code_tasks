@@ -7,18 +7,28 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 /*
-
+100000000
+101
+1000010011100010111000001101000011001010011101011001101100000001011011000000101101101011101111011011
+10100
+0
  */
 public class A1204 {
 
     static void solve() {
         String n = FS.next();
+        if (n.equals("0")) {
+            FS.pt.println("0");
+            return;
+        }
+
         for (int i = 1; i < n.length(); i++) {
             if (n.charAt(i) != '0') {
-                FS.pt.println(n.length() / 2 + 1);
+                FS.pt.println((n.length() + 1) / 2);
                 return;
             }
         }
+
         FS.pt.println(n.length() / 2);
     }
 

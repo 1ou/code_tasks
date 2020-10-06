@@ -5,133 +5,32 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 /*
-https://codeforces.com/problemset/problem/14217/B
-1
-4 4
-3 3
-3 1
-3 3
-1 3
-1 3
-3 3
-3 1
-3 3
-
-6
-3 4
-1 2
-5 6
-5 7
-7 4
-8 9
-9 8
-2 5
-1 1
-1 1
-2 2
-2 2
-1 100
-10 10
-10 10
-1 2
-4 5
-8 4
-2 2
-1 1
-1 1
-1 2
-3 4
-1 2
-1 1
-1 1
-
+https://codeforces.com/problemset/problem/1417/B
+2
+6 7
+1 2 3 4 5 6
+3 6
+3 3 3
  */
 public class B {
 
     static void solve() {
         int n = FS.nextInt();
-        int m = FS.nextInt();
-        int sim = 0;
-        int simFull = 0;
-        int triple = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int k = 0; k < n; k++) {
-            int x = FS.nextInt();
-            int y = FS.nextInt();
-            int x2 = FS.nextInt();
-            int y2 = FS.nextInt();
-
-            if (x == y && y == x2 && x2 == y2) {
-                simFull++;
-                continue;
-            }
-            if (x == y2 && y == x2) {
-                sim++;
-                continue;
-            }
-            if (x == y && y == x2) {
-                Integer i = map.get(x);
-                if (i == null) {
-                    i = 1;
-                } else {
-                    i++;
-                }
-                map.put(x, i);
-                continue;
-            }
-
-            if (x == y && y == y2) {
-                Integer i = map.get(x);
-                if (i == null) {
-                    i = 1;
-                } else {
-                    i++;
-                }
-                map.put(x, i);
-                continue;
-            }
-
-            if (x == x2 && x2 == y2) {
-                Integer i = map.get(x);
-                if (i == null) {
-                    i = 1;
-                } else {
-                    i++;
-                }
-                map.put(x, i);
-                continue;
-            }
-
-            if (y == x2 && x2 == y2) {
-                Integer i = map.get(y);
-                if (i == null) {
-                    i = 1;
-                } else {
-                    i++;
-                }
-                map.put(y, i);
+        long m = FS.nextLong();
+        int k = 0;
+        for (int i = 0; i < n; i++) {
+            long a = FS.nextLong();
+            if (a < Math.ceil(m / 2d)) {
+                FS.pt.print("0 ");
+            } else if (m % 2 == 0 && a == m / 2) {
+                FS.pt.print((k++) % 2 + " ");
+            } else {
+                FS.pt.print("1 ");
             }
         }
-        if (m % 2 == 1) {
-            FS.pt.println("NO");
-            return;
-        }
-        for (Map.Entry<Integer, Integer> it : map.entrySet()) {
-            if (it.getValue() == 4) {
-                triple = 1;
-                break;
-            }
-        }
-        if ((sim > 0 || triple == 1) && m % 4 == 0) {
-            FS.pt.println("YES");
-        } else if (simFull > 0) {
-            FS.pt.println("YES");
-        } else {
-            FS.pt.println("NO");
-        }
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
