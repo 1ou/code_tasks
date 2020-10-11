@@ -1,20 +1,75 @@
-package codeforces;
+package codeforces.contest.c1427;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
 https://codeforces.com/problemset/problem/?/?
- */
-public class aTemplate {
+4
+4
+1 -2 3 -4
+3
+0 0 0
+5
+1 -1 1 -1 1
+6
+40 -31 -9 0 13 -40
 
+ */
+public class A {
     static void solve() {
         int n = FS.nextInt();
+        List<Integer> a = new ArrayList<>();
+        int negative = 0;
+        int positive = 0;
+        int nu = 0;
+        for (int i = 0; i < n; i++) {
+            int y = FS.nextInt();
+            a.add(y);
+            if (y < 0) {
+                negative += Math.abs(y);
+            } else if (y > 0) {
+                positive += y;
+            } else {
+                nu++;
+            }
+        }
+        if (negative == positive) {
+            FS.pt.println("NO");
+            return;
+        }
+        FS.pt.println("YES");
+        if (negative > positive) {
+            for (int i = 0; i < n; i++) {
+                if (a.get(i) < 0) {
+                    FS.pt.print(a.get(i) + " ");
+                }
+            }
+            for (int i = 0; i < n; i++) {
+                if (a.get(i) > 0) {
+                    FS.pt.print(a.get(i) + " ");
+                }
+            }
+        } else {
+            for (int i = 0; i < n; i++) {
+                if (a.get(i) > 0) {
+                    FS.pt.print(a.get(i) + " ");
+                }
+            }
+            for (int i = 0; i < n; i++) {
+                if (a.get(i) < 0) {
+                    FS.pt.print(a.get(i) + " ");
+                }
+            }
+        }
 
-        FS.pt.println(n);
+        for (int i = 0; i < nu; i++) {
+            FS.pt.print(" 0 ");
+        }
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
