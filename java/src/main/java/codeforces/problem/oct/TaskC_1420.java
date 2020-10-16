@@ -19,7 +19,7 @@ https://codeforces.com/problemset/problem/1420/C1
 1 2 5 4 3 6 7
 
  */
-public class TaskC_1142 {
+public class TaskC_1420 {
     static void solve() {
         int n = FS.nextInt();
         int q = FS.nextInt();
