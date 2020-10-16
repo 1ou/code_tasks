@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.oct;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,14 +9,34 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
- */
-public class aTemplate {
+https://codeforces.com/problemset/problem/1420/C1
+3
+3 0
+1 3 2
+2 0
+1 2
+7 0
+1 2 5 4 3 6 7
 
+ */
+public class TaskC_1142 {
     static void solve() {
         int n = FS.nextInt();
+        int q = FS.nextInt();
+        long[] a = FS.readArrayL(n);
 
-        FS.pt.println(n);
+        long[] d1 = new long[n + 1];
+        long[] d2 = new long[n + 1];
+
+        d1[0] = Integer.MIN_VALUE;
+        d2[0] = 0;
+
+        for (int i = 0; i < n; ++i) {
+            d1[i + 1] = Math.max(d1[i], d2[i] + a[i]);
+            d2[i + 1] = Math.max(d2[i], d1[i] - a[i]);
+        }
+
+        FS.pt.println(Math.max(d1[n], d2[n]));
     }
 
     public static void main(String[] args) {
@@ -120,30 +140,6 @@ public class aTemplate {
                     pt.print(" ");
                 }
                 pt.println();
-            }
-            pt.println();
-        }
-
-        static List<Long> readListLong(int n) {
-            List<Long> list = new ArrayList<>(n);
-            for (int i = 0; i < n; i++) {
-                list.add(nextLong());
-            }
-            return list;
-        }
-
-        static List<Integer> readListInt(int n) {
-            List<Integer> list = new ArrayList<>(n);
-            for (int i = 0; i < n; i++) {
-                list.add(nextInt());
-            }
-            return list;
-        }
-
-        static <T> void printList(List<T> list) {
-            for (T value : list) {
-                pt.print(value);
-                pt.print(" ");
             }
             pt.println();
         }
