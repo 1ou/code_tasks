@@ -1,4 +1,4 @@
-//package codeforces.contest.c1421;
+//package codex/forces.contest.c1421;
 
 import java.io.BufferedReader;
 import java.io.IOException;
