@@ -1,4 +1,4 @@
-package codeforces.contest.c1433;//package codeforces.problem.oct;
+package codeforces.contest.c1433;
 
 import java.io.BufferedReader;
 import java.io.IOException;
