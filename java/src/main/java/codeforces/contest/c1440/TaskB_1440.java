@@ -1,4 +1,4 @@
-package codeforces.contest.c1447;
+package codeforces.contest.c1440;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,24 +9,24 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1447/A
-3
-2
-3
-4
-
-1
-3
+https://codeforces.com/problemset/problem/1440/B
  */
-public class TaskA_1447 {
+public class TaskB_1440 {
 
     static void solve() {
         int n = FS.nextInt();
-        FS.pt.println(n);
-        for (int i = 0; i < n; i++) {
-            FS.pt.print((i + 1) + " ");
+        int k = FS.nextInt();
+        List<Long> l = FS.readListLong(n * k);
+        long ans = 0;
+        int right = n * k - (n / 2 + 1);
+        int cnt = 0;
+        while (cnt < k) {
+            cnt++;
+            ans += l.get(right);
+            right -= (n / 2 + 1);
         }
-        FS.pt.println();
+
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

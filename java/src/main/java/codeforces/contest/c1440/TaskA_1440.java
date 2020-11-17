@@ -1,4 +1,4 @@
-package codeforces.contest.c1447;
+package codeforces.contest.c1440;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,24 +9,36 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1447/A
-3
-2
-3
-4
-
-1
-3
+https://codeforces.com/problemset/problem/1440/A
  */
-public class TaskA_1447 {
+public class TaskA_1440 {
 
     static void solve() {
         int n = FS.nextInt();
-        FS.pt.println(n);
+        int c0 = FS.nextInt();
+        int c1 = FS.nextInt();
+        int h = FS.nextInt();
+        char[] str = FS.next().toCharArray();
+
+        long sum = 0;
         for (int i = 0; i < n; i++) {
-            FS.pt.print((i + 1) + " ");
+            if (str[i] == '1') {
+                if (c1 > h + c0) {
+                    sum += h + c0;
+                } else {
+                    sum += c1;
+                }
+            }
+
+            if (str[i] == '0') {
+                if (c0 > h + c1) {
+                    sum += h + c1;
+                } else {
+                    sum += c0;
+                }
+            }
         }
-        FS.pt.println();
+        FS.pt.println(sum);
     }
 
     public static void main(String[] args) {

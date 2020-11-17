@@ -10,23 +10,39 @@ import java.util.StringTokenizer;
 
 /*
 https://codeforces.com/problemset/problem/1447/B
-3
 2
-3
-4
-
+3 1
+-2
+-3
 1
-3
+3 2
+-2 -3
+-3 0
+1 -4
  */
 public class TaskB_1447 {
 
     static void solve() {
         int n = FS.nextInt();
-        FS.pt.println(n);
+        int m = FS.nextInt();
+        int a[][] = FS.read2Array(n, m);
+        long sum = 0;
+        long minNumber = Long.MAX_VALUE;
+        long cnt = 0;
         for (int i = 0; i < n; i++) {
-            FS.pt.print((i + 1) + " ");
+            for (int j = 0; j < m; j++) {
+                if (a[i][j] <= 0) {
+                    cnt++;
+                }
+                minNumber = Math.min(Math.abs(a[i][j]), minNumber);
+                sum += Math.abs(a[i][j]);
+            }
         }
-        FS.pt.println();
+        if (cnt % 2 == 0) {
+            FS.pt.println(sum);
+        } else {
+            FS.pt.println(sum - Math.abs(minNumber) * 2);
+        }
     }
 
     public static void main(String[] args) {
