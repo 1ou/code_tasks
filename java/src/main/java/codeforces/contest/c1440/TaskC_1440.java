@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.contest.c1440;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,14 +9,92 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1440/C
  */
-public class aTemplate {
+public class TaskC_1440 {
 
     static void solve() {
         int n = FS.nextInt();
+        int m = FS.nextInt();
+        int[][] mat = new int[n][m];
 
-        FS.pt.println(n);
+        for (int i = 0; i < n; i++) {
+            String str = FS.next();
+            for (int j = 0; j < str.length(); j++) {
+                if (str.charAt(j) == '1') {
+                    mat[i][j] = 1;
+                } else {
+                    mat[i][j] = 0;
+                }
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        int last = -1;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int cnt = 0;
+                last += 1;
+                ans.add(new ArrayList<>());
+
+                if (mat[i][j] == 1) {
+                    ans.get(last).add(i + 1);
+                    ans.get(last).add(j + 1);
+                    mat[i][j] = 0;
+                    cnt++;
+                }
+
+                if (i + 1 < n && mat[i+1][j] == 1) {
+                    ans.get(last).add(i + 2);
+                    ans.get(last).add(j + 1);
+                    mat[i+1][j] = 0;
+                    cnt++;
+                }
+
+                if (j + 1 < m && mat[i][j+1] == 1) {
+                    ans.get(last).add(i + 1);
+                    ans.get(last).add(j + 2);
+                    mat[i][j+1] = 0;
+                    cnt++;
+                }
+
+                if (cnt < 3) {
+                    if (i + 1 < n && j + 1 < m && mat[i + 1][j + 1] == 1) {
+                        ans.get(last).add(i + 2);
+                        ans.get(last).add(j + 2);
+
+                        mat[i+1][j+1] = 0;
+                        cnt++;
+                    }
+                } else {
+                    if (i + 1 < n && j + 1 < m && mat[i + 1][j + 1] == 1) {
+                        last++;
+                        ans.add(new ArrayList<>());
+
+                        mat[i+1][j+1] = 0;
+                        ans.get(last).add(i + 2);
+                        ans.get(last).add(j + 2);
+                    }
+                }
+
+                if (ans.get(last).size() > 0 && ans.get(last).size() < 0) {
+
+                }
+
+                if (ans.get(last).size() == 0) {
+                    ans.remove(last);
+                    last--;
+                }
+            }
+        }
+
+        FS.pt.println(ans.size());
+        for (int i = 0; i < ans.size(); i++) {
+            for (int j = 0; j < ans.get(i).size(); j++) {
+                FS.pt.print(ans.get(i).get(j) + " ");
+            }
+            FS.pt.println();
+        }
     }
 
     public static void main(String[] args) {
@@ -52,20 +130,20 @@ public class aTemplate {
             return a;
         }
 
-        static int[][] read2Array(int n, int m) {
-            int[][] a = new int[n][m];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static int[][] read2Array(int m, int n) {
+            int[][] a = new int[m][n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     a[i][j] = nextInt();
                 }
             }
             return a;
         }
 
-        static long[][] read2ArrayL(int n, int m) {
-            long[][] a = new long[n][m];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static long[][] read2ArrayL(int m, int n) {
+            long[][] a = new long[m][n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     a[i][j] = nextInt();
                 }
             }
@@ -102,9 +180,9 @@ public class aTemplate {
             pt.println();
         }
 
-        static void print2Arr(int[][] arr, int n, int m) {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static void print2Arr(int[][] arr, int m, int n) {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -113,9 +191,9 @@ public class aTemplate {
             pt.println();
         }
 
-        static void print2Arr(long[][] arr, int n, int m) {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static void print2Arr(long[][] arr, int m, int n) {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }

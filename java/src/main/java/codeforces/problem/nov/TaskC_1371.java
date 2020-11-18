@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,14 +9,21 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1371/C
  */
-public class aTemplate {
+public class TaskC_1371 {
 
     static void solve() {
-        int n = FS.nextInt();
+        long a = FS.nextLong(); // vanilla
+        long b = FS.nextLong(); // chocolate
+        long n = FS.nextLong();
+        long m = FS.nextLong();
 
-        FS.pt.println(n);
+        if (m <= Math.min(a, b) && n + m <= a + b) {
+            FS.pt.println("Yes");
+        } else {
+            FS.pt.println("No");
+        }
     }
 
     public static void main(String[] args) {
