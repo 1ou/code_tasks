@@ -9,42 +9,16 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
-
-1
-1 1
-1
+https://codeforces.com/problemset/problem/1356/C
  */
-public class Task1367_C {
+public class TaskC_1352 {
 
     static void solve() {
-        int n = FS.nextInt();
-        int k = FS.nextInt();
-        char[] s = FS.next().toCharArray();
-        int res = 0;
+        long n = FS.nextLong();
+        long k = FS.nextLong();
 
-        for (int i = 0; i < n;) {
-            int j = i + 1;
-
-            for (; j < n && s[j] != '1'; j++);
-
-            int left = s[i] == '1' ? k : 0;
-            int right = j < n && s[j] == '1' ? k : 0;
-            int len = j - i;
-
-            if (left == k) {
-                len--;
-            }
-
-            len -= left + right;
-
-            if (len > 0) {
-                res += (len + k) / (k + 1);
-            }
-
-            i = j;
-        }
-        FS.pt.println(res);
+        long ans = (k - 1) / (n - 1);
+        FS.pt.println(ans + k);
     }
 
     public static void main(String[] args) {
