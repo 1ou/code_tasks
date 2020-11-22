@@ -8,113 +8,35 @@ import java.util.*;
 
 /*
 https://codeforces.com/problemset/problem/1451/C
-4
-3 3
-abc
-bcd
-4 2
-abba
-azza
-2 1
-zz
-aa
-6 2
-aaabba
-ddddcc
-
  */
 public class TaskC_1451 {
-
-    static class Pair {
-        int f;
-        int s;
-
-        public Pair(int f, int s) {
-            this.f = f;
-            this.s = s;
-        }
-    }
-
     static void solve() {
         int n = FS.nextInt();
         int k = FS.nextInt();
         char[] a = FS.next().toCharArray();
         char[] b = FS.next().toCharArray();
 
-        // key - uchastok, v - Map<Integer, Int> // k - index, v - int(char)
-        Map<Integer, List<Pair>> mapAA = new HashMap<>();
-        Map<Integer, List<Pair>> mapBB = new HashMap<>();
-
-        for (int i = 0; i < n - k + 1; i++) {
-            for (int j = 0; j < k; j++) {
-                List<Pair> uchA = mapAA.get(i);
-                if (uchA == null) {
-                    uchA = new ArrayList<>();
-                }
-                uchA.add(new Pair(i * k + j, a[i * k + j]));
-                mapAA.put(i, uchA);
-
-                List<Pair> uchB = mapBB.get(i);
-                if (uchB == null) {
-                    uchB = new ArrayList<>();
-                }
-                uchB.add(new Pair(i * k + j, b[i * k + j]));
-                mapBB.put(i, uchB);
-            }
-        }
-
-        for (Map.Entry<Integer, List<Pair>> itA : mapAA.entrySet()) {
-            for (int i = 0; i < itA.getValue().size(); i++) {
-                for (Map.Entry<Integer, List<Pair>> itB : mapBB.entrySet()) {
-
-                    int prevDiff = (int) b[itB.getValue().get(0).f] - (int) a[itA.getValue().get(i).f];
-
-                    boolean t = true;
-                    for (int j = 1; j < itB.getValue().size(); j++) {
-                        int diff = (int) b[itB.getValue().get(j).f] - (int) a[itA.getValue().get(i).f + j];
-                        if (diff <= 0 || prevDiff != diff) {
-                            t = false;
-                            break;
-                        }
-                    }
-                    if (t) {
-                        for (int u = itA.getValue().get(i).f; u < itA.getValue().get(i).f + itA.getValue().size(); u++) {
-                            a[u] = b[u];
-                        }
-                    }
-                }
-
-            }
-        }
-        Map<Integer, Integer> mapA = new HashMap<>();
-        Map<Integer, Integer> mapB = new HashMap<>();
-
+        int[] have = new int[27];
+        int[] need = new int[27];
         for (int i = 0; i < n; i++) {
-            Integer aa = mapA.get((int) a[i]);
-            if (aa == null) {
-                aa = 1;
-            } else {
-                aa++;
-            }
-            mapA.put((int) a[i], aa);
-
-            Integer bb = mapB.get((int) b[i]);
-            if (bb == null) {
-                bb = 1;
-            } else {
-                bb++;
-            }
-            mapB.put((int) b[i], bb);
+            have[a[i] - 'a']++;
+            need[b[i] - 'a']++;
         }
 
-        for (Map.Entry<Integer, Integer> it : mapA.entrySet()) {
-            Integer bCount = mapB.get(it.getKey());
-            if (bCount == null || it.getValue() != bCount) {
-                FS.pt.println("NO");
-                return;
+        boolean bad = false;
+        for (int j = 25; j >= 0; j--) {
+            have[j] += have[j + 1];
+            need[j] += need[j + 1];
+            if (have[j] > need[j] || (need[j] - have[j]) % k != 0) {
+                bad = true;
+                break;
             }
         }
-        FS.pt.println("YES");
+        if (bad) {
+            FS.pt.println("NO");
+        } else {
+            FS.pt.println("YES");
+        }
     }
 
     public static void main(String[] args) {

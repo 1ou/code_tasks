@@ -14,9 +14,10 @@ https://codeforces.com/problemset/problem/1451/D
 public class TaskD_1451 {
 
     static void solve() {
-        int n = FS.nextInt();
+        int d = FS.nextInt();
+        int k = FS.nextInt();
 
-        FS.pt.println(n);
+        FS.pt.println(d);
     }
 
     public static void main(String[] args) {
