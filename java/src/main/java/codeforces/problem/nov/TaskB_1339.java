@@ -1,22 +1,37 @@
-package codeforces;
+package codeforces.problem.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1339/B
  */
-public class aTemplate {
+public class TaskB_1339 {
 
     static void solve() {
         int n = FS.nextInt();
+        List<Long> a = FS.readListLong(n);
+        a.sort(Comparator.comparingLong(it -> it));
 
-        FS.pt.println(n);
+        int curr = n / 2;
+        List<Long> ans = new ArrayList<>();
+        ans.add(a.get(curr));
+
+        int i = 1;
+
+        while (ans.size() != n) {
+            if (i % 2 == 1) {
+                curr -= i;
+            } else {
+                curr += i;
+            }
+            ans.add(a.get(curr));
+            i++;
+        }
+        FS.printList(ans);
     }
 
     public static void main(String[] args) {

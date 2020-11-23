@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,10 +11,12 @@ import java.util.StringTokenizer;
 /*
 https://codeforces.com/problemset/problem/?/?
  */
-public class aTemplate {
+public class TaskC_1389 {
 
     static void solve() {
-        int n = FS.nextInt();
+        char[] s = FS.next().toCharArray();
+        int n = s.length;
+
 
         FS.pt.println(n);
     }
@@ -154,16 +156,6 @@ public class aTemplate {
 
         static long nextLong() {
             return Long.parseLong(next());
-        }
-    }
-
-    static class Pair<T> {
-        T first;
-        T second;
-
-        public Pair(T first, T second) {
-            this.first = first;
-            this.second = second;
         }
     }
 }
