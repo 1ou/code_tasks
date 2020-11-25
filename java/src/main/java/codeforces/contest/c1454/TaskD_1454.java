@@ -1,7 +1,5 @@
 package codeforces.contest.c1454;
 
-import codeforces.contest.с1418.A;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
