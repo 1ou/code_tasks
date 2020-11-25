@@ -1,22 +1,54 @@
-package codeforces;
+package codeforces.contest.c1454;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1454/B
  */
-public class aTemplate {
+public class TaskB_1454 {
 
     static void solve() {
         int n = FS.nextInt();
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            int p = FS.nextInt();
+            a[i] = p;
+            Integer val = map.get(p);
+            if (val == null) {
+                val = 1;
+            } else {
+                val++;
+            }
+            map.put(p, val);
+        }
 
-        FS.pt.println(n);
+        int min = Integer.MAX_VALUE;
+        int cnt = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+
+            if (value == 1) {
+                min = Math.min(key, min);
+                cnt++;
+            }
+        }
+
+        if (cnt == 0) {
+            FS.pt.println(-1);
+        } else {
+            for (int i = 0; i < n; i++) {
+                if (a[i] == min) {
+                    FS.pt.println(i + 1);
+                    return;
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -157,11 +189,11 @@ public class aTemplate {
         }
     }
 
-    static class Pair<T, K> {
+    static class Pair<T> {
         T first;
-        K second;
+        T second;
 
-        public Pair(T first, K second) {
+        public Pair(T first, T second) {
             this.first = first;
             this.second = second;
         }

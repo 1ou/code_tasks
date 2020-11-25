@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.contest.c1454;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,14 +9,18 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1454/A
  */
-public class aTemplate {
+public class TaskA_1454 {
 
     static void solve() {
         int n = FS.nextInt();
-
-        FS.pt.println(n);
+        int[] arr = new int[n];
+        arr[0] = n;
+        for (int i = 1; i < n; i ++) {
+            arr[i] = i;
+        }
+        FS.printArr(arr);
     }
 
     public static void main(String[] args) {
@@ -157,11 +161,11 @@ public class aTemplate {
         }
     }
 
-    static class Pair<T, K> {
+    static class Pair<T> {
         T first;
-        K second;
+        T second;
 
-        public Pair(T first, K second) {
+        public Pair(T first, T second) {
             this.first = first;
             this.second = second;
         }

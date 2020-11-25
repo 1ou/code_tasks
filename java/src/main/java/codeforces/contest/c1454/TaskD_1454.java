@@ -1,22 +1,54 @@
-package codeforces;
+package codeforces.contest.c1454;
+
+import codeforces.contest.с1418.A;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1454/D
+1
+360
+
+1
+9876543210
  */
-public class aTemplate {
-
+public class TaskD_1454 {
     static void solve() {
-        int n = FS.nextInt();
+        long n = FS.nextLong();
 
-        FS.pt.println(n);
+        long N = n;
+        Map<Long, Long> map = new HashMap<>();
+        for (long i = 2; i * i <= n; i++) {
+            long a = 0;
+            while (n % i == 0) {
+                map.put(i, ++a);
+                n /= i;
+            }
+        }
+
+        if (n > 1) map.put(n, 1L);
+        long max = 0;
+        long div = 0;
+        for (Map.Entry<Long, Long> entry : map.entrySet()) {
+            if (max < entry.getValue()) {
+                max = entry.getValue();
+                div = entry.getKey();
+            }
+        }
+
+        ArrayList<Long> ans = new ArrayList<>();
+        for (int i = 0; i < max - 1; i++) {
+            ans.add(div);
+            N /= div;
+        }
+        ans.add(N);
+
+        FS.pt.println(ans.size());
+        FS.printList(ans);
     }
 
     public static void main(String[] args) {
