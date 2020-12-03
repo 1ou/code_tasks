@@ -1,35 +1,23 @@
-//package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1366/B
+https://codeforces.com/problemset/problem/1366/С
  */
-public class TaskB_1366 {
+public class TaskС_1366 {
 
     static void solve() {
-        long n = FS.nextLong();
-        long x = FS.nextLong();
+        int n = FS.nextInt();
         int m = FS.nextInt();
+        int[][] a = FS.read2Array(n, m);
 
-        long L = x;
-        long R = x;
-
-        for (int i = 0; i < m; i++) {
-            long l = FS.nextInt();
-            long r = FS.nextInt();
-
-            if (Math.max(l, L) <= Math.min(r, R)) {
-                L = Math.min(l, L);
-                R = Math.max(r, R);
-            }
-        }
-
-        FS.pt.println(R - L + 1);
     }
 
     public static void main(String[] args) {

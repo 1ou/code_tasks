@@ -1,21 +1,37 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1455/A
+https://codeforces.com/problemset/problem/1339/B
  */
-public class TaskA_1455 {
+public class TaskB_1339 {
 
     static void solve() {
-        String s = FS.next();
-        FS.pt.println(s.length());
+        int n = FS.nextInt();
+        List<Long> a = FS.readListLong(n);
+        a.sort(Comparator.comparingLong(it -> it));
+
+        int curr = n / 2;
+        List<Long> ans = new ArrayList<>();
+        ans.add(a.get(curr));
+
+        int i = 1;
+
+        while (ans.size() != n) {
+            if (i % 2 == 1) {
+                curr -= i;
+            } else {
+                curr += i;
+            }
+            ans.add(a.get(curr));
+            i++;
+        }
+        FS.printList(ans);
     }
 
     public static void main(String[] args) {
@@ -156,11 +172,11 @@ public class TaskA_1455 {
         }
     }
 
-    static class Pair<T, K> {
+    static class Pair<T> {
         T first;
-        K second;
+        T second;
 
-        public Pair(T first, K second) {
+        public Pair(T first, T second) {
             this.first = first;
             this.second = second;
         }

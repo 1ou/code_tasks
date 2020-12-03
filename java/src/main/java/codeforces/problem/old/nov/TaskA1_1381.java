@@ -1,42 +1,69 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1457/B
-3
-10 2
-1 1 2 2 1 1 2 2 2 1
-7 1
-1 2 3 4 5 6 7
-10 3
-1 3 3 3 3 1 2 1 3 3
+https://codeforces.com/problemset/problem/1381/A1
  */
-public class TaskB_1457 {
+public class TaskA1_1381 {
 
+    static void swap(char[] arr, int pos) {
+        for (int i = 0; i <= pos; i++) {
+            if (arr[i] == '1') {
+                arr[i] = '0';
+            } else {
+                arr[i] = '1';
+            }
+        }
+
+        if (pos > 0) {
+            for (int i = 0; i <= pos / 2; i++) {
+                char tmp = arr[i];
+                arr[i] = arr[pos - i];
+                arr[pos - i] = tmp;
+            }
+        }
+    }
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        int[] c = FS.readArray(n);
+        String a = FS.next();
+        String b = FS.next();
 
-        int ans = Integer.MAX_VALUE;
-        for (int i = 1; i <= 100; i++) {
-            int cur = 0;
-            for (int j = 0; j < n; j++) {
-                if (c[j] != i) {
-                    j += k - 1;
-                    cur++;
+        List<Integer> ans = new ArrayList<>();
+        char[] arr = a.toCharArray();
+
+        int r = n - 1;
+        while (!String.valueOf(arr).equals(b) && r >= 0) {
+            if(arr[r] != b.charAt(r)) {
+                if (arr[0] != b.charAt(r)) {
+                    swap(arr, r);
+                    ans.add(r + 1);
+                } else {
+                    swap(arr, 0);
+                    ans.add(1);
+
+                    swap(arr, r);
+                    ans.add(r + 1);
                 }
             }
-            ans = Math.min(cur, ans);
+            r--;
         }
-
-        FS.pt.println(ans);
+        if (String.valueOf(arr).equals(b)) {
+            FS.pt.print(ans.size() + " ");
+            for (int i = 0; i < ans.size(); i++) {
+                FS.pt.print(ans.get(i) + " ");
+            }
+        } else {
+            FS.pt.print(0);
+        }
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
@@ -72,20 +99,20 @@ public class TaskB_1457 {
             return a;
         }
 
-        static int[][] read2Array(int n, int m) {
-            int[][] a = new int[n][m];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static int[][] read2Array(int m, int n) {
+            int[][] a = new int[m][n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     a[i][j] = nextInt();
                 }
             }
             return a;
         }
 
-        static long[][] read2ArrayL(int n, int m) {
-            long[][] a = new long[n][m];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static long[][] read2ArrayL(int m, int n) {
+            long[][] a = new long[m][n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     a[i][j] = nextInt();
                 }
             }
@@ -122,9 +149,9 @@ public class TaskB_1457 {
             pt.println();
         }
 
-        static void print2Arr(int[][] arr, int n, int m) {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static void print2Arr(int[][] arr, int m, int n) {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -133,9 +160,9 @@ public class TaskB_1457 {
             pt.println();
         }
 
-        static void print2Arr(long[][] arr, int n, int m) {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+        static void print2Arr(long[][] arr, int m, int n) {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -174,16 +201,6 @@ public class TaskB_1457 {
 
         static long nextLong() {
             return Long.parseLong(next());
-        }
-    }
-
-    static class Pair<T, K> {
-        T first;
-        K second;
-
-        public Pair(T first, K second) {
-            this.first = first;
-            this.second = second;
         }
     }
 }

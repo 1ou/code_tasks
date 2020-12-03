@@ -1,24 +1,42 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1457/B
+3
+10 2
+1 1 2 2 1 1 2 2 2 1
+7 1
+1 2 3 4 5 6 7
+10 3
+1 3 3 3 3 1 2 1 3 3
  */
-public class TaskC_1389 {
+public class TaskB_1457 {
+
 
     static void solve() {
-        char[] s = FS.next().toCharArray();
-        int n = s.length;
+        int n = FS.nextInt();
+        int k = FS.nextInt();
+        int[] c = FS.readArray(n);
 
+        int ans = Integer.MAX_VALUE;
+        for (int i = 1; i <= 100; i++) {
+            int cur = 0;
+            for (int j = 0; j < n; j++) {
+                if (c[j] != i) {
+                    j += k - 1;
+                    cur++;
+                }
+            }
+            ans = Math.min(cur, ans);
+        }
 
-        FS.pt.println(n);
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
@@ -156,6 +174,16 @@ public class TaskC_1389 {
 
         static long nextLong() {
             return Long.parseLong(next());
+        }
+    }
+
+    static class Pair<T, K> {
+        T first;
+        K second;
+
+        public Pair(T first, K second) {
+            this.first = first;
+            this.second = second;
         }
     }
 }

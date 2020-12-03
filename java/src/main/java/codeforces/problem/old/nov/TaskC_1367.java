@@ -1,4 +1,4 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,15 +9,42 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1366/С
+https://codeforces.com/problemset/problem/?/?
+
+1
+1 1
+1
  */
-public class TaskС_1366 {
+public class TaskC_1367 {
 
     static void solve() {
         int n = FS.nextInt();
-        int m = FS.nextInt();
-        int[][] a = FS.read2Array(n, m);
+        int k = FS.nextInt();
+        char[] s = FS.next().toCharArray();
+        int res = 0;
 
+        for (int i = 0; i < n;) {
+            int j = i + 1;
+
+            for (; j < n && s[j] != '1'; j++);
+
+            int left = s[i] == '1' ? k : 0;
+            int right = j < n && s[j] == '1' ? k : 0;
+            int len = j - i;
+
+            if (left == k) {
+                len--;
+            }
+
+            len -= left + right;
+
+            if (len > 0) {
+                res += (len + k) / (k + 1);
+            }
+
+            i = j;
+        }
+        FS.pt.println(res);
     }
 
     public static void main(String[] args) {

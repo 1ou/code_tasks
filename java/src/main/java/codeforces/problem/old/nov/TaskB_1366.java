@@ -1,66 +1,42 @@
-package codeforces.problem.nov;
+//package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
-10
-1 1 2 1 1 1 2 1 1 1
-
-1
-2
-
+https://codeforces.com/problemset/problem/1366/B
  */
-public class TaskA_1149 {
+public class TaskB_1366 {
 
     static void solve() {
-        int n = FS.nextInt();
-        int[] arr = FS.readArray(n);
+        long n = FS.nextLong();
+        long x = FS.nextLong();
+        int m = FS.nextInt();
 
-        int cnt1 = 0;
-        int cnt2 = 0;
+        long L = x;
+        long R = x;
 
-        for (int i = 0; i < n;i++) {
-            if (arr[i] == 1) {
-                cnt1++;
-                continue;
+        for (int i = 0; i < m; i++) {
+            long l = FS.nextInt();
+            long r = FS.nextInt();
+
+            if (Math.max(l, L) <= Math.min(r, R)) {
+                L = Math.min(l, L);
+                R = Math.max(r, R);
             }
-            if (arr[i] == 2) {
-                cnt2++;
-            }
         }
 
-        if (cnt2 > 0) {
-            FS.pt.print("2 ");
-            cnt2--;
-        }
-
-        if (cnt1 > 0) {
-            FS.pt.print("1 ");
-            cnt1--;
-        }
-
-        for (int i = 0; i < cnt2; i++) {
-            FS.pt.print("2 ");
-        }
-
-        for (int i = 0; i < cnt1; i++) {
-            FS.pt.print("1 ");
-        }
+        FS.pt.println(R - L + 1);
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
             solve();
-//        }
+        }
         FS.pt.close();
     }
 
@@ -191,16 +167,6 @@ public class TaskA_1149 {
 
         static long nextLong() {
             return Long.parseLong(next());
-        }
-    }
-
-    static class Pair<T, K> {
-        T first;
-        K second;
-
-        public Pair(T first, K second) {
-            this.first = first;
-            this.second = second;
         }
     }
 }

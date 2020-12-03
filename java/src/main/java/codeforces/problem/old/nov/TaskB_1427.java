@@ -1,4 +1,4 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,31 +7,66 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1339/B
+https://codeforces.com/problemset/problem/1427/B
+2
+5 2
+WLWLL
+6 5
+LLLWWL
+
+1
+15 5
+WWWLLLWWWLLLWWW
  */
-public class TaskB_1339 {
+public class TaskB_1427 {
 
     static void solve() {
         int n = FS.nextInt();
-        List<Long> a = FS.readListLong(n);
-        a.sort(Comparator.comparingLong(it -> it));
+        int k = FS.nextInt();
+        int tmpK = k;
+        char[] c = FS.next().toCharArray();
 
-        int curr = n / 2;
-        List<Long> ans = new ArrayList<>();
-        ans.add(a.get(curr));
+        List<Integer> gaps = new ArrayList<>();
+        int wins = 0;
+        int cnt = 0;
+        int winstreak = 0;
+        boolean streak = false;
+        for (int i = 0; i < n; i++) {
 
-        int i = 1;
-
-        while (ans.size() != n) {
-            if (i % 2 == 1) {
-                curr -= i;
-            } else {
-                curr += i;
+            if (i > 0 && c[i] == 'W' && c[i - 1] == 'W') {
+                streak = true;
             }
-            ans.add(a.get(curr));
-            i++;
+
+            if (c[i] == 'W') {
+                wins++;
+            }
+
+            if (c[i] == 'L' && streak) {
+                streak = false;
+                winstreak++;
+            }
+
+            if (cnt == 0 && c[i] == 'L') {
+                cnt++;
+                continue;
+            }
+
+            if (cnt > 0 && c[i] == 'W') {
+                gaps.add(cnt);
+                cnt = 0;
+            }
         }
-        FS.printList(ans);
+
+        int filledGaps = 0;
+        gaps.sort(Comparator.comparingInt(it -> it));
+        for (int i = 0; i < gaps.size(); i++) {
+            if (k >= gaps.get(i)) {
+                filledGaps++;
+                k -= gaps.get(i);
+            }
+        }
+
+        FS.pt.println(2 * (tmpK + wins) - winstreak + filledGaps);
     }
 
     public static void main(String[] args) {
@@ -172,11 +207,11 @@ public class TaskB_1339 {
         }
     }
 
-    static class Pair<T> {
+    static class Pair<T, K> {
         T first;
-        T second;
+        K second;
 
-        public Pair(T first, T second) {
+        public Pair(T first, K second) {
             this.first = first;
             this.second = second;
         }

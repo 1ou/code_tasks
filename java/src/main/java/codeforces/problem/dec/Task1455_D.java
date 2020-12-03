@@ -1,4 +1,4 @@
-package codeforces.problem.nov;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,32 +9,50 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1457/C
+https://codeforces.com/problemset/problem/1455/D
  */
-public class Task1457_C {
+public class Task1455_D {
 
     static void solve() {
         int n = FS.nextInt();
-        int p = FS.nextInt();
-        int k = FS.nextInt();
-        char[] s = FS.next().toCharArray();
         int x = FS.nextInt();
-        int y = FS.nextInt();
+        int[] arr = FS.readArray(n);
 
-        int[] a = new int[k];
-        int res = n * x; // if we have all 0s and we change all of them to 1, worst case
-        int m = 0;
-        for (int i = n - 1; i >= p - 1; i--) {
-            if (s[i] == '0') {
-                a[m % k]++;
+        int sorted = 0;
+        int times = 0;
+        for (int i = 0; i < n - 1;) {
+            if (arr[i] <= arr[i + 1]) {
+                sorted++;
+                i++;
+                continue;
+            } else {
+                if (arr[i] > x) {
+                    int tmp = arr[i];
+                    arr[i] = x;
+                    x = tmp;
+                    times++;
+                } else {
+                    int pos = i + 1;
+                    boolean found = false;
+                    while (pos < n) {
+                        if (arr[pos] > x) {
+                            found = true;
+                            int tmp = arr[pos];
+                            arr[pos] = x;
+                            x = tmp;
+                            times++;
+                            break;
+                        }
+                        pos++;
+                    }
+                    if (!found) {
+                        FS.pt.println("-1");
+                        return;
+                    }
+                }
             }
-            // let us try to put p at current index
-            int cost = (i + 1 - p) * y + a[m % k] * x;
-            res = Math.min(res, cost);
-            m++;
         }
-
-        FS.pt.println(res);
+        FS.pt.println(times);
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package codeforces.problem.nov;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,61 +9,20 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1381/A1
+https://codeforces.com/problemset/problem/1455/B
  */
-public class TaskA1_1381 {
-
-    static void swap(char[] arr, int pos) {
-        for (int i = 0; i <= pos; i++) {
-            if (arr[i] == '1') {
-                arr[i] = '0';
-            } else {
-                arr[i] = '1';
-            }
-        }
-
-        if (pos > 0) {
-            for (int i = 0; i <= pos / 2; i++) {
-                char tmp = arr[i];
-                arr[i] = arr[pos - i];
-                arr[pos - i] = tmp;
-            }
-        }
-    }
+public class Task1455_B {
 
     static void solve() {
-        int n = FS.nextInt();
-        String a = FS.next();
-        String b = FS.next();
+        long x = FS.nextLong();
+        int steps = 0;
+        while (steps * (steps + 1) < 2 * x)
+            steps++;
 
-        List<Integer> ans = new ArrayList<>();
-        char[] arr = a.toCharArray();
+        if (steps * (steps + 1) / 2 == x + 1)
+            steps++;
 
-        int r = n - 1;
-        while (!String.valueOf(arr).equals(b) && r >= 0) {
-            if(arr[r] != b.charAt(r)) {
-                if (arr[0] != b.charAt(r)) {
-                    swap(arr, r);
-                    ans.add(r + 1);
-                } else {
-                    swap(arr, 0);
-                    ans.add(1);
-
-                    swap(arr, r);
-                    ans.add(r + 1);
-                }
-            }
-            r--;
-        }
-        if (String.valueOf(arr).equals(b)) {
-            FS.pt.print(ans.size() + " ");
-            for (int i = 0; i < ans.size(); i++) {
-                FS.pt.print(ans.get(i) + " ");
-            }
-        } else {
-            FS.pt.print(0);
-        }
-        FS.pt.println();
+        FS.pt.println(steps);
     }
 
     public static void main(String[] args) {
@@ -99,20 +58,20 @@ public class TaskA1_1381 {
             return a;
         }
 
-        static int[][] read2Array(int m, int n) {
-            int[][] a = new int[m][n];
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static int[][] read2Array(int n, int m) {
+            int[][] a = new int[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     a[i][j] = nextInt();
                 }
             }
             return a;
         }
 
-        static long[][] read2ArrayL(int m, int n) {
-            long[][] a = new long[m][n];
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static long[][] read2ArrayL(int n, int m) {
+            long[][] a = new long[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     a[i][j] = nextInt();
                 }
             }
@@ -149,9 +108,9 @@ public class TaskA1_1381 {
             pt.println();
         }
 
-        static void print2Arr(int[][] arr, int m, int n) {
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static void print2Arr(int[][] arr, int n, int m) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -160,9 +119,9 @@ public class TaskA1_1381 {
             pt.println();
         }
 
-        static void print2Arr(long[][] arr, int m, int n) {
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static void print2Arr(long[][] arr, int n, int m) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -201,6 +160,16 @@ public class TaskA1_1381 {
 
         static long nextLong() {
             return Long.parseLong(next());
+        }
+    }
+
+    static class Pair<T, K> {
+        T first;
+        K second;
+
+        public Pair(T first, K second) {
+            this.first = first;
+            this.second = second;
         }
     }
 }

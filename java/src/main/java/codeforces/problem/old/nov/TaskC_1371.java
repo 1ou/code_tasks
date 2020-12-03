@@ -1,39 +1,28 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1365/A
+https://codeforces.com/problemset/problem/1371/C
  */
-public class TaskB_1365 {
+public class TaskC_1371 {
 
     static void solve() {
-        int n = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int[] b = FS.readArray(n);
+        long a = FS.nextLong(); // vanilla
+        long b = FS.nextLong(); // chocolate
+        long n = FS.nextLong();
+        long m = FS.nextLong();
 
-        boolean isSort = true;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            if (map.size() < 2) {
-                map.putIfAbsent(b[i], 1);
-            } else {
-                break;
-            }
-            if (i < n - 1) {
-                if (a[i] > a[i+1]) {
-                    isSort = false;
-                }
-            }
-        }
-        if (map.size() == 1) {
-            FS.pt.println((isSort) ? "YES" : "NO");
+        if (m <= Math.min(a, b) && n + m <= a + b) {
+            FS.pt.println("Yes");
         } else {
-            FS.pt.println("YES");
+            FS.pt.println("No");
         }
     }
 

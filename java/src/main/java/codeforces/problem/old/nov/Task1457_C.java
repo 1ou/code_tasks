@@ -1,32 +1,40 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1457/C
  */
-public class TaskA_1457 {
+public class Task1457_C {
 
     static void solve() {
-        long n = FS.nextLong();
-        long m = FS.nextLong();
+        int n = FS.nextInt();
+        int p = FS.nextInt();
+        int k = FS.nextInt();
+        char[] s = FS.next().toCharArray();
+        int x = FS.nextInt();
+        int y = FS.nextInt();
 
-        long r = FS.nextLong();
-        long c = FS.nextLong();
-
-        List<Pair<Long, Long>> edges = Arrays.asList(new Pair<>(1L, 1L), new Pair<>(n, m), new Pair<>(n, 1L), new Pair<>(1L, m));
-        long max = Integer.MIN_VALUE;
-        for (int i = 0; i < edges.size(); i++) {
-            max = Math.max(Math.abs(edges.get(i).first - r) + Math.abs(edges.get(i).second - c), max);
+        int[] a = new int[k];
+        int res = n * x; // if we have all 0s and we change all of them to 1, worst case
+        int m = 0;
+        for (int i = n - 1; i >= p - 1; i--) {
+            if (s[i] == '0') {
+                a[m % k]++;
+            }
+            // let us try to put p at current index
+            int cost = (i + 1 - p) * y + a[m % k] * x;
+            res = Math.min(res, cost);
+            m++;
         }
-        FS.pt.println(max);
+
+        FS.pt.println(res);
     }
 
     public static void main(String[] args) {

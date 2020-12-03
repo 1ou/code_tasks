@@ -1,4 +1,4 @@
-package codeforces.problem.nov;
+package codeforces.problem.old.nov;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,23 +9,57 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1356/C
+https://codeforces.com/problemset/problem/?/?
+10
+1 1 2 1 1 1 2 1 1 1
+
+1
+2
+
  */
-public class TaskC_1352 {
+public class TaskA_1149 {
 
     static void solve() {
-        long n = FS.nextLong();
-        long k = FS.nextLong();
+        int n = FS.nextInt();
+        int[] arr = FS.readArray(n);
 
-        long ans = (k - 1) / (n - 1);
-        FS.pt.println(ans + k);
+        int cnt1 = 0;
+        int cnt2 = 0;
+
+        for (int i = 0; i < n;i++) {
+            if (arr[i] == 1) {
+                cnt1++;
+                continue;
+            }
+            if (arr[i] == 2) {
+                cnt2++;
+            }
+        }
+
+        if (cnt2 > 0) {
+            FS.pt.print("2 ");
+            cnt2--;
+        }
+
+        if (cnt1 > 0) {
+            FS.pt.print("1 ");
+            cnt1--;
+        }
+
+        for (int i = 0; i < cnt2; i++) {
+            FS.pt.print("2 ");
+        }
+
+        for (int i = 0; i < cnt1; i++) {
+            FS.pt.print("1 ");
+        }
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
             solve();
-        }
+//        }
         FS.pt.close();
     }
 
@@ -156,6 +190,16 @@ public class TaskC_1352 {
 
         static long nextLong() {
             return Long.parseLong(next());
+        }
+    }
+
+    static class Pair<T, K> {
+        T first;
+        K second;
+
+        public Pair(T first, K second) {
+            this.first = first;
+            this.second = second;
         }
     }
 }
