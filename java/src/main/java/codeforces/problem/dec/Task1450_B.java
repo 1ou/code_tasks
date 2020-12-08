@@ -1,23 +1,64 @@
-package codeforces;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1450/B
+1
+3 3
+6 7
+8 8
+6 9
  */
-public class aTemplate {
+public class Task1450_B {
 
     static void solve() {
         int n = FS.nextInt();
+        long k = FS.nextLong();
+        List<Pair<Integer, Integer>> points = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int x = FS.nextInt();
+            int y = FS.nextInt();
+            points.add(new Pair<>(x, y));
+        }
 
-        FS.pt.println(n);
+        int ans = 0;
+        while (points.size() > 1) {
+            int max = Integer.MIN_VALUE;
+            List<Pair<Integer, Integer>> finalRemoved = new ArrayList<>();
+            for (int i = 0; i < points.size(); i++) {
+                int tmp = 0;
+                List<Pair<Integer, Integer>> removed = new ArrayList<>();
+                for (int j = 0; j < points.size(); j++) {
+                    if (i != j) {
+                        if (Math.abs(points.get(i).first - points.get(j).first) +
+                                Math.abs(points.get(i).second - points.get(j).second) <= k) {
+                            tmp++;
+                            removed.add(points.get(j));
+                        }
+                    }
+                }
+                if (tmp > max) {
+                    max = tmp;
+                    finalRemoved = removed;
+                }
+            }
+
+            if (finalRemoved.isEmpty() && points.size() > 1) {
+                FS.pt.println(-1);
+                return;
+            } else {
+                ans++;
+                for (int i = 0; i < finalRemoved.size(); i++) {
+                    points.remove(finalRemoved.get(i));
+                }
+            }
+        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
