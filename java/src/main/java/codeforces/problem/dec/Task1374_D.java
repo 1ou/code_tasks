@@ -1,4 +1,4 @@
-package codeforces.problem.old.nov;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,58 +7,30 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1427/B
-2
-5 2
-WLWLL
-6 5
-LLLWWL
-
-1
-15 5
-WWWLLLWWWLLLWWW
+https://codeforces.com/problemset/problem/1374/D
  */
-public class TaskB_1427 {
+public class Task1374_D {
 
     static void solve() {
-        int N = FS.nextInt();
-        int K = FS.nextInt();
-        char[] S = FS.next().toCharArray();
+        int n = FS.nextInt();
+        int k = FS.nextInt();
+        int[] a = FS.readArray(n);
+        long max = -1;
+        Map<Long, Long> hm = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (a[i] % k == 0)
+                continue;
+            long mod = a[i] % k;
+            if (hm.containsKey(mod)) {
+                max = Math.max(max, hm.get(mod) + k);
+                hm.put(mod, hm.get(mod) + k);
+            } else {
+                max = Math.max(max, k - mod);
+                hm.put(mod, k - mod);
+            }
+        }
 
-        int winning_streaks_cnt = 0;
-        int wins = 0;
-        int losses = 0;
-        List<Integer> losing_streaks = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            if (S[i] == 'W') {
-                wins++;
-                if (i == 0 || S[i - 1] == 'L') winning_streaks_cnt++;
-            }
-            if (S[i] == 'L') {
-                losses++;
-                if (i == 0 || S[i - 1] == 'W') losing_streaks.add(0);
-                losing_streaks.set(losing_streaks.size() - 1, losing_streaks.get(losing_streaks.size() - 1) + 1);
-            }
-        }
-        if (K >= losses) {
-            FS.pt.println(2 * N - 1);
-            return;
-        }
-        if (wins == 0) {
-            if (K == 0) FS.pt.println(0);
-            else FS.pt.println(2 * K - 1);
-            return;
-        }
-        if (S[0] == 'L') losing_streaks.set(0, Integer.MAX_VALUE);
-        if (S[N - 1] == 'L') losing_streaks.set(losing_streaks.size() - 1, Integer.MAX_VALUE);
-        losing_streaks.sort(Comparator.naturalOrder());
-        wins += K;
-        for (int ls : losing_streaks) {
-            if (ls > K) break;
-            K -= ls;
-            winning_streaks_cnt--;
-        }
-        FS.pt.println(2 * wins - winning_streaks_cnt);
+        FS.pt.println(max + 1);
     }
 
     public static void main(String[] args) {
@@ -206,6 +178,20 @@ public class TaskB_1427 {
         public Pair(T first, K second) {
             this.first = first;
             this.second = second;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Pair<?, ?> pair = (Pair<?, ?>) o;
+            return Objects.equals(first, pair.first) &&
+                    Objects.equals(second, pair.second);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(first, second);
         }
     }
 }
