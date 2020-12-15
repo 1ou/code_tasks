@@ -1,23 +1,57 @@
-package codeforces;
+package codeforces.contest.c1461;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.util.stream.LongStream;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1461/D
+
  */
-public class aTemplate {
+public class Task1461_D {
+
+    static void go(int l, int r, Set<Long> set, List<Long> a) {
+        long sum = 0;
+        for (int i = l; i < r + 1; i++) {
+            sum += a.get(i);
+        }
+        set.add(sum);
+        long mid = (a.get(l) + a.get(r)) / 2;
+        int pos = -1;
+        for (int i = l; i < r + 1; i++) {
+            if (a.get(i) <= mid) {
+                pos = i;
+            } else {
+                break;
+            }
+        }
+
+        if (pos == -1 || pos == r) {
+            return;
+        }
+
+        go(l, pos, set, a);
+        go(pos + 1, r, set, a);
+    }
 
     static void solve() {
         int n = FS.nextInt();
-
-        FS.pt.println(n);
+        int q = FS.nextInt();
+        List<Long> a = FS.readListLong(n);
+        a.sort(Comparator.naturalOrder());
+        Set<Long> ss = new HashSet<>();
+        go(0, n - 1, ss, a);
+        while (q-- > 0) {
+            long s = FS.nextLong();
+            if (ss.contains(s)) {
+                FS.pt.println("YES");
+            } else {
+                FS.pt.println("NO");
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -47,14 +81,14 @@ public class aTemplate {
             return Integer.parseInt(next());
         }
 
+        static double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
         static int[] readArray(int n) {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
-        }
-
-        static double nextDouble() {
-            return Double.parseDouble(next());
         }
 
         static int[][] read2Array(int n, int m) {
