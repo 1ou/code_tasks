@@ -11,12 +11,70 @@ import java.util.StringTokenizer;
 
 /*
 https://codeforces.com/problemset/problem/1465/B
+5
+1
+282
+1234567890
+1000000000000000000
+123456
  */
 public class Task1465_B {
 
-    static void solve() {
-        int n = FS.nextInt();
+    static boolean checkDivisibility(long n, long digit) {
+        // If the digit divides the number
+        // then return  true else return false.
+        if (digit == 0) return true;
+        return n % digit == 0;
+    }
 
+    // Function to check if all
+    // digits of n divide it or not,
+    static boolean allDigitsDivide(long n) {
+        long temp = n;
+        while (temp > 0) {
+
+            // Taking the digit of the
+            // number into var 'digit'.
+            long digit = temp % 10;
+
+            if (!(checkDivisibility(n, digit)))
+                return false;
+
+            temp /= 10;
+        }
+        return true;
+    }
+
+
+    static void solve() {
+//        for (int i = 1; i < 1000; i++) {
+//            FS.pt.print(i + " " + ((allDigitsDivide(i)) ? "YES" : "NO"));
+//            long n = i;
+//            long tmp = n;
+//            long lcmm = 1;
+//            long gcd = 0;
+//            while (n > 0) {
+//                long d = n % 10;
+//                if (d != 0) {
+//                    lcmm = lcm(lcmm, d);
+//                    gcd = gcd(gcd, d);
+//                }
+//                n /= 10;
+//            }
+//            FS.pt.print(" LCM = " + lcmm + " GCD " + gcd);
+//            FS.pt.println();
+//        FS.pt.println(tmp + lcmm - gcd);
+//        }
+        long n = FS.nextLong();
+//
+////        FS.pt.println("PRIMES = ");
+////        primeFactors(n);
+////        FS.pt.println();
+////        FS.pt.println("PRIMES end ");
+
+        while (!allDigitsDivide(n)) {
+            n += 1;
+        }
         FS.pt.println(n);
     }
 

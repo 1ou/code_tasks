@@ -162,6 +162,56 @@ public class CodeForcesTemplate {
         }
     }
 
+    public static long gcd(long a, long b) {
+        while (b != 0) {
+            long tmp = a % b;
+            a = b;
+            b = tmp;
+        }
+        return a;
+    }
+
+    public static long lcm(long number1, long number2) {
+        if (number1 == 0 || number2 == 0) {
+            return 0;
+        }
+        long absNumber1 = Math.abs(number1);
+        long absNumber2 = Math.abs(number2);
+        long absHigherNumber = Math.max(absNumber1, absNumber2);
+        long absLowerNumber = Math.min(absNumber1, absNumber2);
+        long lcm = absHigherNumber;
+        while (lcm % absLowerNumber != 0) {
+            lcm += absHigherNumber;
+        }
+        return lcm;
+    }
+
+    public static List<Long> primeFactors(long n) {
+        List<Long> ans = new ArrayList<>();
+        // Print the number of 2s that divide n
+        while (n % 2 == 0) {
+            ans.add(2L);
+            n /= 2;
+        }
+
+        // n must be odd at this point.  So we can
+        // skip one element (Note i = i +2)
+        for (long i = 3; i <= Math.sqrt(n); i += 2) {
+            // While i divides n, print i and divide n
+            while (n % i == 0) {
+                ans.add(i);
+                n /= i;
+            }
+        }
+
+        // This condition is to handle the case whien
+        // n is a prime number greater than 2
+        if (n > 2) {
+            ans.add(n);
+        }
+        return ans;
+    }
+
     static class Pair<T, K> {
         T first;
         K second;

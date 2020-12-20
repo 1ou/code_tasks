@@ -4,20 +4,63 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
 https://codeforces.com/problemset/problem/1465/C
+4
+3 1
+2 3
+3 2
+2 1
+1 2
+5 3
+2 3
+3 1
+1 2
+5 4
+4 5
+5 1
+2 2
+3 3
+
  */
 public class Task1465_C {
 
     static void solve() {
         int n = FS.nextInt();
+        int m = FS.nextInt();
+        int tmp = m;
 
-        FS.pt.println(n);
+        int[] go = new int[n];
+        Arrays.fill(go, -1);
+
+        while (m-- > 0) {
+            int x = FS.nextInt();
+            int y = FS.nextInt();
+            x-=1;
+            y-=1;
+            go[x] = y;
+        }
+
+        int[] vis = new int[n];
+        int ans = tmp;
+
+        for(int i = 0; i < n; i++){
+            if(vis[i] != 0) continue;
+            if(go[i] == i){
+                ans -= 2;
+            }
+            int cur = i;
+            while(cur != -1 && vis[cur] == 0){
+                vis[cur] = 1;
+                cur = go[cur];
+            }
+            if(cur >= 0 && cur == i){
+                ans++;
+            }
+        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

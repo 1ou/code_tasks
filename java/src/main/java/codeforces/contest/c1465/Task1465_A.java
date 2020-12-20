@@ -11,13 +11,26 @@ import java.util.StringTokenizer;
 
 /*
 https://codeforces.com/problemset/problem/1465/A
+1
+12
+gl))hf))))))
  */
 public class Task1465_A {
 
     static void solve() {
         int n = FS.nextInt();
-
-        FS.pt.println(n);
+        char[] s = FS.next().toCharArray();
+        int lastPos = n - 1;
+        while (lastPos >= 0 && s[lastPos] == ')') {
+            lastPos--;
+        }
+        lastPos++;
+        int diff = n - lastPos;
+        if (lastPos >= diff) {
+            FS.pt.println("NO");
+        } else {
+            FS.pt.println("YES");
+        }
     }
 
     public static void main(String[] args) {
