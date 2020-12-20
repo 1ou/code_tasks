@@ -8,22 +8,6 @@ import java.util.*;
 
 /*
 https://codeforces.com/problemset/problem/1465/C
-4
-3 1
-2 3
-3 2
-2 1
-1 2
-5 3
-2 3
-3 1
-1 2
-5 4
-4 5
-5 1
-2 2
-3 3
-
  */
 public class Task1465_C {
 
