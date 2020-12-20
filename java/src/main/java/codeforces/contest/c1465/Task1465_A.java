@@ -1,4 +1,4 @@
-package codeforces.problem.old;
+package codeforces.contest.c1465;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,27 +6,25 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1465/A
  */
-public class AtCoder {
+public class Task1465_A {
 
     static void solve() {
-        int a = FS.nextInt();
-        int b = FS.nextInt();
-        int c = FS.nextInt();
-        String s = FS.next();
+        int n = FS.nextInt();
 
-        FS.pt.println((a + b + c) + " " + s);
+        FS.pt.println(n);
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
             solve();
-//        }
+        }
         FS.pt.close();
     }
 
@@ -55,20 +53,24 @@ public class AtCoder {
             return a;
         }
 
-        static int[][] read2Array(int m, int n) {
-            int[][] a = new int[m][n];
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        static int[][] read2Array(int n, int m) {
+            int[][] a = new int[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     a[i][j] = nextInt();
                 }
             }
             return a;
         }
 
-        static long[][] read2ArrayL(int m, int n) {
-            long[][] a = new long[m][n];
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static long[][] read2ArrayL(int n, int m) {
+            long[][] a = new long[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     a[i][j] = nextInt();
                 }
             }
@@ -105,9 +107,9 @@ public class AtCoder {
             pt.println();
         }
 
-        static void print2Arr(int[][] arr, int m, int n) {
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static void print2Arr(int[][] arr, int n, int m) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -116,9 +118,9 @@ public class AtCoder {
             pt.println();
         }
 
-        static void print2Arr(long[][] arr, int m, int n) {
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
+        static void print2Arr(long[][] arr, int n, int m) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
                     pt.print(arr[i][j]);
                     pt.print(" ");
                 }
@@ -157,6 +159,30 @@ public class AtCoder {
 
         static long nextLong() {
             return Long.parseLong(next());
+        }
+    }
+
+    static class Pair<T, K> {
+        T first;
+        K second;
+
+        public Pair(T first, K second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Pair<?, ?> pair = (Pair<?, ?>) o;
+            return Objects.equals(first, pair.first) &&
+                    Objects.equals(second, pair.second);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(first, second);
         }
     }
 }
