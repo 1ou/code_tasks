@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,19 +12,29 @@ import java.util.StringTokenizer;
 /*
 https://codeforces.com/problemset/problem/?/?
  */
-public class CodeForcesTemplate {
+public class Task1459_C {
 
     static void solve() {
         int n = FS.nextInt();
+        int m = FS.nextInt();
+        long[] a = FS.readArrayL(n);
 
-        FS.pt.println(n);
+        long gcdA = 0;
+        for (int i = 1; i < n; ++i) {
+            gcdA = gcd(gcdA, Math.abs(a[i] - a[i - 1]));
+        }
+        while (m-- > 0) {
+            long b = FS.nextLong();
+            FS.pt.print(gcd(gcdA, a[0] + b) + " ");
+        }
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
-            solve();
-        }
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
+        solve();
+//        }
         FS.pt.close();
     }
 
@@ -71,7 +81,7 @@ public class CodeForcesTemplate {
             long[][] a = new long[n][m];
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
-                    a[i][j] = nextLong();
+                    a[i][j] = nextInt();
                 }
             }
             return a;
@@ -162,44 +172,53 @@ public class CodeForcesTemplate {
         }
     }
 
-    static class NumberTheory {
-        public static long gcd(long a, long b) {
-            while (b != 0) {
-                long tmp = a % b;
-                a = b;
-                b = tmp;
-            }
-            return a;
+    public static long gcd(long a, long b) {
+        while (b != 0) {
+            long tmp = a % b;
+            a = b;
+            b = tmp;
+        }
+        return a;
+    }
+
+    public static long lcm(long number1, long number2) {
+        if (number1 == 0 || number2 == 0) {
+            return 0;
+        }
+        long absNumber1 = Math.abs(number1);
+        long absNumber2 = Math.abs(number2);
+        long absHigherNumber = Math.max(absNumber1, absNumber2);
+        long absLowerNumber = Math.min(absNumber1, absNumber2);
+        long lcm = absHigherNumber;
+        while (lcm % absLowerNumber != 0) {
+            lcm += absHigherNumber;
+        }
+        return lcm;
+    }
+
+    public static List<Long> primeFactors(long n) {
+        List<Long> ans = new ArrayList<>();
+        while (n % 2 == 0) {
+            ans.add(2L);
+            n /= 2;
         }
 
-        public static long lcm(long a, long b) {
-            return a * b / gcd(a, b);
+        // n must be odd at this point.  So we can
+        // skip one element (Note i = i + 2)
+        for (long i = 3; i <= Math.sqrt(n); i += 2) {
+            // While i divides n, print i and divide n
+            while (n % i == 0) {
+                ans.add(i);
+                n /= i;
+            }
         }
 
-        public static List<Long> primeFactors(long n) {
-            List<Long> ans = new ArrayList<>();
-            while (n % 2 == 0) {
-                ans.add(2L);
-                n /= 2;
-            }
-
-            // n must be odd at this point.  So we can
-            // skip one element (Note i = i + 2)
-            for (long i = 3; i <= Math.sqrt(n); i += 2) {
-                // While i divides n, print i and divide n
-                while (n % i == 0) {
-                    ans.add(i);
-                    n /= i;
-                }
-            }
-
-            // This condition is to handle the case when
-            // n is a prime number greater than 2
-            if (n > 2) {
-                ans.add(n);
-            }
-            return ans;
+        // This condition is to handle the case whien
+        // n is a prime number greater than 2
+        if (n > 2) {
+            ans.add(n);
         }
+        return ans;
     }
 
     static class Pair<T, K> {
