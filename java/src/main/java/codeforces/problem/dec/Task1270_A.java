@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1270/A
  */
 public class Task1270_A {
 

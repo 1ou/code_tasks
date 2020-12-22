@@ -11,17 +11,6 @@ import java.util.StringTokenizer;
 
 /*
 https://codeforces.com/problemset/problem/1270/B
-1
-3
-1 3 5
-
-1
-2
-0 2
-
-1
-2
-2 0
  */
 public class Task1270_B {
 
