@@ -1,23 +1,30 @@
-package codeforces;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1462/E1
  */
-public class CodeForcesTemplate {
+public class Task1462_E1 {
 
     static void solve() {
         int n = FS.nextInt();
-
-        FS.pt.println(n);
+        List<Long> ll = FS.readListLong(n);
+        ll.sort(Comparator.naturalOrder());
+        long ans = 0;
+        int r = 0;
+        for (int l = 0; l < n - 2; l++) {
+            while (r + 1 < n && (ll.get(r + 1) - ll.get(l) <= 2)) {
+                r++;
+                int len = r - l;
+                ans += len * (len - 1) / 2;
+            }
+        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
