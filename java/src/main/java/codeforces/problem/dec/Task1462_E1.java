@@ -18,11 +18,11 @@ public class Task1462_E1 {
         long ans = 0;
         int r = 0;
         for (int l = 0; l < n - 2; l++) {
-            while (r + 1 < n && (ll.get(r + 1) - ll.get(l) <= 2)) {
-                r++;
-                int len = r - l;
-                ans += len * (len - 1) / 2;
+            while (r + 1 < n && ll.get(r + 1) - ll.get(l) <= 2) {
+                ++r;
             }
+            long len = r - l;
+            ans += len * (len - 1) / 2;
         }
         FS.pt.println(ans);
     }
