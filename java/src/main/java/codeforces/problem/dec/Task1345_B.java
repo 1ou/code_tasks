@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,36 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1345/B
+1
+26
+
+1
+24
  */
-public class CodeForcesTemplate {
+public class Task1345_B {
 
     static void solve() {
-        int n = FS.nextInt();
+        long n = FS.nextLong();
+        long ans = 0;
+        while (n >= 2) {
+            long big = 0;
+            long pow = 1;
+            while (big < n) {
+                big += 3 * pow++;
+            }
+            big = big - 3 * (pow - 1);
+            if (big + (pow - 1) * 2 > n) {
+                big -= 3 * (pow - 2);
+                big += (pow - 2) * 2;
+            } else {
+                big += (pow - 1) * 2;
+            }
+            n -= big;
+            ans++;
+        }
 
-        FS.pt.println(n);
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
