@@ -10,22 +10,7 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
-7
-6 5
-1 1 1 1 1 1
-6 4
-1 1 1 1 1 1
-6 3
-2 2 2 2 3 3
-6 3
-2 3 2 3 2 3
-6 1
-1 1 1 1 1 1
-6 2
-1 1 1 1 1 1
-6 2
-1 1 1 1 1 6
+https://codeforces.com/problemset/problem/1196/B
  */
 public class Task1196_B {
 
