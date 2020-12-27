@@ -10,31 +10,18 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1345/B
+https://codeforces.com/problemset/problem/1327/A
  */
-public class Task1345_B {
+public class Task1327_A {
 
     static void solve() {
-        long n = FS.nextLong();
-        long ans = 0;
-        while (n >= 2) {
-            long big = 0;
-            long pow = 1;
-            while (big < n) {
-                big += 3 * pow++;
-            }
-            big = big - 3 * (pow - 1);
-            if (big + (pow - 1) * 2 > n) {
-                big -= 3 * (pow - 2);
-                big += (pow - 2) * 2;
-            } else {
-                big += (pow - 1) * 2;
-            }
-            n -= big;
-            ans++;
+        long n = FS.nextInt();
+        long k = FS.nextInt();
+        if ((n + k) % 2 == 0 && k * k <= n) {
+            FS.pt.println("YES");
+        } else {
+            FS.pt.println("NO");
         }
-
-        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
