@@ -1,4 +1,4 @@
-//package codeforces.problem.dec;
+package codeforces.problem.dec;
 
 import java.io.BufferedReader;
 import java.io.IOException;
