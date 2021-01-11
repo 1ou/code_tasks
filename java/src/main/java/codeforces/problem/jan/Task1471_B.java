@@ -25,34 +25,24 @@ public class Task1471_B {
         int n = FS.nextInt();
         long x = FS.nextLong();
         long sum = 0;
-        List<Long> ll = new ArrayList<>();
-        boolean t = true;
+        int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
-            long a = FS.nextLong();
-            sum += a;
-            if (a % x == 0 && t) {
-                for (int k = 0; k < x; k++) {
-                    ll.add(a / x);
-                }
-            } else {
-                t = false;
-            }
+            arr[i] = FS.nextInt();
+            sum += arr[i];
         }
-
-        int o = ll.size();
-        for (int i = 0; i < o; i++) {
-            sum += ll.get(i);
-            if (t && ll.get(i) % x == 0) {
-                for (int j = 0; j < x; j++) {
-                    ll.add(ll.get(i) / x);
-                    o++;
+        int level = 1;
+        while (true) {
+            for (int i = 0; i < n; i++) {
+                if (arr[i] % x == 0) {
+                    arr[i] /= x;
+                    sum += arr[i] * Math.pow(x, level);
+                } else {
+                    FS.pt.println(sum);
+                    return;
                 }
-            } else {
-                t = false;
             }
+            level++;
         }
-
-        FS.pt.println(sum);
     }
 
     public static void main(String[] args) {

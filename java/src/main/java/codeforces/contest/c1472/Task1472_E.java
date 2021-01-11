@@ -4,53 +4,60 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
 https://codeforces.com/problemset/problem/1472/E
  */
 public class Task1472_E {
 
+    static class Point {
+        int w;
+        int h;
+        int ind;
+
+        Point(int wi, int hi, int in) {
+            w = wi;
+            h = hi;
+            ind = in;
+        }
+    }
+
     static void solve() {
         int n = FS.nextInt();
-        long[] h = new long[n];
-        long[] w = new long[n];
-        int t = n;
-        while (t-- > 0) {
-            h[n - t - 1] = FS.nextLong();
-            w[n - t - 1] = FS.nextLong();
-        }
-        long minH = Long.MAX_VALUE;
-        long minW = Long.MAX_VALUE;
-        int minHIndex = 0;
-        int minWIndex = 0;
+
+        List<Point> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if (h[i] < minH) {
-                minHIndex = i;
-                minH = h[i];
+            int h = FS.nextInt();
+            int w = FS.nextInt();
+            list.add(new Point(w, h, i + 1));
+            list.add(new Point(h, w, i + 1));
+        }
+        list.sort((p1, p2) -> {
+            if (p1.w != p2.w) {
+                return p1.w - p2.w;
             }
-            if (w[i] < minW) {
-                minWIndex = i;
-                minW = w[i];
+            return p2.h - p1.h;
+        });
+        int minIndex = -1;
+        int minElement = Integer.MAX_VALUE;
+        int[] result = new int[n];
+        Arrays.fill(result, -1);
+        for (Point p : list) {
+            int h = p.h;
+            int i = p.ind;
+            if (h < minElement) {
+                minElement = h;
+                minIndex = i;
+            } else if (h > minElement) {
+                result[i - 1] = minIndex;
             }
         }
-        for (int i = 0; i < n; i++) {
-            if (i != minHIndex && i != minWIndex) {
-                if (h[minHIndex] < h[i] && w[minHIndex] < w[i]) {
-                    FS.pt.print((minHIndex + 1) + " ");
-                    continue;
-                }
-                if (w[minWIndex] < h[i] && h[minWIndex] < w[i]) {
-                    FS.pt.print((minWIndex + 1) + " ");
-                    continue;
-                }
-            }
-            FS.pt.print("-1 ");
+        StringBuilder sb = new StringBuilder();
+        for (int i : result) {
+            sb.append(i).append(" ");
         }
-        FS.pt.println();
+        FS.pt.println(sb);
     }
 
     public static void main(String[] args) {
