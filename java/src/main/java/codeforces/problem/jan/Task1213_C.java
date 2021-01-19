@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,15 +10,52 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/?
+https://codeforces.com/problemset/problem/1213/C
+1
+100 3
+
+1
+44 22
  */
-public class CodeForcesTemplate {
+public class Task1213_C {
 
     static void solve() {
-//        int n = FS.nextInt();
         long n = FS.nextLong();
+        long m = FS.nextLong();
+        if (n == m) {
+            FS.pt.println(m % 10);
+            return;
+        }
+        long d = m % 10;
+        long mT = m;
 
-        FS.pt.println(n);
+        long circleSum = 0;
+        circleSum += d;
+        long circleRange = m;
+
+        while (true) {
+            mT += m;
+            long dd = mT % 10;
+            if (dd == d) {
+                break;
+            } else {
+                circleSum += dd;
+                circleRange += m;
+            }
+        }
+
+        long ss = 0;
+        long ans = 0;
+        long ranges = n / circleRange;
+        if (ranges > 0) {
+            ans += ranges * circleSum;
+            ss = ranges * circleRange;
+        }
+        while (ss + m <= n) {
+            ss += m;
+            ans += ss % 10;
+        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
