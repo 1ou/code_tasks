@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.contest.c1475;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,32 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1475/B
+3
+22230
+22231
+20222
  */
-public class CodeForcesTemplate {
+public class Task1475_B {
 
     static void solve() {
-        int n = FS.nextInt();
+        long n = FS.nextLong();
+        if (n == 2020 || n == 2021) {
+            FS.pt.println("YES");
+            return;
+        }
 
-        FS.pt.println(n);
+        for (int por = 1; por <= n / 2020 + 1; por++) {
+            for (int i = 0; i <= por; i++) {
+                long sum = i * 2020 + (por - i) * 2021;
+                if (sum == n) {
+                    FS.pt.println("YES");
+                    return;
+                }
+            }
+        }
+
+        FS.pt.println("NO");
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.contest.c1475;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,18 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1475/A
  */
-public class CodeForcesTemplate {
+public class Task1475_A {
+
 
     static void solve() {
-        int n = FS.nextInt();
-
-        FS.pt.println(n);
+        long n = FS.nextLong();
+        if ((n & (n - 1)) == 0) {
+            FS.pt.println("NO");
+        } else {
+            FS.pt.println("YES");
+        }
     }
 
     public static void main(String[] args) {

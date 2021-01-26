@@ -1,23 +1,59 @@
-package codeforces;
+//package codeforces.contest.c1475;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1475/C
  */
-public class CodeForcesTemplate {
+public class Task1475_C {
 
     static void solve() {
-        int n = FS.nextInt();
+        int a = FS.nextInt();
+        int b = FS.nextInt();
+        int k = FS.nextInt();
+        int[] aa = FS.readArray(k);
+        int[] bb = FS.readArray(k);
 
-        FS.pt.println(n);
+        Map<Integer, Integer> men = new HashMap<>();
+        Map<Integer, Integer> girls = new HashMap<>();
+
+        for (int i = 0; i < aa.length; i++) {
+            Integer in = men.get(aa[i]);
+            if (in == null) {
+                in = 1;
+            } else {
+                in++;
+            }
+            men.put(aa[i], in);
+        }
+
+        for (int i = 0; i < bb.length; i++) {
+            Integer in = girls.get(bb[i]);
+            if (in == null) {
+                in = 1;
+            } else {
+                in++;
+            }
+            girls.put(bb[i], in);
+        }
+
+        long ans = 0;
+
+
+        for (int i = 0; i < k; i++) {
+            final int sum = k - i;
+
+            final int acount = men.compute(aa[i], (key, val) -> --val);
+            final int bcount = girls.compute(bb[i], (key, val) -> --val);
+
+            ans += sum - acount - bcount - 1;
+        }
+
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

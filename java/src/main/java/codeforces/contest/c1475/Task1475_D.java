@@ -1,23 +1,81 @@
-package codeforces;
+package codeforces.contest.c1475;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1475/D
  */
-public class CodeForcesTemplate {
+public class Task1475_D {
 
     static void solve() {
         int n = FS.nextInt();
+        long m = FS.nextLong();
+        long[] a = FS.readArrayL(n);
 
-        FS.pt.println(n);
+        List<Long> lessI = new ArrayList<>();
+        List<Long> importantI = new ArrayList<>();
+        long impSum = 0;
+        for (int i = 0; i < n; i++) {
+            int b = FS.nextInt();
+            if (b == 1) {
+                lessI.add(a[i]);
+            } else {
+                importantI.add(a[i]);
+                impSum += a[i];
+            }
+        }
+        lessI.sort(Comparator.naturalOrder());
+        importantI.sort(Comparator.naturalOrder());
+
+        Map<Long, Long> map = new TreeMap<>(Comparator.reverseOrder());
+
+        long prevSum = 0;
+        long cost = 0;
+        long minCost = Long.MAX_VALUE;
+        for (int i = lessI.size() - 1; i >= 0; i--) {
+            prevSum += lessI.get(i);
+            map.put(prevSum, ++cost);
+            if (prevSum >= m) {
+                minCost = Math.min(minCost, cost);
+            }
+        }
+
+        for (Map.Entry<Long, Long> it : map.entrySet()) {
+            if (it.getKey() + impSum < m) {
+                break;
+            }
+
+            long sum = it.getKey();
+            long newCost = it.getValue();
+            for (int i = importantI.size() - 1; i >= 0; i--) {
+                sum += importantI.get(i);
+                newCost += 2;
+                if (sum >= m) {
+                    minCost = Math.min(newCost, minCost);
+                    break;
+                }
+            }
+        }
+
+        long newCost = 0;
+        long sum = 0;
+        for (int i = importantI.size() - 1; i >= 0; i--) {
+            sum += importantI.get(i);
+            newCost += 2;
+            if (sum >= m) {
+                minCost = Math.min(newCost, minCost);
+            }
+        }
+
+        if (minCost == Long.MAX_VALUE) {
+            FS.pt.println(-1);
+            return;
+        }
+        FS.pt.println(minCost);
     }
 
     public static void main(String[] args) {
