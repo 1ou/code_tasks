@@ -1,30 +1,45 @@
-package codeforces;
+package codeforces.problem.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1324/D
  */
-public class CodeForcesTemplate {
+public class Task1324_D {
 
     static void solve() {
         int n = FS.nextInt();
+        List<Long> a = FS.readListLong(n);
+        List<Long> b = FS.readListLong(n);
 
-        FS.pt.println(n);
+        List<Long> cc = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            long diff = a.get(i) - b.get(i);
+            cc.add(diff);
+        }
+        cc.sort(Comparator.naturalOrder());
+
+        long ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (cc.get(i) <= 0) continue;
+            long c = (-1) * cc.get(i) + 1;
+
+            int pos = BinarySearch.lowerBound(cc, c);
+            ans += i - pos;
+        }
+
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
-            solve();
-        }
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
+        solve();
+//        }
         FS.pt.close();
     }
 
@@ -168,55 +183,6 @@ public class CodeForcesTemplate {
         }
     }
 
-    static class NumberTheory {
-        public static long gcd(long a, long b) {
-            while (b != 0) {
-                long tmp = a % b;
-                a = b;
-                b = tmp;
-            }
-            return a;
-        }
-
-        public static long lcm(long a, long b) {
-            return a * b / gcd(a, b);
-        }
-
-        public static List<Long> primeFactors(long n) {
-            List<Long> ans = new ArrayList<>();
-            while (n % 2 == 0) {
-                ans.add(2L);
-                n /= 2;
-            }
-
-            // n must be odd at this point.  So we can
-            // skip one element (Note i = i + 2)
-            for (long i = 3; i <= Math.sqrt(n); i += 2) {
-                // While i divides n, print i and divide n
-                while (n % i == 0) {
-                    ans.add(i);
-                    n /= i;
-                }
-            }
-
-            // This condition is to handle the case when
-            // n is a prime number greater than 2
-            if (n > 2) {
-                ans.add(n);
-            }
-            return ans;
-        }
-
-        static long fact(long n) {
-            if (n == 0 || n == 1) return 1L;
-            long r = 1;
-            for (int i = 1; i <= n; i++) {
-                r *= i;
-            }
-            return r;
-        }
-    }
-
     static class BinarySearch {
         public static int lowerBound(int[] arr, int key) {
             int low = 0;
@@ -300,6 +266,55 @@ public class CodeForcesTemplate {
                 }
             }
             return low;
+        }
+    }
+
+    static class NumberTheory {
+        public static long gcd(long a, long b) {
+            while (b != 0) {
+                long tmp = a % b;
+                a = b;
+                b = tmp;
+            }
+            return a;
+        }
+
+        public static long lcm(long a, long b) {
+            return a * b / gcd(a, b);
+        }
+
+        public static List<Long> primeFactors(long n) {
+            List<Long> ans = new ArrayList<>();
+            while (n % 2 == 0) {
+                ans.add(2L);
+                n /= 2;
+            }
+
+            // n must be odd at this point.  So we can
+            // skip one element (Note i = i + 2)
+            for (long i = 3; i <= Math.sqrt(n); i += 2) {
+                // While i divides n, print i and divide n
+                while (n % i == 0) {
+                    ans.add(i);
+                    n /= i;
+                }
+            }
+
+            // This condition is to handle the case when
+            // n is a prime number greater than 2
+            if (n > 2) {
+                ans.add(n);
+            }
+            return ans;
+        }
+
+        static long fact(long n) {
+            if (n == 0 || n == 1) return 1L;
+            long r = 1;
+            for (int i = 1; i <= n; i++) {
+                r *= i;
+            }
+            return r;
         }
     }
 
