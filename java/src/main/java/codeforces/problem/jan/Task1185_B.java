@@ -1,4 +1,4 @@
-package codeforces;
+package codeforces.problem.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,45 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1185/B
  */
-public class CodeForcesTemplate {
+public class Task1185_B {
 
     static void solve() {
-        int n = FS.nextInt();
+        char[] s1 = FS.next().toCharArray();
+        char[] s2 = FS.next().toCharArray();
 
-        FS.pt.println(n);
+
+        int index2 = 0;
+        boolean ans = true;
+        for (int index1 = 0; index1 < s1.length; index1++) {
+            if (index2 >= s2.length) {
+                ans = false;
+                break;
+            }
+            char c = s1[index1];
+
+            if (c != s2[index2]) {
+                ans = false;
+                break;
+            }
+
+            index2++;
+
+            if (index1 + 1 < s1.length && c == s1[index1 + 1])
+                continue;
+
+            while (index2 < s2.length && c == s2[index2])
+                index2++;
+        }
+
+        if (index2 < s2.length) ans = false;
+
+        if (ans)
+            System.out.println("YES");
+        else
+            System.out.println("NO");
+
     }
 
     public static void main(String[] args) {
@@ -169,18 +200,6 @@ public class CodeForcesTemplate {
     }
 
     static class NumberTheory {
-        public static boolean isPrime(long n) {
-            if (n <= 1) return false;
-            if (n < 4) return true;
-            if (n % 2 == 0) return false;
-            if (n % 3 == 0) return false;
-
-            for (int i = 5, next = 2; i * i <= n; i += next, next = 6 - next)
-                if (n % i == 0) return false;
-
-            return true;
-        }
-
         public static long gcd(long a, long b) {
             while (b != 0) {
                 long tmp = a % b;

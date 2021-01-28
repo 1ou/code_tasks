@@ -1,4 +1,4 @@
-package codeforces;
+//package codeforces.problem.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,30 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1370/C
  */
-public class CodeForcesTemplate {
+public class Task1370_C {
 
     static void solve() {
-        int n = FS.nextInt();
+        long n = FS.nextLong();
 
-        FS.pt.println(n);
+        if (n == 1) {
+            FS.pt.println("FastestFinger");
+        } else if (n == 2) {
+            FS.pt.println("Ashishgup");
+        } else if (n % 2 == 1) {
+            FS.pt.println("Ashishgup");
+        } else if ((n & (n - 1)) == 0) {
+            FS.pt.println("FastestFinger");
+        } else if (n % 4 == 0) {
+            FS.pt.println("Ashishgup");
+        } else {
+            if (NumberTheory.isPrime(n / 2)) {
+                FS.pt.println("FastestFinger");
+            } else {
+                FS.pt.println("Ashishgup");
+            }
+        }
     }
 
     public static void main(String[] args) {
