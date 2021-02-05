@@ -1,50 +1,39 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1272/C
+https://codeforces.com/problemset/problem/1471/A
  */
-public class Task1272_C {
+public class Task1471_A {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        char[] s = FS.next().toCharArray();
-        int tmpK = k;
-        Map<Integer, Integer> alphabet = new HashMap<>();
-
-        while (tmpK-- > 0) {
-            int c = FS.next().toCharArray()[0];
-            alphabet.put(c, 1);
+        long x = FS.nextLong();
+        long sum = 0;
+        long max = 0;
+        for (int i = 0; i < n; i++) {
+            long a = FS.nextLong();
+            sum += a;
+            max += Math.ceil((double) a / x);
         }
 
-        long ans = 0;
-        for (int i = 0; i < n; ) {
-            if (alphabet.containsKey((int) s[i])) {
-                long pos = i;
-                while (i < n - 1 && alphabet.containsKey((int) s[i + 1])) {
-                    i++;
-                }
-                long len = i - pos + 1;
-                if (len > 0) {
-                    ans += len * (len + 1) / 2;
-                }
-            }
-            i++;
-        }
-        FS.pt.println(ans);
+        FS.pt.print((long) Math.ceil((double) sum / x) + " " + max);
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
-        solve();
-//        }
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
+            solve();
+        }
         FS.pt.close();
     }
 

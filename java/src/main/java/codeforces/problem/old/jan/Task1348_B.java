@@ -1,39 +1,64 @@
-//package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1370/C
+https://codeforces.com/problemset/problem/1348/B
  */
-public class Task1370_C {
+public class Task1348_B {
 
     static void solve() {
-        long n = FS.nextLong();
-
-        if (n == 1) {
-            FS.pt.println("FastestFinger");
-        } else if (n == 2) {
-            FS.pt.println("Ashishgup");
-        } else if (n % 2 == 1) {
-            FS.pt.println("Ashishgup");
-        } else if ((n & (n - 1)) == 0) {
-            FS.pt.println("FastestFinger");
-        } else if (n % 4 == 0) {
-            FS.pt.println("Ashishgup");
+        int n = FS.nextInt();
+        int k = FS.nextInt();
+        List<Integer> a = FS.readListInt(n);
+        Map<Integer, Integer> m = new HashMap<>();
+        for (int i = 0; i < a.size(); i++) {
+            m.putIfAbsent(a.get(i), 1);
+        }
+        if (m.size() > k) {
+            FS.pt.println(-1);
+            return;
         } else {
-            if (NumberTheory.isPrime(n / 2)) {
-                FS.pt.println("FastestFinger");
+            int[] arr = m.keySet().stream().mapToInt(it -> it).toArray();
+            Arrays.sort(arr);
+
+            List<Integer> aa = new ArrayList<>();
+            if (arr.length < k) {
+                for (int i = 0; i < arr.length; i++) {
+                    aa.add(arr[i]);
+                }
+
+                int filled = arr.length;
+                int start = 1;
+                while (filled < k) {
+                    if (!m.containsKey(start)) {
+                        aa.add(start);
+                        filled++;
+                    } else {
+                        start++;
+                    }
+                }
+                aa.sort(Comparator.naturalOrder());
             } else {
-                FS.pt.println("Ashishgup");
+                for (int i = 0; i < arr.length; i++) {
+                    aa.add(arr[i]);
+                }
+            }
+
+            int po = 0;
+            FS.pt.println(n * k);
+            for (int i = 0; i < n * k; i++) {
+                FS.pt.print(aa.get(po) + " ");
+                po++;
+                if (po >= k) po = 0;
             }
         }
+
+        FS.pt.println();
     }
 
     public static void main(String[] args) {
@@ -185,18 +210,6 @@ public class Task1370_C {
     }
 
     static class NumberTheory {
-        public static boolean isPrime(long n) {
-            if (n <= 1) return false;
-            if (n < 4) return true;
-            if (n % 2 == 0) return false;
-            if (n % 3 == 0) return false;
-
-            for (int i = 5, next = 2; i * i <= n; i += next, next = 6 - next)
-                if (n % i == 0) return false;
-
-            return true;
-        }
-
         public static long gcd(long a, long b) {
             while (b != 0) {
                 long tmp = a % b;
@@ -242,92 +255,6 @@ public class Task1370_C {
                 r *= i;
             }
             return r;
-        }
-    }
-
-    static class BinarySearch {
-        public static int lowerBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int lowerBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int lowerBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int upperBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
         }
     }
 

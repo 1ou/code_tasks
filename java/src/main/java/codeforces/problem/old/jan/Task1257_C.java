@@ -1,48 +1,46 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1471/B
-1
-4 2
-4 6 8 2
-
-1
-4 2
-4 6 8 9
+https://codeforces.com/problemset/problem/1257/C
  */
-public class Task1471_B {
+public class Task1257_C {
 
     static void solve() {
-        int n = FS.nextInt();
-        long x = FS.nextLong();
-        long sum = 0;
-        int[] arr = new int[n];
+        long n = FS.nextLong();
+        Map<Integer, List<Integer>> map = new HashMap<>();
+
         for (int i = 0; i < n; i++) {
-            arr[i] = FS.nextInt();
-            sum += arr[i];
+            int v = FS.nextInt();
+            List<Integer> val = map.computeIfAbsent(v, k -> new ArrayList<>());
+            val.add(i);
         }
-        int level = 1;
-        while (true) {
-            for (int i = 0; i < n; i++) {
-                if (arr[i] % x == 0) {
-                    arr[i] /= x;
-                    sum += arr[i] * Math.pow(x, level);
-                } else {
-                    FS.pt.println(sum);
-                    return;
+
+        int minDiff = Integer.MAX_VALUE;
+        for (Map.Entry<Integer, List<Integer>> it : map.entrySet()) {
+            List<Integer> ll = it.getValue();
+
+            ll.sort(Comparator.naturalOrder());
+            if (ll.size() > 1) {
+                int mDiff = ll.get(1) - ll.get(0) + 1;
+                for (int i = 2; i < ll.size(); i++) {
+                    int tmp = Math.min(mDiff, ll.get(i) - ll.get(i - 1) + 1);
+                    if (tmp > 1) {
+                        mDiff = tmp;
+                    }
                 }
+                minDiff = Math.min(minDiff, mDiff);
             }
-            level++;
         }
+        if (minDiff == Integer.MAX_VALUE) {
+            minDiff = -1;
+        }
+        FS.pt.println(minDiff);
     }
 
     public static void main(String[] args) {
@@ -249,6 +247,14 @@ public class Task1471_B {
         public Pair(T first, K second) {
             this.first = first;
             this.second = second;
+        }
+
+        public K getSecond() {
+            return second;
+        }
+
+        public T getFirst() {
+            return first;
         }
 
         @Override

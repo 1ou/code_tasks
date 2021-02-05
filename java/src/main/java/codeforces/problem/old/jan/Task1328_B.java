@@ -1,31 +1,30 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1362/C
+https://codeforces.com/problemset/problem/1328/B
  */
-public class Task1362_C {
+public class Task1328_B {
 
     static void solve() {
-        long n = FS.nextLong();
-        char[] s = Long.toBinaryString(n).toCharArray();
-        int cnt1 = 0;
-        for (int i = 0; i < s.length; i++) {
-            if (s[i] == '1') {
-                cnt1++;
+        int n = FS.nextInt();
+        long k = FS.nextLong();
+        char[] s = new char[n];
+        Arrays.fill(s, 'a');
+        for (int i = n - 2; i >= 0; i--) {
+            if (k <= (n - i - 1)) {
+                s[i] = 'b';
+                s[n - (int) k] = 'b';
+                FS.pt.println(s);
+                break;
             }
+            k -= (n - i - 1);
         }
-
-
-        FS.pt.println(n * 2 - cnt1);
     }
 
     public static void main(String[] args) {

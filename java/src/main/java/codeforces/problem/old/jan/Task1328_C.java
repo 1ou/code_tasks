@@ -1,18 +1,57 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1466/D
+https://codeforces.com/problemset/problem/1328/C
  */
-public class Task1466_D {
+public class Task1328_C {
 
     static void solve() {
         int n = FS.nextInt();
+        char[] x = FS.next().toCharArray();
+
+        char[] max = new char[n];
+        char[] min = new char[n];
+        boolean was1 = false;
+        for (int i = 0; i < n; i++) {
+            if (x[i] == '2' && !was1) {
+                min[i] = '1';
+                max[i] = '1';
+                continue;
+            } else if (x[i] == '2' && was1) {
+                min[i] = '2';
+                max[i] = '0';
+                continue;
+            }
+
+            if (x[i] == '1' && !was1) {
+                min[i] = '0';
+                max[i] = '1';
+                was1 = true;
+                continue;
+            } else if (x[i] == '1' && was1) {
+                max[i] = '0';
+                min[i] = '1';
+                was1 = true;
+                continue;
+            }
+
+            if (x[i] == '0') {
+                min[i] = '0';
+                max[i] = '0';
+            }
+        }
+
+        FS.pt.println(max);
+        FS.pt.println(min);
     }
 
     public static void main(String[] args) {

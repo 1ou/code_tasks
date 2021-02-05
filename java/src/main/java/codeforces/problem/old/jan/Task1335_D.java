@@ -1,45 +1,51 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1355/D
-2
-6 11
-5 11
+https://codeforces.com/problemset/problem/1335/D
+1
+641738592
+872915346
+539624817
+764183925
+928457631
+153296478
+416579283
+397862154
+285341769
  */
-public class Task1355_D {
+public class Task1335_D {
 
     static void solve() {
-        long n = FS.nextLong();
-        long s = FS.nextLong();
+        char [][] sud = new char[9][9];
 
-        if (n > s / 2) {
-            FS.pt.println("NO");
-            return;
+        for (int i = 0; i < 9; i++) {
+            sud[i] = FS.next().toCharArray();
         }
 
-        FS.pt.println("YES");
-        long tmpN = n;
-        while (tmpN-- > 1) {
-            FS.pt.print("1 ");
+        for (int i = 0; i < sud.length; i++) {
+            for (int j = 0; j < sud.length; j++) {
+                if (sud[i][j] == '8') {
+                    sud[i][j] = '9';
+                }
+            }
         }
-        FS.pt.println(s - (n - 1));
-        FS.pt.println(s / 2);
+
+        for (int i = 0; i < sud.length; i++) {
+            FS.pt.println(sud[i]);
+        }
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
             solve();
-//        }
+        }
         FS.pt.close();
     }
 

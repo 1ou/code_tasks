@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,74 +10,31 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1473/B
+https://codeforces.com/problemset/problem/1221/С
+1
+19 6 1
  */
-public class Task1473_B {
+public class Task1221_C {
 
     static void solve() {
-        String s = FS.next();
-        String t = FS.next();
+        long c = FS.nextLong(); // coders
+        long m = FS.nextLong(); // maths
+        long x = FS.nextLong();
 
-        String bigger;
-        String less;
-
-        if (s.length() < t.length()) {
-            bigger = t;
-            less = s;
+        long ans = 0;
+        long d = Math.abs(c - m);
+        x += d;
+        if (c > m) {
+            c -= d;
         } else {
-            bigger = s;
-            less = t;
+            m -= d;
         }
 
-        if (bigger.contains(less)) {
-            if (bigger.substring(bigger.length() - less.length()).equals(less)) {
-                boolean tt = true;
-                int indexLess = 0;
-                for (int i = 0; i < bigger.length(); i++) {
-                    if (bigger.charAt(i) != less.charAt(indexLess)) {
-                        tt = false;
-                        break;
-                    }
-                    indexLess++;
-                    if (indexLess == less.length()) {
-                        indexLess = 0;
-                    }
-                }
-                boolean containSameLatter = true;
-                if (bigger.length() > 1) {
-                    for (int i = 1; i < bigger.length(); i++) {
-                        if (bigger.charAt(i - 1) != bigger.charAt(i)) {
-                            containSameLatter = false;
-                            break;
-                        }
-                    }
-                }
-                if (less.length() > 1) {
-                    for (int i = 1; i < less.length(); i++) {
-                        if (less.charAt(i - 1) != less.charAt(i)) {
-                            containSameLatter = false;
-                            break;
-                        }
-                    }
-                }
-
-                if (bigger.charAt(0) != less.charAt(0)) {
-                    containSameLatter = false;
-                }
-                if (!tt && !containSameLatter) {
-                    FS.pt.println("-1");
-                    return;
-                }
-
-                for (int i = 0; i < NumberTheory.lcm(bigger.length(), less.length()) / less.length(); i++) {
-                    FS.pt.print(less);
-                }
-                FS.pt.println();
-                return;
-            }
-        }
-
-        FS.pt.println("-1");
+        ans = Math.min(c, Math.min(m, x));
+        c -= ans;
+        m -= ans;
+        ans += (c + m) / 3;
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

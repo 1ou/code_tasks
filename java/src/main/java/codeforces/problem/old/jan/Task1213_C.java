@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,17 +10,52 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1354/C1
- */
-public class Task1354_C1 {
+https://codeforces.com/problemset/problem/1213/C
+1
+100 3
 
-    public static double csc(double theta) {
-        return 1.0 / Math.sin(theta);
-    }
+1
+44 22
+ */
+public class Task1213_C {
 
     static void solve() {
-        int n = FS.nextInt();
-        FS.pt.println(0.5 * csc(Math.PI / (n * 2)) * Math.cos(Math.PI / (n * 2)) * 2);
+        long n = FS.nextLong();
+        long m = FS.nextLong();
+        if (n == m) {
+            FS.pt.println(m % 10);
+            return;
+        }
+        long d = m % 10;
+        long mT = m;
+
+        long circleSum = 0;
+        circleSum += d;
+        long circleRange = m;
+
+        while (true) {
+            mT += m;
+            long dd = mT % 10;
+            if (dd == d) {
+                break;
+            } else {
+                circleSum += dd;
+                circleRange += m;
+            }
+        }
+
+        long ss = 0;
+        long ans = 0;
+        long ranges = n / circleRange;
+        if (ranges > 0) {
+            ans += ranges * circleSum;
+            ss = ranges * circleRange;
+        }
+        while (ss + m <= n) {
+            ss += m;
+            ans += ss % 10;
+        }
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

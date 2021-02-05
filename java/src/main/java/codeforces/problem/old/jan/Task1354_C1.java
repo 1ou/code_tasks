@@ -1,44 +1,26 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1335/D
-1
-641738592
-872915346
-539624817
-764183925
-928457631
-153296478
-416579283
-397862154
-285341769
+https://codeforces.com/problemset/problem/1354/C1
  */
-public class Task1335_D {
+public class Task1354_C1 {
+
+    public static double csc(double theta) {
+        return 1.0 / Math.sin(theta);
+    }
 
     static void solve() {
-        char [][] sud = new char[9][9];
-
-        for (int i = 0; i < 9; i++) {
-            sud[i] = FS.next().toCharArray();
-        }
-
-        for (int i = 0; i < sud.length; i++) {
-            for (int j = 0; j < sud.length; j++) {
-                if (sud[i][j] == '8') {
-                    sud[i][j] = '9';
-                }
-            }
-        }
-
-        for (int i = 0; i < sud.length; i++) {
-            FS.pt.println(sud[i]);
-        }
+        int n = FS.nextInt();
+        FS.pt.println(0.5 * csc(Math.PI / (n * 2)) * Math.cos(Math.PI / (n * 2)) * 2);
     }
 
     public static void main(String[] args) {

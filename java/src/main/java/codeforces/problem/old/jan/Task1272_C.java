@@ -1,49 +1,50 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1363/B
+https://codeforces.com/problemset/problem/1272/C
  */
-public class Task1363_B {
+public class Task1272_C {
 
     static void solve() {
+        int n = FS.nextInt();
+        int k = FS.nextInt();
         char[] s = FS.next().toCharArray();
-        int n = s.length;
+        int tmpK = k;
+        Map<Integer, Integer> alphabet = new HashMap<>();
 
-        int[] cnt0 = new int[n];
-        int[] cnt1 = new int[n];
-
-        int c0 = 0;
-        int c1 = 0;
-        for (int i = 0; i < n; i++) {
-            if (s[i] == '0') c0++;
-            if (s[i] == '1') c1++;
-            cnt0[i] = c0;
-            cnt1[i] = c1;
+        while (tmpK-- > 0) {
+            int c = FS.next().toCharArray()[0];
+            alphabet.put(c, 1);
         }
 
-        int ans = Integer.MAX_VALUE;
-        for (int i = 0; i < n; i++) {
-            ans = Math.min(ans, cnt1[i] + cnt0[n - 1] - cnt0[i]);
-            ans = Math.min(ans, cnt0[i] + cnt1[n - 1] - cnt1[i]);
+        long ans = 0;
+        for (int i = 0; i < n; ) {
+            if (alphabet.containsKey((int) s[i])) {
+                long pos = i;
+                while (i < n - 1 && alphabet.containsKey((int) s[i + 1])) {
+                    i++;
+                }
+                long len = i - pos + 1;
+                if (len > 0) {
+                    ans += len * (len + 1) / 2;
+                }
+            }
+            i++;
         }
-
         FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
-            solve();
-        }
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
+        solve();
+//        }
         FS.pt.close();
     }
 

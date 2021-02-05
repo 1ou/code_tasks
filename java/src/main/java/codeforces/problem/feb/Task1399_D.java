@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.feb;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,34 +10,77 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1473/C
+https://codeforces.com/problemset/problem/1399/D
  */
-public class Task1473_C {
+public class Task1399_D {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
+        char[] s = FS.next().toCharArray();
 
-        StringBuilder sb = new StringBuilder();
-        int a = 2 * k - n;
+        List<Integer> zeroIndexes = new ArrayList<>();
+        List<Integer> oneIndexes = new ArrayList<>();
 
-        for (int i = 1; i < a; i++) {
-            if (i == 1) {
-                sb.append(i);
+        for (int i = 1; i < s.length; i++) {
+            if (s[i] == '1') {
+                oneIndexes.add(i);
             } else {
-                sb.append(" ").append(i);
+                zeroIndexes.add(i);
             }
         }
 
-        for (int i = k; i >= a; i--) {
-            if (sb.length() == 0) {
-                sb.append(i);
+        int handled = 0;
+        char last = s[0];
+        int lastIndex = 0;
+        int ans = 1;
+        int[] m = new int[s.length];
+        m[0] = 1;
+        while (handled < s.length) {
+            if (last == '1') {
+                int lowerBound = BinarySearch.lowerBound(zeroIndexes, lastIndex);
+                if (zeroIndexes.size() > lowerBound && zeroIndexes.get(lowerBound) > lastIndex) {
+                    m[zeroIndexes.get(lowerBound)] = ans;
+                    last = s[zeroIndexes.get(lowerBound)];
+                    lastIndex = zeroIndexes.get(lowerBound);
+                    zeroIndexes.remove(lowerBound);
+                } else {
+                    handled++;
+                    while (handled < m.length && m[handled] != 0) {
+                        handled++;
+                    }
+                    if (handled < s.length) {
+                        lastIndex = handled;
+                        last = s[handled];
+                        m[handled] = ans + 1;
+                    }
+                    ans++;
+                    continue;
+                }
             } else {
-                sb.append(" ").append(i);
+                int lowerBound = BinarySearch.lowerBound(oneIndexes, lastIndex);
+                if (oneIndexes.size() > lowerBound && oneIndexes.get(lowerBound) > lastIndex) {
+                    m[oneIndexes.get(lowerBound)] = ans;
+                    last = s[oneIndexes.get(lowerBound)];
+                    lastIndex = oneIndexes.get(lowerBound);
+                    oneIndexes.remove(lowerBound);
+                } else {
+                    handled++;
+                    while (handled < m.length && m[handled] != 0) {
+                        handled++;
+                    }
+                    if (handled < s.length) {
+                        lastIndex = handled;
+                        last = s[handled];
+                        m[handled] = ans + 1;
+                    }
+
+                    ans++;
+                    continue;
+                }
             }
         }
-
-        FS.pt.println(sb);
+        FS.pt.println(ans - 1);
+        FS.printArr(m);
     }
 
     public static void main(String[] args) {

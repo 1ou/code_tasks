@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,45 +10,21 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1185/B
+https://codeforces.com/problemset/problem/1467/A
  */
-public class Task1185_B {
+public class Task1467_A {
 
     static void solve() {
-        char[] s1 = FS.next().toCharArray();
-        char[] s2 = FS.next().toCharArray();
-
-
-        int index2 = 0;
-        boolean ans = true;
-        for (int index1 = 0; index1 < s1.length; index1++) {
-            if (index2 >= s2.length) {
-                ans = false;
-                break;
-            }
-            char c = s1[index1];
-
-            if (c != s2[index2]) {
-                ans = false;
-                break;
-            }
-
-            index2++;
-
-            if (index1 + 1 < s1.length && c == s1[index1 + 1])
-                continue;
-
-            while (index2 < s2.length && c == s2[index2])
-                index2++;
+        int n = FS.nextInt();
+        StringBuilder str = new StringBuilder();
+        str.append("9");
+        int k = 8;
+        n--;
+        while (n-- > 0) {
+            str.append(k % 10);
+            k++;
         }
-
-        if (index2 < s2.length) ans = false;
-
-        if (ans)
-            System.out.println("YES");
-        else
-            System.out.println("NO");
-
+        FS.pt.println(str);
     }
 
     public static void main(String[] args) {
@@ -245,92 +221,6 @@ public class Task1185_B {
                 r *= i;
             }
             return r;
-        }
-    }
-
-    static class BinarySearch {
-        public static int lowerBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int lowerBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int lowerBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int upperBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
         }
     }
 

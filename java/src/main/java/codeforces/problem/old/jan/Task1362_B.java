@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,52 +10,46 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1213/C
+https://codeforces.com/problemset/problem/1362/B
 1
-100 3
+3
+0 1 5
 
 1
-44 22
+2
+6 4
  */
-public class Task1213_C {
+public class Task1362_B {
 
     static void solve() {
-        long n = FS.nextLong();
-        long m = FS.nextLong();
-        if (n == m) {
-            FS.pt.println(m % 10);
-            return;
+        int n = FS.nextInt();
+        int[] s = new int[n];
+
+        int[] prev = new int[1024];
+        for (int i = 0; i < n; i++) {
+            s[i] = FS.nextInt();
+            prev[s[i]]++;
         }
-        long d = m % 10;
-        long mT = m;
 
-        long circleSum = 0;
-        circleSum += d;
-        long circleRange = m;
 
-        while (true) {
-            mT += m;
-            long dd = mT % 10;
-            if (dd == d) {
-                break;
-            } else {
-                circleSum += dd;
-                circleRange += m;
+        for (int i = 1; i <= 1023; i++) {
+            int[] curr = new int[1024];
+            for (int j = 0; j < n; j++) {
+                curr[i ^ s[j]]++;
+            }
+            boolean t = true;
+            for (int j = 0; j < 1024; j++) {
+                if (curr[j] != prev[j]) {
+                    t = false;
+                    break;
+                }
+            }
+            if (t) {
+                FS.pt.println(i);
+                return;
             }
         }
-
-        long ss = 0;
-        long ans = 0;
-        long ranges = n / circleRange;
-        if (ranges > 0) {
-            ans += ranges * circleSum;
-            ss = ranges * circleRange;
-        }
-        while (ss + m <= n) {
-            ss += m;
-            ans += ss % 10;
-        }
-        FS.pt.println(ans);
+        FS.pt.println(-1);
     }
 
     public static void main(String[] args) {
@@ -207,6 +201,18 @@ public class Task1213_C {
     }
 
     static class NumberTheory {
+        public static boolean isPrime(long n) {
+            if (n <= 1) return false;
+            if (n < 4) return true;
+            if (n % 2 == 0) return false;
+            if (n % 3 == 0) return false;
+
+            for (int i = 5, next = 2; i * i <= n; i += next, next = 6 - next)
+                if (n % i == 0) return false;
+
+            return true;
+        }
+
         public static long gcd(long a, long b) {
             while (b != 0) {
                 long tmp = a % b;
@@ -252,6 +258,92 @@ public class Task1213_C {
                 r *= i;
             }
             return r;
+        }
+    }
+
+    static class BinarySearch {
+        public static int lowerBound(int[] arr, int key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                if (arr[mid] >= key) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+        public static int lowerBound(long[] arr, long key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                if (arr[mid] >= key) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+        public static <T extends Comparable<T>> int lowerBound(List<T> arr, T key) {
+            int low = 0;
+            int high = arr.size() - 1;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                if (arr.get(mid).compareTo(key) >= 0) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+        public static int upperBound(int[] arr, int key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low + 1) / 2;
+                if (arr[mid] <= key) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return low;
+        }
+
+        public static int upperBound(long[] arr, long key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low + 1) / 2;
+                if (arr[mid] <= key) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return low;
+        }
+
+        public static <T extends Comparable<T>> int upperBound(List<T> arr, T key) {
+            int low = 0;
+            int high = arr.size() - 1;
+            while (low < high) {
+                int mid = low + (high - low + 1) / 2;
+                if (arr.get(mid).compareTo(key) >= 0) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return low;
         }
     }
 

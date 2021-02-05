@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,21 +10,22 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1467/A
+https://codeforces.com/problemset/problem/1362/C
  */
-public class Task1467_A {
+public class Task1362_C {
 
     static void solve() {
-        int n = FS.nextInt();
-        StringBuilder str = new StringBuilder();
-        str.append("9");
-        int k = 8;
-        n--;
-        while (n-- > 0) {
-            str.append(k % 10);
-            k++;
+        long n = FS.nextLong();
+        char[] s = Long.toBinaryString(n).toCharArray();
+        int cnt1 = 0;
+        for (int i = 0; i < s.length; i++) {
+            if (s[i] == '1') {
+                cnt1++;
+            }
         }
-        FS.pt.println(str);
+
+
+        FS.pt.println(n * 2 - cnt1);
     }
 
     public static void main(String[] args) {

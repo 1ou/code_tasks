@@ -1,29 +1,47 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1328/B
+https://codeforces.com/problemset/problem/1471/B
+1
+4 2
+4 6 8 2
+
+1
+4 2
+4 6 8 9
  */
-public class Task1328_B {
+public class Task1471_B {
 
     static void solve() {
         int n = FS.nextInt();
-        long k = FS.nextLong();
-        char[] s = new char[n];
-        Arrays.fill(s, 'a');
-        for (int i = n - 2; i >= 0; i--) {
-            if (k <= (n - i - 1)) {
-                s[i] = 'b';
-                s[n - (int) k] = 'b';
-                FS.pt.println(s);
-                break;
+        long x = FS.nextLong();
+        long sum = 0;
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = FS.nextInt();
+            sum += arr[i];
+        }
+        int level = 1;
+        while (true) {
+            for (int i = 0; i < n; i++) {
+                if (arr[i] % x == 0) {
+                    arr[i] /= x;
+                    sum += arr[i] * Math.pow(x, level);
+                } else {
+                    FS.pt.println(sum);
+                    return;
+                }
             }
-            k -= (n - i - 1);
+            level++;
         }
     }
 

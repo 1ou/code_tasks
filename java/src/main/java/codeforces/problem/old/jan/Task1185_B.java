@@ -1,65 +1,54 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1348/B
+https://codeforces.com/problemset/problem/1185/B
  */
-public class Task1348_B {
+public class Task1185_B {
 
     static void solve() {
-        int n = FS.nextInt();
-        int k = FS.nextInt();
-        List<Integer> a = FS.readListInt(n);
-        Map<Integer, Integer> m = new HashMap<>();
-        for (int i = 0; i < a.size(); i++) {
-            m.putIfAbsent(a.get(i), 1);
-        }
-        if (m.size() > k) {
-            FS.pt.println(-1);
-            return;
-        } else {
-            int[] arr = m.keySet().stream().mapToInt(it -> it).toArray();
-            Arrays.sort(arr);
+        char[] s1 = FS.next().toCharArray();
+        char[] s2 = FS.next().toCharArray();
 
-            List<Integer> aa = new ArrayList<>();
-            if (arr.length < k) {
-                for (int i = 0; i < arr.length; i++) {
-                    aa.add(arr[i]);
-                }
 
-                int filled = arr.length;
-                int start = 1;
-                while (filled < k) {
-                    if (!m.containsKey(start)) {
-                        aa.add(start);
-                        filled++;
-                    } else {
-                        start++;
-                    }
-                }
-                aa.sort(Comparator.naturalOrder());
-            } else {
-                for (int i = 0; i < arr.length; i++) {
-                    aa.add(arr[i]);
-                }
+        int index2 = 0;
+        boolean ans = true;
+        for (int index1 = 0; index1 < s1.length; index1++) {
+            if (index2 >= s2.length) {
+                ans = false;
+                break;
+            }
+            char c = s1[index1];
+
+            if (c != s2[index2]) {
+                ans = false;
+                break;
             }
 
-            int po = 0;
-            FS.pt.println(n * k);
-            for (int i = 0; i < n * k; i++) {
-                FS.pt.print(aa.get(po) + " ");
-                po++;
-                if (po >= k) po = 0;
-            }
+            index2++;
+
+            if (index1 + 1 < s1.length && c == s1[index1 + 1])
+                continue;
+
+            while (index2 < s2.length && c == s2[index2])
+                index2++;
         }
 
-        FS.pt.println();
+        if (index2 < s2.length) ans = false;
+
+        if (ans)
+            System.out.println("YES");
+        else
+            System.out.println("NO");
+
     }
 
     public static void main(String[] args) {
@@ -256,6 +245,92 @@ public class Task1348_B {
                 r *= i;
             }
             return r;
+        }
+    }
+
+    static class BinarySearch {
+        public static int lowerBound(int[] arr, int key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                if (arr[mid] >= key) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+        public static int lowerBound(long[] arr, long key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                if (arr[mid] >= key) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+        public static <T extends Comparable<T>> int lowerBound(List<T> arr, T key) {
+            int low = 0;
+            int high = arr.size() - 1;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                if (arr.get(mid).compareTo(key) >= 0) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+
+        public static int upperBound(int[] arr, int key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low + 1) / 2;
+                if (arr[mid] <= key) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return low;
+        }
+
+        public static int upperBound(long[] arr, long key) {
+            int low = 0;
+            int high = arr.length - 1;
+            while (low < high) {
+                int mid = low + (high - low + 1) / 2;
+                if (arr[mid] <= key) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return low;
+        }
+
+        public static <T extends Comparable<T>> int upperBound(List<T> arr, T key) {
+            int low = 0;
+            int high = arr.size() - 1;
+            while (low < high) {
+                int mid = low + (high - low + 1) / 2;
+                if (arr.get(mid).compareTo(key) >= 0) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
+                }
+            }
+            return low;
         }
     }
 

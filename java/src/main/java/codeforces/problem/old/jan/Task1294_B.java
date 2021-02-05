@@ -1,41 +1,49 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1342/A
+https://codeforces.com/problemset/problem/1294/B
  */
-public class Task1342_A {
+public class Task1294_B {
 
     static void solve() {
-        long x = FS.nextLong();
-        long y = FS.nextLong();
-        long a = FS.nextLong(); // price
-        long b = FS.nextLong(); // price
+        int n = FS.nextInt();
+        Map<Integer, List<Integer>> m = new TreeMap<>(Comparator.naturalOrder());
+        while (n-- > 0) {
+            int x = FS.nextInt();
+            int y = FS.nextInt();
+            List<Integer> ll = m.computeIfAbsent(y, k -> new ArrayList<>());
+            ll.add(x);
+        }
 
-        long usd = 0;
-        if (a * 2 < b) {
-            usd = a * x + a * y;
-        } else {
-            long min = Math.min(x, y);
-            usd = min * b;
-            x -= min;
-            y -= min;
-            if (x > 0) {
-                usd += a * x;
-            }
-            if (y > 0) {
-                usd += a * y;
+        int maxR = 0;
+        int maxU = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<Integer, List<Integer>> it : m.entrySet()) {
+            List<Integer> lll = it.getValue();
+            lll.sort(Comparator.naturalOrder());
+            for (Integer integer : lll) {
+                if (integer < maxR) {
+                    FS.pt.println("NO");
+                    return;
+                }
+                while (maxR < integer) {
+                    stringBuilder.append("R");
+                    maxR++;
+                }
+                while (maxU < it.getKey()) {
+                    maxU++;
+                    stringBuilder.append("U");
+                }
             }
         }
-        FS.pt.println(usd);
+        FS.pt.println("YES");
+        FS.pt.println(stringBuilder);
     }
 
     public static void main(String[] args) {

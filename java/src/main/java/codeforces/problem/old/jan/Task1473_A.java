@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,21 +10,36 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1476/A
-1
-2 1
+https://codeforces.com/problemset/problem/1473/A
  */
-public class Task1476_A {
+public class Task1473_A {
 
     static void solve() {
-        long n = FS.nextLong();
-        long k = FS.nextLong();
-
-        if (n > k) {
-            FS.pt.println((n % k == 0) ? 1 : 2);
-        } else {
-            FS.pt.println((long) Math.ceil((double) k / n));
+        int n = FS.nextInt();
+        int d = FS.nextInt();
+        int[] a = FS.readArray(n);
+        boolean t = true;
+        for (int i = 0; i < n; i++) {
+            if (a[i] > d) {
+                t = false;
+                break;
+            }
         }
+        if (t) {
+            FS.pt.println("YES");
+            return;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    if (a[i] + a[j] <= d) {
+                        FS.pt.println("YES");
+                        return;
+                    }
+                }
+            }
+        }
+        FS.pt.println("NO");
     }
 
     public static void main(String[] args) {
@@ -176,18 +191,6 @@ public class Task1476_A {
     }
 
     static class NumberTheory {
-        public static boolean isPrime(long n) {
-            if (n <= 1) return false;
-            if (n < 4) return true;
-            if (n % 2 == 0) return false;
-            if (n % 3 == 0) return false;
-
-            for (int i = 5, next = 2; i * i <= n; i += next, next = 6 - next)
-                if (n % i == 0) return false;
-
-            return true;
-        }
-
         public static long gcd(long a, long b) {
             while (b != 0) {
                 long tmp = a % b;
@@ -233,92 +236,6 @@ public class Task1476_A {
                 r *= i;
             }
             return r;
-        }
-    }
-
-    static class BinarySearch {
-        public static int lowerBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int lowerBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int lowerBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int upperBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
         }
     }
 

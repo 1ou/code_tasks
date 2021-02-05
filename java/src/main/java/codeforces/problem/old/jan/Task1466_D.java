@@ -1,4 +1,4 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,39 +7,19 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1324/D
+https://codeforces.com/problemset/problem/1466/D
  */
-public class Task1324_D {
+public class Task1466_D {
 
     static void solve() {
         int n = FS.nextInt();
-        List<Long> a = FS.readListLong(n);
-        List<Long> b = FS.readListLong(n);
-
-        List<Long> cc = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            long diff = a.get(i) - b.get(i);
-            cc.add(diff);
-        }
-        cc.sort(Comparator.naturalOrder());
-
-        long ans = 0;
-        for (int i = 0; i < n; i++) {
-            if (cc.get(i) <= 0) continue;
-            long c = (-1) * cc.get(i) + 1;
-
-            int pos = BinarySearch.lowerBound(cc, c);
-            ans += i - pos;
-        }
-
-        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
-        solve();
-//        }
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
+            solve();
+        }
         FS.pt.close();
     }
 
@@ -180,92 +160,6 @@ public class Task1324_D {
     static class Mat {
         public static long pow(long a, long exp) {
             return (long) Math.pow(a, exp);
-        }
-    }
-
-    static class BinarySearch {
-        public static int lowerBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int lowerBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr[mid] >= key) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int lowerBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    high = mid;
-                } else {
-                    low = mid + 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(int[] arr, int key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static int upperBound(long[] arr, long key) {
-            int low = 0;
-            int high = arr.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr[mid] <= key) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
-        }
-
-        public static <T extends Comparable<T>> int upperBound(List<T> arr, T key) {
-            int low = 0;
-            int high = arr.size() - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (arr.get(mid).compareTo(key) >= 0) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
-            }
-            return low;
         }
     }
 

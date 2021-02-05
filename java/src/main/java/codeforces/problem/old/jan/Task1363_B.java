@@ -1,46 +1,42 @@
-package codeforces.problem.jan;
+package codeforces.problem.old.jan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1257/C
+https://codeforces.com/problemset/problem/1363/B
  */
-public class Task1257_C {
+public class Task1363_B {
 
     static void solve() {
-        long n = FS.nextLong();
-        Map<Integer, List<Integer>> map = new HashMap<>();
+        char[] s = FS.next().toCharArray();
+        int n = s.length;
 
+        int[] cnt0 = new int[n];
+        int[] cnt1 = new int[n];
+
+        int c0 = 0;
+        int c1 = 0;
         for (int i = 0; i < n; i++) {
-            int v = FS.nextInt();
-            List<Integer> val = map.computeIfAbsent(v, k -> new ArrayList<>());
-            val.add(i);
+            if (s[i] == '0') c0++;
+            if (s[i] == '1') c1++;
+            cnt0[i] = c0;
+            cnt1[i] = c1;
         }
 
-        int minDiff = Integer.MAX_VALUE;
-        for (Map.Entry<Integer, List<Integer>> it : map.entrySet()) {
-            List<Integer> ll = it.getValue();
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            ans = Math.min(ans, cnt1[i] + cnt0[n - 1] - cnt0[i]);
+            ans = Math.min(ans, cnt0[i] + cnt1[n - 1] - cnt1[i]);
+        }
 
-            ll.sort(Comparator.naturalOrder());
-            if (ll.size() > 1) {
-                int mDiff = ll.get(1) - ll.get(0) + 1;
-                for (int i = 2; i < ll.size(); i++) {
-                    int tmp = Math.min(mDiff, ll.get(i) - ll.get(i - 1) + 1);
-                    if (tmp > 1) {
-                        mDiff = tmp;
-                    }
-                }
-                minDiff = Math.min(minDiff, mDiff);
-            }
-        }
-        if (minDiff == Integer.MAX_VALUE) {
-            minDiff = -1;
-        }
-        FS.pt.println(minDiff);
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
@@ -247,14 +243,6 @@ public class Task1257_C {
         public Pair(T first, K second) {
             this.first = first;
             this.second = second;
-        }
-
-        public K getSecond() {
-            return second;
-        }
-
-        public T getFirst() {
-            return first;
         }
 
         @Override
