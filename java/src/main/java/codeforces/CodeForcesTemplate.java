@@ -227,6 +227,25 @@ public class CodeForcesTemplate {
             }
             return r;
         }
+
+        static long fact(long n, long mod) {
+            if (n <= 1) return 1;
+            long ans = 1;
+            for (int i = 1; i <= n; i++) {
+                ans = (ans * i) % mod;
+            }
+            return ans;
+        }
+
+        static long fastExp(long x, long n, long mod) {
+            long ans = 1;
+            while (n > 0) {
+                if (n % 2 == 1) ans = (ans * x) % mod;
+                x = (x * x) % mod;
+                n /= 2;
+            }
+            return ans;
+        }
     }
 
     static class BinarySearch {

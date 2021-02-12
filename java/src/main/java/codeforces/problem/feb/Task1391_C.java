@@ -1,92 +1,30 @@
-//package codeforces.contest.c1481;
+package codeforces.problem.feb;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1481/C
-1
-5 2
-1 2 2 1 1
-1 2 2 1 1
-1 2
+https://codeforces.com/problemset/problem/1391/C
  */
-public class Task1481_C {
+public class Task1391_C {
 
     static void solve() {
         int n = FS.nextInt();
-        int m = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int[] b = FS.readArray(n);
-        int[] c = FS.readArray(m);
-
-        int[] res = new int[m];
-        ArrayDeque<Integer>[] painterIds = new ArrayDeque[n + 1];
-        for (int i = 0; i < n + 1; ++i) {
-            painterIds[i] = new ArrayDeque<>();
-        }
-        HashMap<Integer, Integer> h = new HashMap<>();
-        for (int i = 0; i < m; ++i) {
-            h.put(c[i], h.getOrDefault(c[i], 0) + 1);
-            painterIds[c[i]].add(i);
-        }
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                if (h.containsKey(b[i])) {
-                    if (h.get(b[i]) == 1) {
-                        h.remove(b[i]);
-                    } else {
-                        h.put(b[i], h.get(b[i]) - 1);
-                    }
-                } else {
-                    FS.pt.println("NO");
-                    return;
-                }
-            }
-        }
-        boolean hasLast = false;
-        int neutralId = 0;
-        for (int i = 0; i < n; ++i) {
-            if (b[i] == c[m - 1]) {
-                neutralId = i + 1;
-                hasLast = true;
-                break;
-            }
-        }
-        if (!hasLast) {
-            FS.pt.println("NO");
-            return;
-        }
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                if (!painterIds[b[i]].isEmpty()) {
-                    res[painterIds[b[i]].pollFirst()] = i + 1;
-                }
-            }
-        }
-        if (res[m - 1] == 0) {
-            res[m - 1] = neutralId;
-        }
-        for (int i = 0; i < m; ++i) {
-            if (res[i] == 0) {
-                res[i] = res[m - 1];
-            }
-        }
-        FS.pt.println("YES");
-        for (int e : res) {
-            FS.pt.print(e + " ");
-        }
-        FS.pt.println();
+        long mod = (long) 1e9 + 7;
+        FS.pt.println((mod + NumberTheory.fact(n, mod) - NumberTheory.fastExp(2, n - 1, mod)) % mod);
     }
 
     public static void main(String[] args) {
-        int T = FS.nextInt();
-        for (int tt = 0; tt < T; tt++) {
+//        int T = FS.nextInt();
+//        for (int tt = 0; tt < T; tt++) {
             solve();
-        }
+//        }
         FS.pt.close();
     }
 
@@ -288,6 +226,25 @@ public class Task1481_C {
                 r *= i;
             }
             return r;
+        }
+
+        static long fact(long n, long mod) {
+            if (n <= 1) return 1;
+            long ans = 1;
+            for (int i = 1; i <= n; i++) {
+                ans = (ans * i) % mod;
+            }
+            return ans;
+        }
+
+        static long fastExp(long x, long n, long mod) {
+            long ans = 1;
+            while (n > 0) {
+                if (n % 2 == 1) ans = (ans * x) % mod;
+                x = (x * x) % mod;
+                n /= 2;
+            }
+            return ans;
         }
     }
 
