@@ -1,4 +1,4 @@
-package codeforces.contest.c1490;
+//package codeforces.contest.c1490;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,59 +7,46 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1490/E
+https://codeforces.com/problemset/problem/1490/F
 1
-6
-1 1 1 3 500 100
+8
+3 1 2 3 3 4 3 3
 
 1
-9
-1 1 1 3 3 3 9 15 25
+7
+2 3 1 4 1 1 2
  */
-public class Task1490_E {
+public class Task1490_F {
 
     static void solve() {
         int n = FS.nextInt();
-        List<Pair<Integer, Long>> a = new ArrayList<>();
+        long[] a = FS.readArrayL(n);
+        Map<Long, Integer> cnt = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            long v = FS.nextLong();
-            a.add(new Pair<>(i, v));
+            cnt.put(a[i], cnt.getOrDefault(a[i], 0) + 1);
         }
-        a.sort(Comparator.comparingLong(it -> it.second));
 
-        int l = 0;
-        int r = n - 1;
-        while (l != r) {
-            int m = (l + r) / 2;
-            long sum = 0;
-            for (int i = 0; i <= m; i++) {
-                sum += a.get(i).second;
-            }
+        Map<Integer, Integer> cnt2 = new HashMap<>();
+        for (Map.Entry<Long, Integer> it : cnt.entrySet()) {
+            cnt2.put(it.getValue(), cnt2.getOrDefault(it.getValue(), 0) + 1);
+        }
 
-            boolean f = true;
-            for (int i = m + 1; i < n; i++) {
-                if (sum >= a.get(i).second) {
-                    sum += a.get(i).second;
-                } else {
-                    f = false;
-                    break;
+        int ans = Integer.MAX_VALUE;
+        for (Map.Entry<Integer, Integer> entry : cnt2.entrySet()) {
+            int aa = entry.getKey();
+            int t_ans = 0;
+            for (Map.Entry<Integer, Integer> temp : cnt2.entrySet()) {
+                if (temp.getKey() < aa) {
+                    t_ans += (temp.getKey()) * temp.getValue();
+                }
+                if (temp.getKey() > aa) {
+                    t_ans += (temp.getKey() - aa) * temp.getValue();
                 }
             }
-
-            if (f) {
-                r = m;
-            } else {
-                l = m + 1;
-            }
-         }
-
-        List<Integer> res = new ArrayList<>();
-        for (int i = n - 1; i >= l; i--) {
-            res.add(a.get(i).first + 1);
+            ans = Math.min(ans, t_ans);
         }
-        res.sort(Comparator.naturalOrder());
-        FS.pt.println(res.size());
-        FS.printList(res);
+
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {

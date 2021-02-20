@@ -1,4 +1,4 @@
-package codeforces.contest.c1490;
+package codeforces.problem.feb;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,59 +7,21 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1490/E
-1
-6
-1 1 1 3 500 100
-
-1
-9
-1 1 1 3 3 3 9 15 25
+https://codeforces.com/problemset/problem/1487/A
  */
-public class Task1490_E {
+public class Task1487_A {
 
     static void solve() {
         int n = FS.nextInt();
-        List<Pair<Integer, Long>> a = new ArrayList<>();
+        List<Integer> a = FS.readListInt(n);
+        a.sort(Comparator.naturalOrder());
+        int min = a.get(0);
+        int nas = 0;
         for (int i = 0; i < n; i++) {
-            long v = FS.nextLong();
-            a.add(new Pair<>(i, v));
+            if (a.get(i) > min) nas++;
         }
-        a.sort(Comparator.comparingLong(it -> it.second));
 
-        int l = 0;
-        int r = n - 1;
-        while (l != r) {
-            int m = (l + r) / 2;
-            long sum = 0;
-            for (int i = 0; i <= m; i++) {
-                sum += a.get(i).second;
-            }
-
-            boolean f = true;
-            for (int i = m + 1; i < n; i++) {
-                if (sum >= a.get(i).second) {
-                    sum += a.get(i).second;
-                } else {
-                    f = false;
-                    break;
-                }
-            }
-
-            if (f) {
-                r = m;
-            } else {
-                l = m + 1;
-            }
-         }
-
-        List<Integer> res = new ArrayList<>();
-        for (int i = n - 1; i >= l; i--) {
-            res.add(a.get(i).first + 1);
-        }
-        res.sort(Comparator.naturalOrder());
-        FS.pt.println(res.size());
-        FS.printList(res);
+        FS.pt.println(nas);
     }
 
     public static void main(String[] args) {
