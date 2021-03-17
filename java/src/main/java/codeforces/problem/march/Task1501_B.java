@@ -1,4 +1,4 @@
-package codeforces.contest.c1496;
+package codeforces.problem.march;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,28 +10,28 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1496/A
+https://codeforces.com/problemset/problem/?/A
  */
-public class Task1496_A {
+public class Task1501_B {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        String s = FS.next();
-        if (n <= (2 * k)) {
-            System.out.println("NO");
-            return;
-        }
-        boolean b = false;
-        for (int i = 0; i < k; i++) {
-            if (s.charAt(i) != s.charAt(n - i - 1)) {
-                System.out.println("NO");
-                b = true;
-                break;
-            }
+        int[] a = FS.readArray(n);
 
+        int curr = 0;
+        StringBuilder str = new StringBuilder();
+        for (int i = n - 1; i >= 0; i--) {
+            if (a[i] != 0 || curr > 0) {
+                if (a[i] > curr) {
+                    curr = a[i];
+                }
+                str.append("1 ");
+                curr--;
+            } else {
+                str.append("0 ");
+            }
         }
-        if (!b) System.out.println("YES");
+        FS.pt.println(str.reverse().toString());
     }
 
     public static void main(String[] args) {

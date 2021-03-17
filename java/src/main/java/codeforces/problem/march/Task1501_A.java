@@ -1,4 +1,4 @@
-package codeforces.contest.c1496;
+//package codeforces.problem.march;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,28 +10,34 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1496/A
+https://codeforces.com/problemset/problem/?/A
  */
-public class Task1496_A {
+public class Task1501_A {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        String s = FS.next();
-        if (n <= (2 * k)) {
-            System.out.println("NO");
-            return;
-        }
-        boolean b = false;
-        for (int i = 0; i < k; i++) {
-            if (s.charAt(i) != s.charAt(n - i - 1)) {
-                System.out.println("NO");
-                b = true;
-                break;
-            }
+        int[] a = new int[n+1];
+        int[] b = new int[n+1];
 
+        a[0] = 0;
+        b[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            a[i] = FS.nextInt();
+            b[i] = FS.nextInt();
         }
-        if (!b) System.out.println("YES");
+
+        int[] tm = FS.readArray(n);
+
+        int moment = tm[0];
+        for(int i = 1; i < n; i++) {
+            moment += (a[i] - b[i-1]); //time req to travel from prev station
+            moment += (int)Math.ceil(((double)b[i] - (double)a[i])/2); //time necessary to wait at current station
+            if(moment < b[i])
+                moment = b[i]; //would only depart on the departure time
+            moment += tm[i]; //extra time going to next station
+        }
+        moment += a[n] - b[n-1];
+        FS.pt.println(moment);
     }
 
     public static void main(String[] args) {

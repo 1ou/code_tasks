@@ -1,37 +1,38 @@
-package codeforces.contest.c1496;
+package codeforces.contest.c1497;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1496/A
+https://codeforces.com/problemset/problem/1497/C
  */
-public class Task1496_A {
+public class Task1497_C {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        String s = FS.next();
-        if (n <= (2 * k)) {
-            System.out.println("NO");
-            return;
-        }
-        boolean b = false;
-        for (int i = 0; i < k; i++) {
-            if (s.charAt(i) != s.charAt(n - i - 1)) {
-                System.out.println("NO");
-                b = true;
-                break;
-            }
+        int sum = FS.nextInt();
 
+        long[] A = FS.readArrayL(n);
+        for (int i = 0; i < n - 2; i++) {
+            // Find pair in subarray A[i+1..n-1]
+            // with sum equal to sum - A[i]
+            HashSet<Long> s = new HashSet<>();
+            long curr_sum = sum - A[i];
+            for (int j = i + 1; j < n; j++) {
+                if (s.contains(curr_sum - A[j])) {
+                    if (NumberTheory.lcm(A[i], NumberTheory.lcm(A[j], curr_sum - A[j])) <= n / 2) {
+                        FS.pt.println(A[i] + " " + (curr_sum - A[j]) + " " + A[j]);
+                        return;
+                    }
+                }
+                s.add(A[j]);
+            }
         }
-        if (!b) System.out.println("YES");
+
+        FS.pt.println("NEVER");
     }
 
     public static void main(String[] args) {

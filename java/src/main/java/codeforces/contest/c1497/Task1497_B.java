@@ -1,37 +1,54 @@
-package codeforces.contest.c1496;
+package codeforces.contest.c1497;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1496/A
+https://codeforces.com/problemset/problem/1497/B
  */
-public class Task1496_A {
+public class Task1497_B {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        String s = FS.next();
-        if (n <= (2 * k)) {
-            System.out.println("NO");
-            return;
-        }
-        boolean b = false;
-        for (int i = 0; i < k; i++) {
-            if (s.charAt(i) != s.charAt(n - i - 1)) {
-                System.out.println("NO");
-                b = true;
-                break;
-            }
+        int m = FS.nextInt();
+        long[] a = FS.readArrayL(n);
 
+        long cnt = 0;
+        Map<Long, Long> mm = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            mm.put(a[i] % m, mm.getOrDefault(a[i] % m, 0L) + 1);
         }
-        if (!b) System.out.println("YES");
+
+        for (Map.Entry<Long, Long> it : mm.entrySet()) {
+            long opposite = m - it.getKey();
+            Long oppositeNumber = mm.get(opposite);
+            Long currNumber = it.getValue();
+
+            if (it.getValue() > 0) {
+                if (oppositeNumber != null) {
+                    cnt += 1;
+                    long min = Math.min(oppositeNumber, currNumber);
+                    oppositeNumber -= min;
+                    currNumber -= min;
+                    long max = Math.max(oppositeNumber, currNumber);
+                    max -= 1;
+                    max = Math.max(0, max);
+                    cnt += max;
+                    mm.put(opposite, 0L);
+                    mm.put(it.getKey(), 0L);
+                } else {
+                    if (it.getKey() == 0) {
+                        cnt += 1;
+                    } else {
+                        cnt += currNumber;
+                    }
+                }
+            }
+        }
+        FS.pt.println(cnt);
     }
 
     public static void main(String[] args) {

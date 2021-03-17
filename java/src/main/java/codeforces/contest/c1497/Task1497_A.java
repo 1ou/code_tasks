@@ -1,37 +1,40 @@
-package codeforces.contest.c1496;
+//package codeforces.contest.c1497;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1496/A
+https://codeforces.com/problemset/problem/1497/A
+3
+11
+4 2 0 1 3 3 4 7 5 6 6
+5
+2 2 8 6 9
+1
+0
+
  */
-public class Task1496_A {
+public class Task1497_A {
 
     static void solve() {
         int n = FS.nextInt();
-        int k = FS.nextInt();
-        String s = FS.next();
-        if (n <= (2 * k)) {
-            System.out.println("NO");
-            return;
-        }
-        boolean b = false;
-        for (int i = 0; i < k; i++) {
-            if (s.charAt(i) != s.charAt(n - i - 1)) {
-                System.out.println("NO");
-                b = true;
-                break;
+        int[] a = FS.readArray(n);
+        Arrays.sort(a);
+        List<Integer> res = new ArrayList<>();
+        List<Integer> tmp = new ArrayList<>();
+        res.add(a[0]);
+        for (int i = 1; i < n; i++) {
+            if (a[i-1] != a[i]) {
+                res.add(a[i]);
+            } else {
+                tmp.add(a[i]);
             }
-
         }
-        if (!b) System.out.println("YES");
+        res.addAll(tmp);
+        FS.printList(res);
     }
 
     public static void main(String[] args) {
