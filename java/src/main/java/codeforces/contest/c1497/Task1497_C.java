@@ -8,31 +8,39 @@ import java.util.*;
 
 /*
 https://codeforces.com/problemset/problem/1497/C
+4
+20 4
+9 5
+11 3
+20 20
  */
 public class Task1497_C {
 
     static void solve() {
-        int n = FS.nextInt();
-        int sum = FS.nextInt();
-
-        long[] A = FS.readArrayL(n);
-        for (int i = 0; i < n - 2; i++) {
-            // Find pair in subarray A[i+1..n-1]
-            // with sum equal to sum - A[i]
-            HashSet<Long> s = new HashSet<>();
-            long curr_sum = sum - A[i];
-            for (int j = i + 1; j < n; j++) {
-                if (s.contains(curr_sum - A[j])) {
-                    if (NumberTheory.lcm(A[i], NumberTheory.lcm(A[j], curr_sum - A[j])) <= n / 2) {
-                        FS.pt.println(A[i] + " " + (curr_sum - A[j]) + " " + A[j]);
-                        return;
-                    }
-                }
-                s.add(A[j]);
-            }
+        long n = FS.nextLong();
+        int k = FS.nextInt();
+        StringBuilder sb = new StringBuilder();
+        while (k > 3) {
+            sb.append(1).append(" ");
+            n--;
+            k--;
         }
-
-        FS.pt.println("NEVER");
+        if (n % 4 == 0) {
+            sb.append(n / 4).append(" ").append(n / 4).append(" ").append(n / 2).append(" ");
+        } else if (n % 4 == 1) {
+            sb.append(1).append(" ");
+            n--;
+            sb.append(n / 2).append(" ").append(n / 2).append(" ");
+        } else if (n % 4 == 2) {
+            sb.append(2).append(" ");
+            n -= 2;
+            sb.append(n / 2).append(" ").append(n / 2).append(" ");
+        } else {
+            sb.append(1).append(" ");
+            n--;
+            sb.append(n / 2).append(" ").append(n / 2).append(" ");
+        }
+        FS.pt.println(sb);
     }
 
     public static void main(String[] args) {
@@ -207,6 +215,28 @@ public class Task1497_C {
 
         public static long lcm(long a, long b) {
             return a * b / gcd(a, b);
+        }
+
+        public static long nextPrime(long num) {
+            num++;
+            for (long i = 2; i < num; i++) {
+                if (num % i == 0) {
+                    num++;
+                    i = 2;
+                }
+            }
+            return num;
+        }
+
+        public static long prevPrime(long num) {
+            num--;
+            for (long i = 2; i < num; i++) {
+                if (num % i == 0) {
+                    num--;
+                    i = 2;
+                }
+            }
+            return num;
         }
 
         public static List<Long> primeFactors(long n) {

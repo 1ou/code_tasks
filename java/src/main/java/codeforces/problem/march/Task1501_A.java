@@ -1,4 +1,4 @@
-//package codeforces.problem.march;
+package codeforces.problem.march;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1501/A
  */
 public class Task1501_A {
 
