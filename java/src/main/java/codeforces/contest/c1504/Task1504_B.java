@@ -10,14 +10,64 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1504/A
+https://codeforces.com/problemset/problem/1504/B
+1
+3
+001
+000
+
+1
+10
+0111010000
+0100101100
+
+1
+6
+000111
+110100
  */
-public class Task1504_A {
+public class Task1504_B {
 
     static void solve() {
-        int n = FS.nextInt();
+        int n = FS.nextInt(), one = 0, zero = 0, c = 0;
 
-        FS.pt.println(n);
+        String a, b;
+        a = FS.next();
+        b = FS.next();
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) == '0') {
+                zero++;
+            } else {
+                one++;
+            }
+        }
+
+        for (int i = n - 1; i >= 0; i--) {
+            if (c % 2 == 0) {
+                if (a.charAt(i) != b.charAt(i)) {
+                    if (zero != one) {
+                        FS.pt.println("NO");
+                        return;
+                    }
+                    c++;
+                }
+            } else {
+                if (a.charAt(i) == b.charAt(i)) {
+                    if (zero != one) {
+                        FS.pt.println("NO");
+                        return;
+                    }
+                    c++;
+                }
+            }
+            if (a.charAt(i) == '0') {
+                zero--;
+            } else {
+                one--;
+            }
+        }
+
+        FS.pt.println("YES");
     }
 
     public static void main(String[] args) {

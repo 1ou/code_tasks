@@ -1,23 +1,78 @@
-package codeforces;
+package codeforces.contest.c1504;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1504/A
+1
+aabaaa
  */
-public class CodeForcesTemplate {
+public class Task1504_A {
+    static boolean verify(char[] str, int i, boolean t) {
+        char[] left = Arrays.copyOfRange(str, 0, i);
+        char[] right = Arrays.copyOfRange(str, i, str.length);
+
+        char[] sum = new char[str.length + 1];
+        System.arraycopy(left, 0, sum, 0, left.length);
+        sum[left.length] = 'a';
+        System.arraycopy(right, 0, sum, left.length + 1, right.length);
+        if (!isPalindrome(sum)) {
+            FS.pt.println("YES");
+            if (t) {
+                for (int j = 0; j < sum.length; j++) {
+                    FS.pt.print(sum[j]);
+                }
+                FS.pt.print('\n');
+            } else {
+                for (int j = 0; j < sum.length; j++) {
+                    FS.pt.print(sum[sum.length - j - 1]);
+                }
+                FS.pt.print('\n');
+            }
+            return true;
+        }
+        return false;
+    }
+
+    static boolean isPalindrome(char[] str) {
+        for (int i = 0; i < str.length / 2; i++) {
+            if (str[i] != str[str.length - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     static void solve() {
-        int n = FS.nextInt();
+        char[] str = FS.next().toCharArray();
+        char[] sum = new char[0];
+        boolean check = true;
+        for (int i = 0; i < str.length; i++) {
+            if (str[i] != 'a') {
+                check = false;
+                break;
+            }
+        }
+        if (check) {
+            FS.pt.println("NO");
+            return;
+        }
 
-        FS.pt.println(n);
+        for (int i = 0; i < str.length; i++) {
+
+            if (verify(str, i, true)) {
+                return;
+            }
+
+            if (verify(new StringBuilder().append(str).reverse().toString().toCharArray(), i, false)) {
+                return;
+            }
+        }
+        FS.pt.println("NO");
     }
 
     public static void main(String[] args) {

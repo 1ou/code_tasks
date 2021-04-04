@@ -10,9 +10,9 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1504/A
+https://codeforces.com/problemset/problem/1504/C
  */
-public class Task1504_A {
+public class Task1504_C {
 
     static void solve() {
         int n = FS.nextInt();
