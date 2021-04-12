@@ -1,4 +1,4 @@
-package codeforces.contest.c1481;
+package codeforces.problem.april;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,79 +7,63 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1481/C
+https://codeforces.com/problemset/problem/1498/B
+2
+5 16
+1 2 8 4 8
+
 1
-5 2
-1 2 2 1 1
-1 2 2 1 1
-1 2
+6 10
+2 8 8 2 2 8
+
  */
-public class Task1481_C {
+public class Task1498_B {
 
     static void solve() {
         int n = FS.nextInt();
-        int m = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int[] b = FS.readArray(n);
-        int[] c = FS.readArray(m);
+        long W = FS.nextLong();
+        int[] w = FS.readArray(n);
+        HashMap<Long, Long> m = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            m.put((long) w[i], m.getOrDefault((long) w[i], 0L) + 1);
+        }
 
-        int[] res = new int[m];
-        ArrayDeque<Integer>[] painterIds = new ArrayDeque[n + 1];
-        for (int i = 0; i < n + 1; ++i) {
-            painterIds[i] = new ArrayDeque<>();
+        long maxPow = 1;
+        while (maxPow <= W) {
+            maxPow *= 2;
         }
-        HashMap<Integer, Integer> h = new HashMap<>();
-        for (int i = 0; i < m; ++i) {
-            h.put(c[i], h.getOrDefault(c[i], 0) + 1);
-            painterIds[c[i]].add(i);
-        }
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                if (h.containsKey(b[i])) {
-                    if (h.get(b[i]) == 1) {
-                        h.remove(b[i]);
+        maxPow /= 2;
+
+        long ans = 0;
+        while (m.size() != 0) {
+            long curr = 0;
+            long currWidth = maxPow;
+            while(curr < W) {
+                if (currWidth == 0) {
+                    break;
+                }
+                Long count = m.get(currWidth);
+                if (count != null) {
+                    long exist = W - curr;
+                    long numbers = exist / currWidth;
+                    if (count >= numbers) {
+                        count -= numbers;
+                        curr += currWidth * numbers;
+                        if (count == 0) {
+                            m.remove(currWidth);
+                        } else {
+                            m.put(currWidth, count);
+                        }
                     } else {
-                        h.put(b[i], h.get(b[i]) - 1);
+                        curr += currWidth * count;
+                        m.remove(currWidth);
                     }
-                } else {
-                    FS.pt.println("NO");
-                    return;
                 }
+                currWidth /= 2;
             }
+            ans++;
         }
-        boolean hasLast = false;
-        int neutralId = 0;
-        for (int i = 0; i < n; ++i) {
-            if (b[i] == c[m - 1]) {
-                neutralId = i + 1;
-                hasLast = true;
-                break;
-            }
-        }
-        if (!hasLast) {
-            FS.pt.println("NO");
-            return;
-        }
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                if (!painterIds[b[i]].isEmpty()) {
-                    res[painterIds[b[i]].pollFirst()] = i + 1;
-                }
-            }
-        }
-        if (res[m - 1] == 0) {
-            res[m - 1] = neutralId;
-        }
-        for (int i = 0; i < m; ++i) {
-            if (res[i] == 0) {
-                res[i] = res[m - 1];
-            }
-        }
-        FS.pt.println("YES");
-        for (int e : res) {
-            FS.pt.print(e + " ");
-        }
-        FS.pt.println();
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
@@ -288,6 +272,25 @@ public class Task1481_C {
                 r *= i;
             }
             return r;
+        }
+
+        static long fact(long n, long mod) {
+            if (n <= 1) return 1;
+            long ans = 1;
+            for (int i = 1; i <= n; i++) {
+                ans = (ans * i) % mod;
+            }
+            return ans;
+        }
+
+        static long fastExp(long x, long n, long mod) {
+            long ans = 1;
+            while (n > 0) {
+                if (n % 2 == 1) ans = (ans * x) % mod;
+                x = (x * x) % mod;
+                n /= 2;
+            }
+            return ans;
         }
     }
 

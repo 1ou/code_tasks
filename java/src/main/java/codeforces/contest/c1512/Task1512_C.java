@@ -1,83 +1,133 @@
-package codeforces.contest.c1481;
+//package codeforces.contest.c1512;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1481/C
+https://codeforces.com/problemset/problem/1512/C
 1
-5 2
-1 2 2 1 1
-1 2 2 1 1
-1 2
+4 1
+00?00
  */
-public class Task1481_C {
+public class Task1512_C {
 
     static void solve() {
-        int n = FS.nextInt();
-        int m = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int[] b = FS.readArray(n);
-        int[] c = FS.readArray(m);
+        long a = FS.nextLong();
+        long b = FS.nextLong();
+        long tmpA = a;
+        long tmpB = b;
 
-        int[] res = new int[m];
-        ArrayDeque<Integer>[] painterIds = new ArrayDeque[n + 1];
-        for (int i = 0; i < n + 1; ++i) {
-            painterIds[i] = new ArrayDeque<>();
+        char[] ar = FS.next().toCharArray();
+        int l = 0;
+        int r = ar.length - 1;
+        int cnt0 = 0;
+        int cnt1 = 0;
+
+        for (int i = 0; i < ar.length; i++) {
+            if (ar[i] == '0') {
+                cnt0++;
+                a--;
+            }
+            if (ar[i] == '1') {
+                cnt1++;
+                b--;
+            }
         }
-        HashMap<Integer, Integer> h = new HashMap<>();
-        for (int i = 0; i < m; ++i) {
-            h.put(c[i], h.getOrDefault(c[i], 0) + 1);
-            painterIds[c[i]].add(i);
-        }
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                if (h.containsKey(b[i])) {
-                    if (h.get(b[i]) == 1) {
-                        h.remove(b[i]);
-                    } else {
-                        h.put(b[i], h.get(b[i]) - 1);
-                    }
+
+        while (l < r) {
+            if (ar[l] != '?' && ar[r] == '?') {
+                if (ar[l] == '0' && a > 0) {
+                    ar[r] = '0';
+                    cnt0++;
+                    a--;
+                } else if (ar[l] == '1' && b > 0) {
+                    ar[r] = '1';
+                    cnt1++;
+                    b--;
                 } else {
-                    FS.pt.println("NO");
+                    FS.pt.println(-1);
+                    return;
+                }
+            } else if (ar[l] == '?' && ar[r] != '?') {
+                if (ar[r] == '0' && a > 0) {
+                    ar[l] = '0';
+                    cnt0++;
+                    a--;
+                } else if (ar[r] == '1' && b > 0) {
+                    ar[l] = '1';
+                    cnt1++;
+                    b--;
+                } else {
+                    FS.pt.println(-1);
                     return;
                 }
             }
+            l++;
+            r--;
         }
-        boolean hasLast = false;
-        int neutralId = 0;
-        for (int i = 0; i < n; ++i) {
-            if (b[i] == c[m - 1]) {
-                neutralId = i + 1;
-                hasLast = true;
+
+        l = 0;
+        r = ar.length - 1;
+        while (l < r) {
+            if (ar[l] == '?' && ar[r] == '?') {
+                if (a > 1 && cnt0 <= tmpA - 2) {
+                    ar[l] = '0';
+                    ar[r] = '0';
+                    cnt0 += 2;
+                    a -= 2;
+                } else if (b > 1 && cnt1 <= tmpB - 2) {
+                    ar[l] = '1';
+                    ar[r] = '1';
+                    b -= 2;
+                    cnt1 += 2;
+                } else {
+                    FS.pt.println(-1);
+                    return;
+                }
+            }
+            l++;
+            r--;
+        }
+
+        if (ar[l] == '?') {
+            if (a > 0) {
+                ar[l] = '0';
+                cnt0++;
+            } else if (b > 0) {
+                ar[l] = '1';
+                cnt1++;
+            } else {
+                FS.pt.println(-1);
+                return;
+            }
+        }
+
+        if (cnt0 != tmpA && cnt1 != tmpB) {
+            FS.pt.println(-1);
+            return;
+        }
+        boolean palindrom = true;
+
+        for (int i = 0; i < ar.length; i++) {
+            if (ar[i] != ar[ar.length - 1 - i]) {
+                palindrom = false;
                 break;
             }
         }
-        if (!hasLast) {
-            FS.pt.println("NO");
+
+        if (!palindrom) {
+            FS.pt.println(-1);
             return;
         }
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                if (!painterIds[b[i]].isEmpty()) {
-                    res[painterIds[b[i]].pollFirst()] = i + 1;
-                }
-            }
-        }
-        if (res[m - 1] == 0) {
-            res[m - 1] = neutralId;
-        }
-        for (int i = 0; i < m; ++i) {
-            if (res[i] == 0) {
-                res[i] = res[m - 1];
-            }
-        }
-        FS.pt.println("YES");
-        for (int e : res) {
-            FS.pt.print(e + " ");
+
+        for (int i = 0; i < ar.length; i++) {
+            FS.pt.print(ar[i]);
         }
         FS.pt.println();
     }
@@ -288,6 +338,25 @@ public class Task1481_C {
                 r *= i;
             }
             return r;
+        }
+
+        static long fact(long n, long mod) {
+            if (n <= 1) return 1;
+            long ans = 1;
+            for (int i = 1; i <= n; i++) {
+                ans = (ans * i) % mod;
+            }
+            return ans;
+        }
+
+        static long fastExp(long x, long n, long mod) {
+            long ans = 1;
+            while (n > 0) {
+                if (n % 2 == 1) ans = (ans * x) % mod;
+                x = (x * x) % mod;
+                n /= 2;
+            }
+            return ans;
         }
     }
 
