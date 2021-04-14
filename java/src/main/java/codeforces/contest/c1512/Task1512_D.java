@@ -16,28 +16,28 @@ public class Task1512_D {
 
     static void solve() {
         int N = FS.nextInt();
-        long B[] = FS.readArrayL(N+2);
-        Arrays.sort(B);
+        List<Long> B = FS.readListLong(N + 2);
+        B.sort(Comparator.naturalOrder());
         long s = 0;
         HashMap<Long, Integer> mp = new HashMap<>();
         StringBuilder ans = new StringBuilder();
         for (int i = 0; i < N; i++) {
-            mp.put(B[i], i);
-            s += B[i];
+            mp.put(B.get(i), i);
+            s += B.get(i);
         }
-        if (s == B[N]) {
-            for (int i = 0; i < N; i++) ans.append(B[i] + " ");
+        if (s == B.get(N)) {
+            for (int i = 0; i < N; i++) ans.append(B.get(i) + " ");
             System.out.println(ans);
-        } else if (s == B[N + 1]) {
-            for (int i = 0; i < N; i++) ans.append(B[i] + " ");
+        } else if (s == B.get(N + 1)) {
+            for (int i = 0; i < N; i++) ans.append(B.get(i) + " ");
             System.out.println(ans);
         } else {
-            long a = s + B[N] - B[N + 1];
+            long a = s + B.get(N)- B.get(N + 1);
             if (mp.containsKey(a)) {
                 int index = mp.get(a);
                 for (int i = 0; i < N + 1; i++) {
                     if (index == i) continue;
-                    ans.append(B[i] + " ");
+                    ans.append(B.get(i) + " ");
                 }
                 System.out.println(ans);
             } else

@@ -1,4 +1,4 @@
-package codeforces;
+//package codeforces.problem.april;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +10,50 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/?/A
+https://codeforces.com/problemset/problem/1503/A
  */
-public class CodeForcesTemplate {
+public class Task1503_A {
 
     static void solve() {
         int n = FS.nextInt();
+        char[] s = FS.next().toCharArray();
+        char[] a = new char[n], b = new char[n];
 
-        FS.pt.println(n);
+        int k = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '1') {
+                k++;
+            }
+        }
+
+        if (k % 2 == 1 || s[0] != '1' || s[n-1] != '1') {
+            FS.pt.println("NO");
+            return;
+        }
+
+        FS.pt.println("YES");
+
+        int usedK = 0;
+        boolean flip = false;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '1') {
+                if (usedK < k / 2) {
+                    a[i] = '(';
+                    b[i] = '(';
+                    usedK++;
+                } else {
+                    a[i] = ')';
+                    b[i] = ')';
+                }
+            } else {
+                a[i] = flip ? '(' : ')';
+                b[i] = flip ? ')' : '(';
+                flip = !flip;
+            }
+        }
+
+        FS.printArr(a);
+        FS.printArr(b);
     }
 
     public static void main(String[] args) {
@@ -95,6 +131,13 @@ public class CodeForcesTemplate {
             for (int value : arr) {
                 pt.print(value);
                 pt.print(" ");
+            }
+            pt.println();
+        }
+
+        static void printArr(char[] arr) {
+            for (char value : arr) {
+                pt.print(value);
             }
             pt.println();
         }
