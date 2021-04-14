@@ -10,50 +10,26 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1503/A
+https://codeforces.com/problemset/problem/1511/B
  */
-public class Task1503_A {
+public class Task1511_B {
 
     static void solve() {
-        int n = FS.nextInt();
-        char[] s = FS.next().toCharArray();
-        char[] a = new char[n], b = new char[n];
+        int a = FS.nextInt();
+        int b = FS.nextInt();
+        int c = FS.nextInt();
+        long[] primes = new long[]{1, 1, 97, 997, 9973, 99991, 999983, 9999991, 99999989, 999999937 };
 
-        int k = 0;
-        for (int i = 0; i < n; i++) {
-            if (s[i] == '1') {
-                k++;
-            }
+        long p = primes[c];
+        long x = p, y = p;
+        while (String.valueOf(x).length() < a) {
+            x = x * 2;
+        }
+        while (String.valueOf(y).length() < b) {
+            y = y * 3;
         }
 
-        if (k % 2 == 1 || s[0] != '1' || s[n-1] != '1') {
-            FS.pt.println("NO");
-            return;
-        }
-
-        FS.pt.println("YES");
-
-        int usedK = 0;
-        boolean flip = false;
-        for (int i = 0; i < n; i++) {
-            if (s[i] == '1') {
-                if (usedK < k / 2) {
-                    a[i] = '(';
-                    b[i] = '(';
-                    usedK++;
-                } else {
-                    a[i] = ')';
-                    b[i] = ')';
-                }
-            } else {
-                a[i] = flip ? '(' : ')';
-                b[i] = flip ? ')' : '(';
-                flip = !flip;
-            }
-        }
-
-        FS.printArr(a);
-        FS.printArr(b);
+        FS.pt.println(x + " " + y);
     }
 
     public static void main(String[] args) {
@@ -131,13 +107,6 @@ public class Task1503_A {
             for (int value : arr) {
                 pt.print(value);
                 pt.print(" ");
-            }
-            pt.println();
-        }
-
-        static void printArr(char[] arr) {
-            for (char value : arr) {
-                pt.print(value);
             }
             pt.println();
         }

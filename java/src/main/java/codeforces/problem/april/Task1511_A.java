@@ -10,50 +10,21 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1503/A
+https://codeforces.com/problemset/problem/1511/A
  */
-public class Task1503_A {
+public class Task1511_A {
 
     static void solve() {
         int n = FS.nextInt();
-        char[] s = FS.next().toCharArray();
-        char[] a = new char[n], b = new char[n];
+        int[] r = FS.readArray(n);
 
-        int k = 0;
+        int ans = 0;
         for (int i = 0; i < n; i++) {
-            if (s[i] == '1') {
-                k++;
-            }
+            if (r[i] == 3 && ans >= 0) ans++;
+            if (r[i] == 1) ans++;
         }
 
-        if (k % 2 == 1 || s[0] != '1' || s[n-1] != '1') {
-            FS.pt.println("NO");
-            return;
-        }
-
-        FS.pt.println("YES");
-
-        int usedK = 0;
-        boolean flip = false;
-        for (int i = 0; i < n; i++) {
-            if (s[i] == '1') {
-                if (usedK < k / 2) {
-                    a[i] = '(';
-                    b[i] = '(';
-                    usedK++;
-                } else {
-                    a[i] = ')';
-                    b[i] = ')';
-                }
-            } else {
-                a[i] = flip ? '(' : ')';
-                b[i] = flip ? ')' : '(';
-                flip = !flip;
-            }
-        }
-
-        FS.printArr(a);
-        FS.printArr(b);
+        FS.pt.println(ans);
     }
 
     public static void main(String[] args) {
@@ -131,13 +102,6 @@ public class Task1503_A {
             for (int value : arr) {
                 pt.print(value);
                 pt.print(" ");
-            }
-            pt.println();
-        }
-
-        static void printArr(char[] arr) {
-            for (char value : arr) {
-                pt.print(value);
             }
             pt.println();
         }
