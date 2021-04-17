@@ -15,9 +15,12 @@ void dfs(int v) {
 }
 
 int main() {
-  scanf("%d%d", &n, &k);
+  //freopen("input.txt", "r", stdin);
+
+  cin >> n >> k;
   dfs(0);
-  printf("a");
-  for (int i = 0; i < n - 1; ++i)
-    printf("%c", path[i % path.size()] + 'a');
+  cout << "a";
+  for (int i = 0; i < n - 1; ++i) {
+    cout << (char) (path[i % path.size()] + 'a');
+  }
 }
