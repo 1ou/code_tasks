@@ -7,47 +7,26 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1511/C
+https://codeforces.com/problemset/problem/1513/B
  */
-public class Task1511_C {
+public class Task1513_B {
 
     static void solve() {
         int n = FS.nextInt();
-        int q = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int taken = 0;
-        TreeMap<Integer, Integer> tree = new TreeMap<>(Comparator.naturalOrder());
-        Set<Integer> set = new HashSet<>();
-
+        long[] a = FS.readArrayL(n);
+        Map<Long, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            if (!set.contains(a[i])) {
-                set.add(a[i]);
-                tree.put(a[i], i + 1);
-            }
+            map.put(a[i], map.getOrDefault(a[i], 0) + 1);
         }
-
-        while (q-- > 0) {
-            int t = FS.nextInt();
-            int k = tree.get(t);
-            for (Map.Entry<Integer, Integer> it : tree.entrySet()) {
-                if (it.getKey() == t) {
-                    FS.pt.print(it.getValue() + " ");
-                    it.setValue(1);
-                } else {
-                    if (k > it.getValue()) {
-                        it.setValue(it.getValue() + 1);
-                    }
-                }
-            }
-        }
-        FS.pt.println();
+        int max = map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
+        FS.pt.println((long) (Mathematics.pow(Mathematics.placements(max, 2), n - max) % 10e7));
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
-        solve();
-//        }
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
+            solve();
+        }
         FS.pt.close();
     }
 
@@ -185,9 +164,17 @@ public class Task1511_C {
         }
     }
 
-    static class Mat {
+    static class Mathematics {
         public static long pow(long a, long exp) {
             return (long) Math.pow(a, exp);
+        }
+
+        public static long placements(int n, int m) {
+            return NumberTheory.fact(n) / NumberTheory.fact(n - m);
+        }
+
+        public static long combinations(int n, int m) {
+            return NumberTheory.fact(n) / (NumberTheory.fact(n - m) * NumberTheory.fact(m));
         }
     }
 

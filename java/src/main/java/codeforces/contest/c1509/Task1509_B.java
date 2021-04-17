@@ -1,4 +1,4 @@
-package codeforces.problem.april;
+package codeforces.contest.c1509;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,47 +7,56 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1511/C
+https://codeforces.com/problemset/problem/1509/B
  */
-public class Task1511_C {
-
+public class Task1509_B {
     static void solve() {
         int n = FS.nextInt();
-        int q = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int taken = 0;
-        TreeMap<Integer, Integer> tree = new TreeMap<>(Comparator.naturalOrder());
-        Set<Integer> set = new HashSet<>();
+        char[] s = FS.next().toCharArray();
+
+        int openT = 0;
+        int openM = 0;
 
         for (int i = 0; i < n; i++) {
-            if (!set.contains(a[i])) {
-                set.add(a[i]);
-                tree.put(a[i], i + 1);
+            if (s[i] == 'T') {
+                openT++;
+            } else {
+                openM++;
+            }
+
+            if (openM > openT) {
+                FS.pt.println("NO");
+                return;
             }
         }
 
-        while (q-- > 0) {
-            int t = FS.nextInt();
-            int k = tree.get(t);
-            for (Map.Entry<Integer, Integer> it : tree.entrySet()) {
-                if (it.getKey() == t) {
-                    FS.pt.print(it.getValue() + " ");
-                    it.setValue(1);
-                } else {
-                    if (k > it.getValue()) {
-                        it.setValue(it.getValue() + 1);
-                    }
-                }
+        openT = 0;
+        openM = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            if (s[i] == 'T') {
+                openT++;
+            } else {
+                openM++;
+            }
+
+            if (openM > openT) {
+                FS.pt.println("NO");
+                return;
             }
         }
-        FS.pt.println();
+
+        if (openT != openM * 2 || n % 3 != 0) {
+            FS.pt.println("NO");
+        } else {
+            FS.pt.println("YES");
+        }
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
-        solve();
-//        }
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
+            solve();
+        }
         FS.pt.close();
     }
 

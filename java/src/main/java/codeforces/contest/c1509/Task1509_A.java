@@ -1,4 +1,4 @@
-package codeforces.problem.april;
+//package codeforces.contest.c1509;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,47 +7,47 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /*
-https://codeforces.com/problemset/problem/1511/C
+https://codeforces.com/problemset/problem/1509/A
+1
+6
+10 7 9 11 11 10
  */
-public class Task1511_C {
+public class Task1509_A {
 
     static void solve() {
         int n = FS.nextInt();
-        int q = FS.nextInt();
         int[] a = FS.readArray(n);
-        int taken = 0;
-        TreeMap<Integer, Integer> tree = new TreeMap<>(Comparator.naturalOrder());
-        Set<Integer> set = new HashSet<>();
-
+        List<Integer> even = new ArrayList<>();
+        List<Integer> odd = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if (!set.contains(a[i])) {
-                set.add(a[i]);
-                tree.put(a[i], i + 1);
-            }
+            if (a[i] % 2 == 0) even.add(a[i]);
+            else odd.add(a[i]);
         }
 
-        while (q-- > 0) {
-            int t = FS.nextInt();
-            int k = tree.get(t);
-            for (Map.Entry<Integer, Integer> it : tree.entrySet()) {
-                if (it.getKey() == t) {
-                    FS.pt.print(it.getValue() + " ");
-                    it.setValue(1);
-                } else {
-                    if (k > it.getValue()) {
-                        it.setValue(it.getValue() + 1);
-                    }
-                }
+        if (even.size() > odd.size()) {
+            for (int i = 0; i < even.size(); i++) {
+                FS.pt.print(even.get(i)+ " ");
+            }
+            for (int i = 0; i < odd.size(); i++) {
+                FS.pt.print(odd.get(i)+ " ");
+            }
+        } else {
+
+            for (int i = 0; i < odd.size(); i++) {
+                FS.pt.print(odd.get(i)+ " ");
+            }
+            for (int i = 0; i < even.size(); i++) {
+                FS.pt.print(even.get(i)+ " ");
             }
         }
         FS.pt.println();
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
-        solve();
-//        }
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
+            solve();
+        }
         FS.pt.close();
     }
 

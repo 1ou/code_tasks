@@ -1,53 +1,30 @@
-package codeforces.problem.april;
+package codeforces.contest.c1509;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 /*
-https://codeforces.com/problemset/problem/1511/C
+https://codeforces.com/problemset/problem/1509/C
  */
-public class Task1511_C {
+public class Task1509_C {
 
     static void solve() {
         int n = FS.nextInt();
-        int q = FS.nextInt();
-        int[] a = FS.readArray(n);
-        int taken = 0;
-        TreeMap<Integer, Integer> tree = new TreeMap<>(Comparator.naturalOrder());
-        Set<Integer> set = new HashSet<>();
 
-        for (int i = 0; i < n; i++) {
-            if (!set.contains(a[i])) {
-                set.add(a[i]);
-                tree.put(a[i], i + 1);
-            }
-        }
-
-        while (q-- > 0) {
-            int t = FS.nextInt();
-            int k = tree.get(t);
-            for (Map.Entry<Integer, Integer> it : tree.entrySet()) {
-                if (it.getKey() == t) {
-                    FS.pt.print(it.getValue() + " ");
-                    it.setValue(1);
-                } else {
-                    if (k > it.getValue()) {
-                        it.setValue(it.getValue() + 1);
-                    }
-                }
-            }
-        }
-        FS.pt.println();
+        FS.pt.println(n);
     }
 
     public static void main(String[] args) {
-//        int T = FS.nextInt();
-//        for (int tt = 0; tt < T; tt++) {
-        solve();
-//        }
+        int T = FS.nextInt();
+        for (int tt = 0; tt < T; tt++) {
+            solve();
+        }
         FS.pt.close();
     }
 

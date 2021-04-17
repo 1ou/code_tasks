@@ -162,9 +162,17 @@ public class CodeForcesTemplate {
         }
     }
 
-    static class Mat {
+    static class Mathematics {
         public static long pow(long a, long exp) {
             return (long) Math.pow(a, exp);
+        }
+
+        public static long placements(int n, int m) {
+            return NumberTheory.fact(n) / NumberTheory.fact(n - m);
+        }
+
+        public static long combinations(int n, int m) {
+            return NumberTheory.fact(n) / (NumberTheory.fact(n - m) * NumberTheory.fact(m));
         }
     }
 
