@@ -15,7 +15,7 @@ void dfs(int v) {
 }
 
 int main() {
-  //freopen("input.txt", "r", stdin);
+  freopen("input.txt", "r", stdin);
 
   cin >> n >> k;
   dfs(0);
