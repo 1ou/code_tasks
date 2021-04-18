@@ -1,18 +1,12 @@
 package test;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 
-public class Test8 {
+public class Test9 {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>(List.of("A", "E", "I", "O", "U"));
-        if(verify(list, l -> l.remove("I"))) //Line n1
-            if(verify(list, l -> l.add("I"))){} //Line n2
-
-        System.out.println(list);
-    }
-
-    private static boolean verify(List<String> list, Predicate<List<String>> predicate) {
-        return predicate.test(list); //Line n3
+        var arr1 = new int[]{10};
+        var arr2 = new String[][] {};
+        var arr3 = new char[][] {{}};
+//        var arr4 = {10, 20, 30};
+        var arr5 = new String[][] {new String[]{"LOOK"}, new String[] {"UP"}};
+//        var [] arr6 = new int[] {2, 3, 4};
     }
 }
