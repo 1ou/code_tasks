@@ -76,27 +76,27 @@ include CMakeFiles/c__.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/c__.dir/flags.make
 
-CMakeFiles/c__.dir/1511/c.cpp.o: CMakeFiles/c__.dir/flags.make
-CMakeFiles/c__.dir/1511/c.cpp.o: ../1511/c.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ou/prog/code_tasks/c++/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/c__.dir/1511/c.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/c__.dir/1511/c.cpp.o -c /home/ou/prog/code_tasks/c++/1511/c.cpp
+CMakeFiles/c__.dir/1514/b.cpp.o: CMakeFiles/c__.dir/flags.make
+CMakeFiles/c__.dir/1514/b.cpp.o: ../1514/b.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ou/prog/code_tasks/c++/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/c__.dir/1514/b.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/c__.dir/1514/b.cpp.o -c /home/ou/prog/code_tasks/c++/1514/b.cpp
 
-CMakeFiles/c__.dir/1511/c.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/c__.dir/1511/c.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ou/prog/code_tasks/c++/1511/c.cpp > CMakeFiles/c__.dir/1511/c.cpp.i
+CMakeFiles/c__.dir/1514/b.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/c__.dir/1514/b.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ou/prog/code_tasks/c++/1514/b.cpp > CMakeFiles/c__.dir/1514/b.cpp.i
 
-CMakeFiles/c__.dir/1511/c.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/c__.dir/1511/c.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ou/prog/code_tasks/c++/1511/c.cpp -o CMakeFiles/c__.dir/1511/c.cpp.s
+CMakeFiles/c__.dir/1514/b.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/c__.dir/1514/b.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ou/prog/code_tasks/c++/1514/b.cpp -o CMakeFiles/c__.dir/1514/b.cpp.s
 
 # Object files for target c__
 c___OBJECTS = \
-"CMakeFiles/c__.dir/1511/c.cpp.o"
+"CMakeFiles/c__.dir/1514/b.cpp.o"
 
 # External object files for target c__
 c___EXTERNAL_OBJECTS =
 
-c__: CMakeFiles/c__.dir/1511/c.cpp.o
+c__: CMakeFiles/c__.dir/1514/b.cpp.o
 c__: CMakeFiles/c__.dir/build.make
 c__: CMakeFiles/c__.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ou/prog/code_tasks/c++/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable c__"
