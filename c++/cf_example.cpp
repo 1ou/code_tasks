@@ -1,19 +1,16 @@
 #include <bits/stdc++.h>
+
 #define ll long long
 
 using namespace std;
 
-int n, t;
-
 int main() {
+    freopen("input.txt", "r", stdin);
 
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
+    ll t, n;
 
-  freopen("input.txt", "r", stdin);
-
-  cin >> t;
-  while (t-- > 0) {
-    cin >> n;
-  }
+    cin >> t;
+    while (t-- > 0) {
+        cin >> n;
+    }
 }
