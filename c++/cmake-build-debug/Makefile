@@ -58,10 +58,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/149/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/152/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/149/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/152/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -78,7 +78,7 @@ CMAKE_BINARY_DIR = /home/ou/prog/code_tasks/c++/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/149/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/152/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -89,7 +89,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/149/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/152/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -142,32 +142,32 @@ project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/build
 .PHONY : project/fast
 
-tasks/1506_b.o: tasks/1506_b.cpp.o
+1523/b.o: 1523/b.cpp.o
 
-.PHONY : tasks/1506_b.o
+.PHONY : 1523/b.o
 
 # target to build an object file
-tasks/1506_b.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/tasks/1506_b.cpp.o
-.PHONY : tasks/1506_b.cpp.o
+1523/b.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/1523/b.cpp.o
+.PHONY : 1523/b.cpp.o
 
-tasks/1506_b.i: tasks/1506_b.cpp.i
+1523/b.i: 1523/b.cpp.i
 
-.PHONY : tasks/1506_b.i
+.PHONY : 1523/b.i
 
 # target to preprocess a source file
-tasks/1506_b.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/tasks/1506_b.cpp.i
-.PHONY : tasks/1506_b.cpp.i
+1523/b.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/1523/b.cpp.i
+.PHONY : 1523/b.cpp.i
 
-tasks/1506_b.s: tasks/1506_b.cpp.s
+1523/b.s: 1523/b.cpp.s
 
-.PHONY : tasks/1506_b.s
+.PHONY : 1523/b.s
 
 # target to generate assembly for a file
-tasks/1506_b.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/tasks/1506_b.cpp.s
-.PHONY : tasks/1506_b.cpp.s
+1523/b.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/1523/b.cpp.s
+.PHONY : 1523/b.cpp.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... project"
-	@echo "... tasks/1506_b.o"
-	@echo "... tasks/1506_b.i"
-	@echo "... tasks/1506_b.s"
+	@echo "... 1523/b.o"
+	@echo "... 1523/b.i"
+	@echo "... 1523/b.s"
 .PHONY : help
 
 

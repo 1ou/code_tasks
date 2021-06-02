@@ -53,10 +53,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/149/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/152/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/149/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/152/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -76,27 +76,27 @@ include CMakeFiles/project.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/project.dir/flags.make
 
-CMakeFiles/project.dir/tasks/1506_b.cpp.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/tasks/1506_b.cpp.o: ../tasks/1506_b.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ou/prog/code_tasks/c++/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/project.dir/tasks/1506_b.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project.dir/tasks/1506_b.cpp.o -c /home/ou/prog/code_tasks/c++/tasks/1506_b.cpp
+CMakeFiles/project.dir/1523/b.cpp.o: CMakeFiles/project.dir/flags.make
+CMakeFiles/project.dir/1523/b.cpp.o: ../1523/b.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ou/prog/code_tasks/c++/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/project.dir/1523/b.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project.dir/1523/b.cpp.o -c /home/ou/prog/code_tasks/c++/1523/b.cpp
 
-CMakeFiles/project.dir/tasks/1506_b.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/project.dir/tasks/1506_b.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ou/prog/code_tasks/c++/tasks/1506_b.cpp > CMakeFiles/project.dir/tasks/1506_b.cpp.i
+CMakeFiles/project.dir/1523/b.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/project.dir/1523/b.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ou/prog/code_tasks/c++/1523/b.cpp > CMakeFiles/project.dir/1523/b.cpp.i
 
-CMakeFiles/project.dir/tasks/1506_b.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/project.dir/tasks/1506_b.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ou/prog/code_tasks/c++/tasks/1506_b.cpp -o CMakeFiles/project.dir/tasks/1506_b.cpp.s
+CMakeFiles/project.dir/1523/b.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/project.dir/1523/b.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ou/prog/code_tasks/c++/1523/b.cpp -o CMakeFiles/project.dir/1523/b.cpp.s
 
 # Object files for target project
 project_OBJECTS = \
-"CMakeFiles/project.dir/tasks/1506_b.cpp.o"
+"CMakeFiles/project.dir/1523/b.cpp.o"
 
 # External object files for target project
 project_EXTERNAL_OBJECTS =
 
-project: CMakeFiles/project.dir/tasks/1506_b.cpp.o
+project: CMakeFiles/project.dir/1523/b.cpp.o
 project: CMakeFiles/project.dir/build.make
 project: CMakeFiles/project.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ou/prog/code_tasks/c++/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable project"
